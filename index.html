@@ -703,10 +703,26 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   padding:12px 0;
 }
 
+/* ---------- TIME TRIAL REVEAL ---------- */
+.revealed-kana{
+  font-family:var(--font-display);
+  font-size:32px;
+  font-weight:700;
+  color:var(--gold);
+  text-align:center;
+  margin:14px 0 4px;
+}
+.revealed-romaji{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  font-style:italic;
+}
+
 /* ---------- TIMER BAR ---------- */
 .timer-bar-wrap{
   display:none;
-  margin-bottom:14px;
+  margin:18px 0 8px;
 }
 .timer-bar-wrap.show{
   display:block;
@@ -714,33 +730,57 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 }
 .timer-bar-track{
   width:100%;
-  height:5px;
+  height:6px;
   background:rgba(255,255,255,0.05);
   border-radius:999px;
   overflow:hidden;
   position:relative;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.3);
 }
 .timer-bar-fill{
   height:100%;
   width:100%;
-  background:linear-gradient(90deg, var(--gold), #e8c87a);
+  background:linear-gradient(90deg, var(--gold), #e8c87a, #f0d78a);
   border-radius:999px;
   transform-origin:left;
   transition:background .3s;
+  position:relative;
+}
+.timer-bar-fill::after{
+  content:'';
+  position:absolute;
+  right:0;
+  top:50%;
+  transform:translate(50%,-50%);
+  width:10px;
+  height:10px;
+  background:#fff;
+  border-radius:50%;
+  box-shadow:0 0 10px 3px rgba(205,163,85,0.6), 0 0 20px 6px rgba(205,163,85,0.2);
+  opacity:0.9;
 }
 .timer-bar-fill.urgent{
-  background:linear-gradient(90deg, var(--red), #c2534a);
+  background:linear-gradient(90deg, var(--red), #c2534a, #d4635a);
+}
+.timer-bar-fill.urgent::after{
+  box-shadow:0 0 10px 3px rgba(176,69,61,0.6), 0 0 20px 6px rgba(176,69,61,0.2);
 }
 .timer-text{
   text-align:center;
-  color:var(--muted);
-  font-size:11px;
-  font-weight:700;
-  margin-top:6px;
+  color:var(--gold);
+  font-size:28px;
+  font-weight:900;
+  margin-top:12px;
   letter-spacing:.08em;
+  font-family:var(--font-body);
+  text-shadow:0 0 12px rgba(205,163,85,0.35), 0 0 30px rgba(205,163,85,0.12);
+  transition:color .25s, text-shadow .25s, transform .25s;
 }
 .timer-text.urgent{
   color:var(--red);
+  font-weight:900;
+  text-shadow:0 0 14px rgba(176,69,61,0.45), 0 0 35px rgba(176,69,61,0.18);
+  transform:scale(1.08);
 }
 
 /* ---------- QUIZ DOTS (under scale) ---------- */
@@ -770,6 +810,9 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 .dot-pill.wrong{
   animation: dotPulseRed .75s ease both;
 }
+.dot-pill.gold{
+  animation: dotPulseGold .75s ease both;
+}
 
 @keyframes dotPulseGreen{
   0%  { transform:scale(1); background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); box-shadow:none; }
@@ -780,6 +823,11 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   0%  { transform:scale(1); background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); box-shadow:none; }
   30% { transform:scale(1.35); background:var(--red); border-color:var(--red); box-shadow:0 0 14px 4px rgba(176,69,61,0.55), 0 0 28px 8px rgba(176,69,61,0.18); }
   100%{ transform:scale(1); background:rgba(176,69,61,0.14); border-color:rgba(176,69,61,0.30); box-shadow:none; }
+}
+@keyframes dotPulseGold{
+  0%  { transform:scale(1); background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); box-shadow:none; }
+  30% { transform:scale(1.35); background:var(--gold); border-color:var(--gold); box-shadow:0 0 14px 4px rgba(205,163,85,0.55), 0 0 28px 8px rgba(205,163,85,0.18); }
+  100%{ transform:scale(1); background:rgba(205,163,85,0.14); border-color:rgba(205,163,85,0.30); box-shadow:none; }
 }
 
 .dot-pill.current{
@@ -862,7 +910,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
     <div class="grid" id="knownGrid"></div>
   </section>
 
-  <footer class="note">Kartani bosib ochib-yoping &middot; Viktorinada 4 ta variantdan to'g'risini tanlang</footer>
+  
 </div>
 
 <script>
@@ -1643,7 +1691,7 @@ function startQuiz(sourceWords){
     quizStage.style.display = 'none';
     doneStage.style.display = 'block';
     doneStage.innerHTML = `
-      <div class="done-card">
+      <div class="done-card" style="margin-top:28px;">
         <h2>Bu kunda hali so'z yo'q</h2>
         <p style="color:var(--muted);font-size:13px;">Viktorina faqat "✓ Bilaman" bo'limiga qo'shilgan so'zlar bilan ishlaydi.<br>Avval Flashcard bo'limida shu kundagi so'zlarni "✓ Bilaman" deb belgilang.</p>
       </div>`;
@@ -1671,14 +1719,19 @@ function renderScale(){
   const total = queue.length;
   const fill = document.getElementById('scaleFill');
   const label = document.getElementById('scaleLabel');
-  if(!fill || !label) return;
-  const pct = total > 0 ? (idx / total) * 100 : 0;
-  fill.style.width = pct + '%';
-  label.innerHTML = `<b>${idx}</b> / ${total} savol`;
+  const track = document.querySelector('.scale-track');
+  if(fill && label){
+    const pct = total > 0 ? (idx / total) * 100 : 0;
+    fill.style.width = pct + '%';
+    label.innerHTML = `<b>${idx}</b> / ${total} savol`;
+  }
+  // In time trial, hide the progress bar line and label, keep only dots
+  if(track) track.style.display = quizMode === 'timetrial' ? 'none' : 'block';
+  if(label) label.style.display = quizMode === 'timetrial' ? 'none' : 'block';
 }
 
 function clearQuizTimer(){
-  if(timerId){ clearInterval(timerId); timerId = null; }
+  if(timerState.intervalId){ clearInterval(timerState.intervalId); timerState.intervalId = null; }
 }
 function startQuizTimer(){
   clearQuizTimer();
@@ -1690,54 +1743,57 @@ function startQuizTimer(){
   text.classList.remove('urgent');
   fill.style.transition = 'none';
   fill.style.transform = 'scaleX(1)';
-  fill.style.background = 'linear-gradient(90deg, var(--gold), #e8c87a)';
   text.textContent = '10';
-  // force reflow
-  void fill.offsetWidth;
-  fill.style.transition = 'transform 10s linear, background .3s';
-  requestAnimationFrame(()=>{
-    fill.style.transform = 'scaleX(0)';
-  });
-  let remaining = 10;
-  timerId = setInterval(()=>{
-    remaining--;
-    if(text) text.textContent = remaining > 0 ? remaining : '0';
-    if(remaining <= 3 && fill){ fill.classList.add('urgent'); }
-    if(remaining <= 3 && text){ text.classList.add('urgent'); }
-    if(remaining <= 0){
+  timerState.remaining = 10;
+  timerState.paused = false;
+  timerState.intervalId = setInterval(()=>{
+    if(timerState.paused) return;
+    timerState.remaining -= 0.1;
+    const intVal = Math.ceil(timerState.remaining);
+    if(text) text.textContent = intVal > 0 ? intVal : '0';
+    if(fill){
+      const pct = Math.max(0, timerState.remaining / 10);
+      fill.style.transform = `scaleX(${pct})`;
+    }
+    if(timerState.remaining <= 3 && fill){ fill.classList.add('urgent'); }
+    if(timerState.remaining <= 3 && text){ text.classList.add('urgent'); }
+    if(timerState.remaining <= 0){
       clearQuizTimer();
       autoTimeUp();
     }
-  }, 1000);
+  }, 100);
 }
 function autoTimeUp(){
   if(busy) return;
   busy = true;
   const w = queue[idx];
   const card = document.getElementById('qCard');
-  const reveal = document.getElementById('typeReveal') || document.getElementById('revealAnswer');
-  const input = document.getElementById('typeInput');
-  const submitBtn = document.getElementById('typeSubmit');
-  if(input) input.disabled = true;
-  if(submitBtn) submitBtn.disabled = true;
-  // If in options mode, highlight correct answer
-  const allBtns = document.querySelectorAll('.option-btn');
-  allBtns.forEach(btn => {
-    btn.disabled = true;
-    if(btn.dataset.correct === 'true'){
-      btn.classList.add('correct');
-    } else {
-      btn.classList.add('dim');
-    }
-  });
+  const reveal = document.getElementById('revealAnswer');
+  const btnSkip = document.getElementById('btnSkip');
+  const btnShow = document.getElementById('btnShowAnswer');
+
+  if(btnSkip) btnSkip.disabled = true;
+  if(btnShow) btnShow.disabled = true;
+
   wrongCount++;
   mistakes.push(w);
   resultLog[idx] = 'wrong';
-  if(card) card.classList.add('flash-wrong');
   playWrongSound();
-  if(reveal) reveal.innerHTML = `Vaqt tugadi! To'g'ri javob: <b>${w.kana}</b>`;
+
+  // Javob ramkasiz, savoldan keyin pastga sillab paydo bo'ladi
+  if(reveal){
+    reveal.innerHTML = `
+      <div class="revealed-kana">${w.kana}</div>
+      <div class="revealed-romaji">${w.romaji}</div>
+    `;
+    requestAnimationFrame(()=>{
+      reveal.style.opacity = '1';
+      reveal.style.transform = 'translateY(0)';
+    });
+  }
+
   const dots = document.querySelectorAll('.dot-pill');
-  if(dots[idx]){ dots[idx].classList.remove('current'); dots[idx].classList.add('wrong'); }
+  if(dots[idx]){ dots[idx].classList.remove('current'); dots[idx].classList.add('gold'); }
   renderScale();
   setTimeout(()=>{
     if(card) card.classList.add('leaving');
@@ -1748,6 +1804,80 @@ function autoTimeUp(){
   }, 1800);
 }
 
+function showAnswerTimeTrial(){
+  if(busy) return;
+  busy = true;
+  clearQuizTimer();
+
+  const w = queue[idx];
+  const card = document.getElementById('qCard');
+  const reveal = document.getElementById('revealAnswer');
+  const btnSkip = document.getElementById('btnSkip');
+  const btnShow = document.getElementById('btnShowAnswer');
+
+  if(btnSkip) btnSkip.disabled = true;
+  if(btnShow) btnShow.disabled = true;
+
+  correctCount++;
+  resultLog[idx] = 'correct';
+
+  const dots = document.querySelectorAll('.dot-pill');
+  if(dots[idx]){ dots[idx].classList.remove('current'); dots[idx].classList.add('gold'); }
+
+  if(reveal){
+    reveal.innerHTML = `
+      <div class="revealed-kana">${w.kana}</div>
+      <div class="revealed-romaji">${w.romaji}</div>
+    `;
+    requestAnimationFrame(()=>{
+      reveal.style.opacity = '1';
+      reveal.style.transform = 'translateY(0)';
+    });
+  }
+
+  renderScale();
+  setTimeout(()=>{
+    if(card) card.classList.add('leaving');
+    setTimeout(()=>{
+      idx++;
+      renderQuestion();
+    }, 380);
+  }, 1400);
+}
+
+function skipTimeTrial(){
+  if(busy) return;
+  busy = true;
+  clearQuizTimer();
+
+  const w = queue[idx];
+  const card = document.getElementById('qCard');
+  const btnSkip = document.getElementById('btnSkip');
+  const btnShow = document.getElementById('btnShowAnswer');
+
+  if(btnSkip) btnSkip.disabled = true;
+  if(btnShow) btnShow.disabled = true;
+
+  wrongCount++;
+  mistakes.push(w);
+  resultLog[idx] = 'wrong';
+
+  const dots = document.querySelectorAll('.dot-pill');
+  if(dots[idx]){ dots[idx].classList.remove('current'); dots[idx].classList.add('gold'); }
+
+  renderScale();
+  setTimeout(()=>{
+    if(card) card.classList.add('leaving');
+    setTimeout(()=>{
+      idx++;
+      renderQuestion();
+    }, 380);
+  }, 400);
+}
+
+let timerState = { remaining: 10, paused: false, intervalId: null };
+
+
 function renderQuestion(){
   if(idx >= queue.length){ showDone(); return; }
   const w = queue[idx];
@@ -1757,93 +1887,67 @@ function renderQuestion(){
     dots.forEach(d=>d.classList.remove('current'));
     dots[idx].classList.add('current');
   }
-  startQuizTimer();
 
-  const options = generateOptions(w, currentQuizWords);
-  const optionsHtml = options.map((opt, i) =>
-    `<button class="option-btn" data-idx="${i}" data-correct="${opt.correct}" type="button">${opt.kana}</button>`
-  ).join('');
+  const isTimeTrial = quizMode === 'timetrial';
 
-  quizStage.innerHTML = `
-    <div class="quiz-card" id="qCard">
-      <div class="q-tag">${w.group}</div>
-      <div class="q-word">${w.uz}</div>
-      ${w.note ? `<div class="q-note">${w.note}</div>` : ''}
-      <div class="timer-bar-wrap" id="timerWrap">
-        <div class="timer-bar-track">
-          <div class="timer-bar-fill" id="timerFill"></div>
+  if(isTimeTrial){
+    // Time trial: savol alohida ramkada, javob ramkasiz pastda chiqadi
+    quizStage.innerHTML = `
+      <div style="width:min(480px,100%);">
+        <div class="quiz-card" id="qCard" style="width:100%;">
+          <div class="q-tag">${w.group}</div>
+          <div class="q-word">${w.uz}</div>
+          ${w.note ? `<div class="q-note">${w.note}</div>` : ''}
+          <div class="timer-bar-wrap show" id="timerWrap">
+            <div class="timer-bar-track">
+              <div class="timer-bar-fill" id="timerFill"></div>
+            </div>
+            <div class="timer-text" id="timerText">10</div>
+          </div>
         </div>
-        <div class="timer-text" id="timerText">10</div>
-      </div>
-      <div class="options-grid" id="optionsGrid">
-        ${optionsHtml}
-      </div>
-      <div class="type-area" id="typeArea" style="display:none;">
-        <input type="text" class="answer-strip" id="typeInput" placeholder="Yaponcha yozing va Enter bosing..." autocomplete="off" spellcheck="false">
-        <div class="reveal-answer" id="typeReveal" style="min-height:20px; margin-bottom:8px;"></div>
-        <div class="action-row" id="typeActions">
-          <button class="submit-btn" id="typeSubmit" type="button">Tekshirish</button>
+        <div class="action-row" style="margin-top:14px;">
+          <button class="submit-btn" id="btnShowAnswer" type="button">Javobni ko'rish</button>
+          <button class="btn-clear" id="btnSkip" type="button">O'tkazib yuborish</button>
         </div>
-      </div>
-      <div class="reveal-answer" id="revealAnswer" style="margin-top:10px;"></div>
-    </div>`;
+        <p style="text-align:center;color:var(--muted);font-size:12px;margin-top:12px;letter-spacing:.04em;">Har bir so'z uchun 10 soniya vaqt beriladi. Javobni o'ylab ko'ring yoki o'tkazib yuboring.</p>
+        <div class="reveal-answer" id="revealAnswer" style="margin-top:16px;opacity:0;transform:translateY(-10px);transition:opacity .45s ease, transform .45s cubic-bezier(.34,1.56,.64,1);"></div>
+      </div>`;
 
-  const buttons = document.querySelectorAll('.option-btn');
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      if(busy) return;
-      submitAnswer(btn.dataset.correct === 'true', btn);
-    });
-  });
+    const btnSkip = document.getElementById('btnSkip');
+    const btnShow = document.getElementById('btnShowAnswer');
 
-  renderScale();
-}
+    if(btnSkip) btnSkip.addEventListener('click', ()=> skipTimeTrial());
+    if(btnShow) btnShow.addEventListener('click', ()=> showAnswerTimeTrial());
 
-function normalizeTyped(str){
-  return str.replace(/\s+/g, '').replace(/[　]/g, '').trim();
-}
-function submitTypedAnswer(val){
-  if(busy) return;
-  busy = true;
-  clearQuizTimer();
-  const w = queue[idx];
-  const card = document.getElementById('qCard');
-  const reveal = document.getElementById('typeReveal');
-  const input = document.getElementById('typeInput');
-  const submitBtn = document.getElementById('typeSubmit');
-  if(input) input.disabled = true;
-  if(submitBtn) submitBtn.disabled = true;
-
-  const normalized = normalizeTyped(val);
-  const accepted = (w.accepted || [w.kana]).map(a=>normalizeTyped(a));
-  const isCorrect = accepted.includes(normalized);
-
-  if(isCorrect){
-    correctCount++;
-    resultLog[idx] = 'correct';
-    if(card) card.classList.add('flash-correct');
-    playCorrectSound();
-    if(reveal) reveal.innerHTML = `<span style="color:var(--green);font-weight:700;">✓ To'g'ri!</span>`;
+    startQuizTimer();
   } else {
-    wrongCount++;
-    mistakes.push(w);
-    resultLog[idx] = 'wrong';
-    if(card) card.classList.add('flash-wrong');
-    playWrongSound();
-    if(reveal) reveal.innerHTML = `To'g'ri javob: <b>${w.kana}</b>`;
-  }
-  const dots = document.querySelectorAll('.dot-pill');
-  if(dots[idx]){ dots[idx].classList.remove('current'); dots[idx].classList.add(isCorrect ? 'correct' : 'wrong'); }
-  renderScale();
+    // 4-variant mode
+    const options = generateOptions(w, currentQuizWords);
+    const optionsHtml = options.map((opt, i) =>
+      `<button class="option-btn" data-idx="${i}" data-correct="${opt.correct}" type="button">${opt.kana}</button>`
+    ).join('');
 
-  const delay = isCorrect ? 1100 : 1800;
-  setTimeout(()=>{
-    if(card) card.classList.add('leaving');
-    setTimeout(()=>{
-      idx++;
-      renderQuestion();
-    }, 380);
-  }, delay);
+    quizStage.innerHTML = `
+      <div class="quiz-card" id="qCard">
+        <div class="q-tag">${w.group}</div>
+        <div class="q-word">${w.uz}</div>
+        ${w.note ? `<div class="q-note">${w.note}</div>` : ''}
+        <div class="options-grid" id="optionsGrid">
+          ${optionsHtml}
+        </div>
+        <div class="reveal-answer" id="revealAnswer" style="margin-top:10px;"></div>
+      </div>`;
+
+    const buttons = document.querySelectorAll('.option-btn');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if(busy) return;
+        submitAnswer(btn.dataset.correct === 'true', btn);
+      });
+    });
+  }
+
+  renderScale();
 }
 
 function submitAnswer(isCorrect, selectedBtn){
@@ -1911,30 +2015,42 @@ function showDone(){
   quizStage.style.display = 'none';
   doneStage.style.display = 'block';
   const total = queue.length;
-  let mistakeHtml = '';
-  if(mistakes.length){
-    mistakeHtml = `<ul class="mistake-list">${mistakes.map(m=>`<li><span>${m.uz}</span><b>${m.kana}</b></li>`).join('')}</ul>
-      <button class="submit-btn" id="btnRetry" style="width:100%;padding:12px;border:none;border-radius:10px;font-weight:700;cursor:pointer;margin-bottom:10px;">Xatolarni qaytarish</button>`;
-  }
-  doneStage.innerHTML = `
-    <div class="done-card">
-      <h2>Viktorina tugadi</h2>
-      <p style="color:var(--muted);font-size:13px;">Barcha ${total} ta so'z ko'rib chiqildi</p>
-      <div class="done-stats">
-        <div><span class="num g">${correctCount}</span><span class="lbl">To'g'ri</span></div>
-        <div><span class="num r">${wrongCount}</span><span class="lbl">Xato</span></div>
-      </div>
-      ${mistakeHtml}
-      <button id="btnRestart" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--bg-soft);color:var(--cream);font-weight:700;cursor:pointer;">Qaytadan boshlash (${total} ta)</button>
-    </div>`;
-  document.getElementById('btnRestart').addEventListener('click', ()=>startQuiz(currentQuizWords));
-  if(mistakes.length){
-    document.getElementById('btnRetry').addEventListener('click', ()=>startQuiz(mistakes));
+
+  if(quizMode === 'timetrial'){
+    // Time trial: simple completion message
+    doneStage.innerHTML = `
+      <div class="done-card" style="margin-top:28px;">
+        <h2>So'zlar ko'rib chiqildi</h2>
+        <p style="color:var(--muted);font-size:13px;">Barcha ${total} ta so'z vaqt sinovida ko'rib chiqildi</p>
+        <button id="btnRestart" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--bg-soft);color:var(--cream);font-weight:700;cursor:pointer;margin-top:20px;">Qaytadan boshlash (${total} ta)</button>
+      </div>`;
+  } else {
+    // 4-variant: full stats
+    let mistakeHtml = '';
+    if(mistakes.length){
+      mistakeHtml = `<ul class="mistake-list">${mistakes.map(m=>`<li><span>${m.uz}</span><b>${m.kana}</b></li>`).join('')}</ul>
+        <button class="submit-btn" id="btnRetry" style="width:100%;padding:12px;border:none;border-radius:10px;font-weight:700;cursor:pointer;margin-bottom:10px;">Xatolarni qaytarish</button>`;
+    }
+    doneStage.innerHTML = `
+      <div class="done-card">
+        <h2>Viktorina tugadi</h2>
+        <p style="color:var(--muted);font-size:13px;">Barcha ${total} ta so'z ko'rib chiqildi</p>
+        <div class="done-stats">
+          <div><span class="num g">${correctCount}</span><span class="lbl">To'g'ri</span></div>
+          <div><span class="num r">${wrongCount}</span><span class="lbl">Xato</span></div>
+        </div>
+        ${mistakeHtml}
+        <button id="btnRestart" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--bg-soft);color:var(--cream);font-weight:700;cursor:pointer;">Qaytadan boshlash (${total} ta)</button>
+      </div>`;
+    if(mistakes.length){
+      document.getElementById('btnRetry').addEventListener('click', ()=>startQuiz(mistakes));
+    }
+    if(wrongCount === 0 && total > 0){
+      spawnConfetti(document.querySelector('.done-card'));
+    }
   }
 
-  if(wrongCount === 0 && total > 0){
-    spawnConfetti(document.querySelector('.done-card'));
-  }
+  document.getElementById('btnRestart').addEventListener('click', ()=>startQuiz(currentQuizWords));
 }
 /* ---------------- KONFETTI: 100% natija uchun kichik zarracha portlashi ---------------- */
 function spawnConfetti(anchorEl){
