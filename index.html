@@ -836,6 +836,276 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   box-shadow:0 0 6px 2px rgba(205,163,85,0.25);
   transform:scale(1.1);
 }
+
+/* ---------- MOCHI: Erkin suzib yuruvchi sferik personaj ---------- */
+.mochi-wrap{
+  position:fixed;
+  z-index:9999;
+  top:0;
+  left:0;
+  pointer-events:auto;
+  will-change:transform;
+  cursor:grab;
+  transition:transform .08s linear;
+}
+.mochi-body{
+  width:72px; height:72px;
+  border-radius:50%;
+  background:radial-gradient(circle at 32% 28%, #f5e6c8 0%, #e8c87a 35%, #cda355 70%, #a9823f 100%);
+  box-shadow:
+    inset -4px -4px 12px rgba(0,0,0,0.18),
+    inset 4px 4px 10px rgba(255,255,255,0.35),
+    0 6px 20px rgba(205,163,85,0.35),
+    0 2px 6px rgba(0,0,0,0.25);
+  position:relative;
+  animation:mochiBreathe 3s ease-in-out infinite;
+}
+@keyframes mochiBreathe{
+  0%,100%{transform:scale(1) translateY(0);}
+  50%{transform:scale(1.04) translateY(-3px);}
+}
+.mochi-shine{
+  position:absolute;
+  top:10px; left:14px;
+  width:18px; height:10px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.55);
+  filter:blur(2px);
+  transform:rotate(-25deg);
+}
+.mochi-face{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.mochi-eye{
+  position:absolute;
+  top:26px;
+  width:14px; height:16px;
+  border-radius:50%;
+  background:#1a1208;
+  overflow:hidden;
+  box-shadow:inset 0 1px 2px rgba(0,0,0,0.4);
+}
+.mochi-eye.left{left:18px;}
+.mochi-eye.right{right:18px;}
+.mochi-pupil{
+  position:absolute;
+  top:3px; left:3px;
+  width:6px; height:6px;
+  border-radius:50%;
+  background:#fff;
+  transition:transform .15s ease-out;
+}
+.mochi-blush{
+  position:absolute;
+  top:40px;
+  width:10px; height:5px;
+  border-radius:50%;
+  background:rgba(194,83,74,0.35);
+  filter:blur(2px);
+}
+.mochi-blush.left{left:14px;}
+.mochi-blush.right{right:14px;}
+.mochi-mouth{
+  position:absolute;
+  top:44px; left:50%; transform:translateX(-50%);
+  width:8px; height:4px;
+  border-radius:0 0 8px 8px;
+  border:1.5px solid #1a1208;
+  border-top:none;
+  background:transparent;
+}
+.mochi-shadow{
+  position:absolute;
+  bottom:-10px; left:50%; transform:translateX(-50%);
+  width:50px; height:10px;
+  border-radius:50%;
+  background:rgba(0,0,0,0.18);
+  filter:blur(4px);
+  animation:mochiShadow 3s ease-in-out infinite;
+}
+@keyframes mochiShadow{
+  0%,100%{transform:translateX(-50%) scale(1); opacity:1;}
+  50%{transform:translateX(-50%) scale(0.75); opacity:0.55;}
+}
+/* Mochi hover reaction */
+.mochi-wrap:hover .mochi-body{
+  animation:mochiExcited .5s ease-in-out infinite;
+}
+@keyframes mochiExcited{
+  0%,100%{transform:scale(1.08) translateY(-4px);}
+  50%{transform:scale(1.12) translateY(-8px);}
+}
+.mochi-wrap:hover .mochi-shadow{
+  animation:none;
+  transform:translateX(-50%) scale(0.6);
+  opacity:0.4;
+}
+/* Blink */
+.mochi-eye.blink{
+  animation:mochiBlink .25s ease-in-out;
+}
+@keyframes mochiBlink{
+  0%,100%{transform:scaleY(1);}
+  50%{transform:scaleY(0.1);}
+}
+
+/* ---------- MOCHI EXPRESSIONS: xursand & hafa ---------- */
+/* Asosiy elementlarga silliq qaytish uchun transition */
+.mochi-body{
+  transition:background 0.8s ease, box-shadow 0.8s ease;
+}
+.mochi-eye{
+  transition:height 0.55s ease, top 0.55s ease, border-radius 0.55s ease;
+}
+.mochi-mouth{
+  transition:width 0.5s ease, height 0.5s ease, top 0.5s ease, border-radius 0.5s ease, border 0.5s ease, background 0.5s ease, opacity 0.5s ease, border-bottom 0.5s ease, border-top 0.5s ease;
+}
+.mochi-pupil{
+  transition:transform 0.15s ease-out, top 0.45s ease, opacity 0.45s ease, left 0.45s ease;
+}
+.mochi-blush{
+  transition:opacity 0.55s ease, width 0.55s ease, height 0.55s ease, top 0.55s ease, background 0.55s ease;
+}
+
+/* ---- HAPPY ---- */
+.mochi-body.happy{
+  background:radial-gradient(circle at 32% 28%, #fff5d6 0%, #f0d060 35%, #e0b040 70%, #c89030 100%);
+  box-shadow:
+    inset -4px -4px 12px rgba(0,0,0,0.12),
+    inset 4px 4px 14px rgba(255,255,255,0.5),
+    0 8px 28px rgba(205,163,85,0.5),
+    0 3px 10px rgba(0,0,0,0.2);
+  animation:mochiHappy .55s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes mochiHappy{
+  0%{transform:scale(1) translateY(0);}
+  40%{transform:scale(1.18) translateY(-14px);}
+  70%{transform:scale(1.08) translateY(-6px);}
+  100%{transform:scale(1.1) translateY(-8px);}
+}
+.mochi-body.happy .mochi-mouth{
+  width:14px; height:10px;
+  border-radius:0 0 14px 14px;
+  border:2px solid #1a1208;
+  border-top:none;
+  background:#c2534a;
+  top:42px;
+  animation:mochiMouthHappy .4s ease both;
+}
+@keyframes mochiMouthHappy{
+  from{width:8px; height:4px; border-radius:0 0 8px 8px;}
+  to{width:14px; height:10px; border-radius:0 0 14px 14px;}
+}
+.mochi-body.happy .mochi-eye{
+  height:18px;
+  top:22px;
+  animation:mochiEyeHappy .4s ease both;
+}
+@keyframes mochiEyeHappy{
+  from{height:16px; top:26px;}
+  to{height:18px; top:22px;}
+}
+.mochi-body.happy .mochi-blush{
+  width:14px; height:7px;
+  background:rgba(194,83,74,0.5);
+  top:38px;
+}
+
+/* ---- SAD: jozibali, och kulrang-oltin, yoqimli ---- */
+.mochi-body.sad{
+  background:radial-gradient(circle at 32% 28%, #e8e0c8 0%, #d4c898 35%, #b8a878 70%, #a09060 100%);
+  box-shadow:
+    inset -4px -4px 12px rgba(0,0,0,0.10),
+    inset 4px 4px 14px rgba(255,255,255,0.30),
+    0 6px 20px rgba(160,150,80,0.22),
+    0 2px 6px rgba(0,0,0,0.12);
+  animation:mochiSad .6s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes mochiSad{
+  0%{transform:scale(1) translateY(0);}
+  40%{transform:scale(0.96) translateY(3px);}
+  100%{transform:scale(0.97) translateY(2px);}
+}
+/* Yoqimli kichik tushkun og'iz: pastga egilgan yumaloq chiziq */
+.mochi-body.sad .mochi-mouth{
+  width:10px;
+  height:5px;
+  border-radius:50%;
+  background:transparent;
+  border:none;
+  border-bottom:2.5px solid #1a1208;
+  top:46px;
+  opacity:0.85;
+  animation:mochiMouthSad .5s ease both;
+}
+@keyframes mochiMouthSad{
+  from{width:8px; height:4px; border-bottom:1.5px solid #1a1208; top:44px; opacity:0.4;}
+  to{width:10px; height:5px; border-bottom:2.5px solid #1a1208; top:46px; opacity:0.85;}
+}
+/* Katta, yoqimli, biroz tushkun ko'zlar (puppy eyes) */
+.mochi-body.sad .mochi-eye{
+  height:14px;
+  top:26px;
+  border-radius:50% 50% 48% 48%;
+  animation:mochiEyeSad .5s ease both;
+}
+@keyframes mochiEyeSad{
+  from{height:16px; top:26px; border-radius:50%;}
+  to{height:14px; top:26px; border-radius:50% 50% 48% 48%;}
+}
+/* Qorachiq biroz pastga qarab turadi */
+.mochi-body.sad .mochi-pupil{
+  top:5px;
+  left:2px;
+  opacity:0.75;
+}
+/* Xijolat blush biroz xira */
+.mochi-body.sad .mochi-blush{
+  opacity:0.30;
+  width:11px;
+  height:5px;
+  top:40px;
+  background:rgba(194,83,74,0.35);
+}
+
+/* Sparkle stars around happy mochi */
+.mochi-sparkle{
+  position:absolute;
+  pointer-events:none;
+  width:6px; height:6px;
+  background:#e8c87a;
+  border-radius:50%;
+  box-shadow:0 0 6px 2px rgba(232,200,122,0.6);
+  opacity:0;
+  animation:sparklePop .7s ease forwards;
+}
+@keyframes sparklePop{
+  0%{opacity:0; transform:scale(0) translate(0,0);}
+  40%{opacity:1; transform:scale(1.3) translate(var(--sx), var(--sy));}
+  100%{opacity:0; transform:scale(0.4) translate(calc(var(--sx)*1.8), calc(var(--sy)*1.8));}
+}
+
+/* Tear drop for sad mochi */
+.mochi-tear{
+  position:absolute;
+  width:4px; height:6px;
+  border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+  background:rgba(120,170,220,0.7);
+  top:38px;
+  opacity:0;
+  animation:tearFall .9s ease forwards;
+}
+.mochi-tear.left{left:22px;}
+.mochi-tear.right{right:22px;}
+@keyframes tearFall{
+  0%{opacity:0.8; transform:translateY(0) scale(1);}
+  60%{opacity:0.6; transform:translateY(14px) scale(0.8);}
+  100%{opacity:0; transform:translateY(24px) scale(0.4);}
+}
 </style>
 </head>
 <body>
@@ -1976,6 +2246,7 @@ function submitAnswer(isCorrect, selectedBtn){
     resultLog[idx] = 'correct';
     card.classList.add('flash-correct');
     playCorrectSound();
+    mochiHappy();
     const dots = document.querySelectorAll('.dot-pill');
     if(dots[idx]){ dots[idx].classList.remove('current'); dots[idx].classList.add('correct'); }
     // Success animation overlay
@@ -1989,6 +2260,7 @@ function submitAnswer(isCorrect, selectedBtn){
     resultLog[idx] = 'wrong';
     card.classList.add('flash-wrong');
     playWrongSound();
+    mochiSad();
     selectedBtn.classList.add('shake-wrong');
     reveal.innerHTML = `To'g'ri javob: <b>${w.kana}</b>`;
     const dots = document.querySelectorAll('.dot-pill');
@@ -2182,6 +2454,234 @@ function spawnConfetti(anchorEl){
   }
 })();
 
+
+
+/* ---------- MOCHI REACTIONS ---------- */
+function mochiHappy(){
+  const body = document.querySelector('.mochi-body');
+  if(!body) return;
+  body.classList.remove('sad');
+  body.classList.add('happy');
+  // Sparkles
+  const wrap = document.getElementById('mochi');
+  for(let i=0;i<6;i++){
+    const s = document.createElement('div');
+    s.className = 'mochi-sparkle';
+    const angle = (Math.PI*2/6)*i + Math.random()*0.5;
+    const dist = 28 + Math.random()*18;
+    s.style.setProperty('--sx', Math.cos(angle)*dist+'px');
+    s.style.setProperty('--sy', Math.sin(angle)*dist+'px');
+    s.style.left = '50%'; s.style.top = '50%';
+    s.style.marginLeft = '-3px'; s.style.marginTop = '-3px';
+    body.appendChild(s);
+    setTimeout(()=>s.remove(), 800);
+  }
+  // 2.5 soniya xursand holatda qoladi, keyin CSS transition bilan silliq qaytadi
+  setTimeout(()=>body.classList.remove('happy'), 2500);
+}
+function mochiSad(){
+  const body = document.querySelector('.mochi-body');
+  if(!body) return;
+  body.classList.remove('happy');
+  body.classList.add('sad');
+  // Tears
+  const leftTear = document.createElement('div');
+  leftTear.className = 'mochi-tear left';
+  body.appendChild(leftTear);
+  const rightTear = document.createElement('div');
+  rightTear.className = 'mochi-tear right';
+  body.appendChild(rightTear);
+  setTimeout(()=>{ leftTear.remove(); rightTear.remove(); }, 1000);
+  // 3 soniya hafa holatda qoladi, keyin CSS transition bilan silliq qaytadi
+  setTimeout(()=>body.classList.remove('sad'), 3000);
+}
+
+/* ---------------- MOCHI: Erkin suzib yuruvchi + sudrab olib borish ---------------- */
+window.addEventListener('DOMContentLoaded', function(){
+  const mochi = document.getElementById('mochi');
+  if(!mochi) return;
+
+  let x = window.innerWidth * 0.85;
+  let y = window.innerHeight * 0.15;
+  let vx = 0.35;
+  let vy = 0.28;
+  let targetVx = 0.35;
+  let targetVy = 0.28;
+  const speedBase = 0.35;
+  const speedVar = 0.25;
+  let quizModeActive = false;
+
+  /* --- Drag state --- */
+  let dragging = false;
+  let dragOffsetX = 0;
+  let dragOffsetY = 0;
+
+  function pickNewDirection(){
+    const angle = Math.random() * Math.PI * 2;
+    const speed = speedBase + Math.random() * speedVar;
+    targetVx = Math.cos(angle) * speed;
+    targetVy = Math.sin(angle) * speed;
+  }
+
+  function getQuizTargetPos(){
+    const quizCard = document.querySelector('.quiz-card');
+    if(!quizCard) return null;
+    const rect = quizCard.getBoundingClientRect();
+    const mochiSize = 72;
+    const gap = 14;
+    const isNarrow = window.innerWidth < 640;
+
+    let tx, ty;
+    if(isNarrow){
+      tx = rect.left + rect.width/2 - mochiSize/2;
+      ty = rect.bottom + gap;
+      if(ty + mochiSize > window.innerHeight - 10){
+        ty = rect.top - mochiSize - gap;
+      }
+    } else {
+      tx = rect.right + gap;
+      ty = rect.top + rect.height/2 - mochiSize/2;
+      if(tx + mochiSize > window.innerWidth - 10){
+        tx = rect.left - mochiSize - gap;
+      }
+    }
+    tx = Math.max(10, Math.min(window.innerWidth - mochiSize - 10, tx));
+    ty = Math.max(10, Math.min(window.innerHeight - mochiSize - 10, ty));
+    return {x: tx, y: ty};
+  }
+
+  function updateMochi(){
+    if(dragging){
+      requestAnimationFrame(updateMochi);
+      return;
+    }
+    const viewQuiz = document.getElementById('viewQuiz');
+    const isQuizVisible = viewQuiz && viewQuiz.classList.contains('active');
+    const quizCard = document.querySelector('.quiz-card');
+    quizModeActive = isQuizVisible && quizCard;
+
+    if(quizModeActive){
+      const target = getQuizTargetPos();
+      if(target){
+        x += (target.x - x) * 0.07;
+        y += (target.y - y) * 0.07;
+      }
+    } else {
+      vx += (targetVx - vx) * 0.015;
+      vy += (targetVy - vy) * 0.015;
+      x += vx;
+      y += vy;
+
+      const pad = 20;
+      const maxX = window.innerWidth - 72 - pad;
+      const maxY = window.innerHeight - 72 - pad;
+
+      if(x < pad){ x = pad; targetVx = Math.abs(targetVx) * 0.8 + 0.1; }
+      if(x > maxX){ x = maxX; targetVx = -Math.abs(targetVx) * 0.8 - 0.1; }
+      if(y < pad){ y = pad; targetVy = Math.abs(targetVy) * 0.8 + 0.1; }
+      if(y > maxY){ y = maxY; targetVy = -Math.abs(targetVy) * 0.8 - 0.1; }
+    }
+
+    mochi.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
+    requestAnimationFrame(updateMochi);
+  }
+
+  setInterval(()=>{ if(!quizModeActive && !dragging && Math.random() < 0.35) pickNewDirection(); }, 2500);
+
+  /* --- Ko'z qorachig'i sichqonchaga qarab turadi --- */
+  const pupils = mochi.querySelectorAll('.mochi-pupil');
+  document.addEventListener('mousemove', (e)=>{
+    const rect = mochi.getBoundingClientRect();
+    const cx = rect.left + rect.width/2;
+    const cy = rect.top + rect.height/2;
+    const dx = e.clientX - cx;
+    const dy = e.clientY - cy;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    const maxOff = 3.5;
+    const offX = dist > 0 ? (dx/dist)*maxOff : 0;
+    const offY = dist > 0 ? (dy/dist)*maxOff : 0;
+    pupils.forEach(p=>{ p.style.transform = `translate(${offX}px, ${offY}px)`; });
+  });
+
+  /* --- Ko'z yumib ochish: AFK vaqtida tez-tez --- */
+  let lastActivity = Date.now();
+  const AFK_MS = 8000;
+  function markActive(){ lastActivity = Date.now(); }
+  ['mousemove','mousedown','keydown','touchstart','scroll','click'].forEach(evt=>{
+    document.addEventListener(evt, markActive, {passive:true});
+  });
+
+  function doBlink(){
+    const eyes = mochi.querySelectorAll('.mochi-eye');
+    eyes.forEach(eye=>{
+      eye.classList.add('blink');
+      setTimeout(()=>eye.classList.remove('blink'), 280);
+    });
+  }
+
+  function blinkLoop(){
+    const idle = Date.now() - lastActivity;
+    const isAFK = idle > AFK_MS;
+    doBlink();
+    const nextDelay = isAFK ? (2500 + Math.random()*1500) : (3000 + Math.random()*4000);
+    setTimeout(blinkLoop, nextDelay);
+  }
+  setTimeout(blinkLoop, 1500);
+
+  /* ========== DRAG & DROP: sichqoncha / barmoq bilan sudrab olib borish ========== */
+  function onDragStart(clientX, clientY){
+    dragging = true;
+    mochi.style.cursor = 'grabbing';
+    mochi.style.transition = 'none';
+    dragOffsetX = clientX - x;
+    dragOffsetY = clientY - y;
+  }
+  function onDragMove(clientX, clientY){
+    if(!dragging) return;
+    x = clientX - dragOffsetX;
+    y = clientY - dragOffsetY;
+    const pad = 0;
+    x = Math.max(pad, Math.min(window.innerWidth - 72 - pad, x));
+    y = Math.max(pad, Math.min(window.innerHeight - 72 - pad, y));
+    mochi.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`;
+  }
+  function onDragEnd(){
+    if(!dragging) return;
+    dragging = false;
+    mochi.style.cursor = 'grab';
+    mochi.style.transition = 'transform .08s linear';
+    pickNewDirection();
+  }
+
+  // Mouse
+  mochi.addEventListener('mousedown', (e)=>{
+    e.preventDefault();
+    e.stopPropagation();
+    onDragStart(e.clientX, e.clientY);
+  });
+  document.addEventListener('mousemove', (e)=>{ onDragMove(e.clientX, e.clientY); });
+  document.addEventListener('mouseup', onDragEnd);
+
+  // Touch (telefon)
+  mochi.addEventListener('touchstart', (e)=>{
+    if(e.touches.length !== 1) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const t = e.touches[0];
+    onDragStart(t.clientX, t.clientY);
+  }, {passive:false});
+  document.addEventListener('touchmove', (e)=>{
+    if(e.touches.length !== 1) return;
+    const t = e.touches[0];
+    onDragMove(t.clientX, t.clientY);
+  }, {passive:false});
+  document.addEventListener('touchend', onDragEnd);
+  document.addEventListener('touchcancel', onDragEnd);
+
+  pickNewDirection();
+  requestAnimationFrame(updateMochi);
+});
+
 /* ---------------- PWA: service worker ro'yxatdan o'tkazish ---------------- */
 if('serviceWorker' in navigator){
   window.addEventListener('load', ()=>{
@@ -2189,5 +2689,20 @@ if('serviceWorker' in navigator){
   });
 }
 </script>
+
+<!-- MOCHI: Erkin suzib yuruvchi sferik personaj -->
+<div class="mochi-wrap" id="mochi">
+  <div class="mochi-body">
+    <div class="mochi-shine"></div>
+    <div class="mochi-face">
+      <div class="mochi-eye left"><div class="mochi-pupil"></div></div>
+      <div class="mochi-eye right"><div class="mochi-pupil"></div></div>
+      <div class="mochi-blush left"></div>
+      <div class="mochi-blush right"></div>
+      <div class="mochi-mouth"></div>
+    </div>
+  </div>
+  <div class="mochi-shadow"></div>
+</div>
 </body>
 </html>
