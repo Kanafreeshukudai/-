@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uyga vazifa so'zlari</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9B%A9%EF%B8%8F%3C/text%3E%3C/svg%3E">
+
+<!-- ---- PWA: "ilova" sifatida o'rnatish uchun ---- -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#161f29">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Uyga vazifa so'zlari">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23161f29'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle'%3E%E2%9B%A9%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap">
+<style>
+
+:root{
+  --bg:#000000;
+  --bg-soft:#050505;
+  --panel:#0a0a0a;
+  --panel-2:#080808;
+  --border:#1a1a1a;
+  --gold:#cda355;
+  --gold-soft:rgba(205,163,85,0.10);
+  --cream:#e0e0e0;
+  --muted:#555555;
+  --green:#4a8a46;
+  --green-soft:rgba(74,138,70,0.12);
+  --red:#b0453d;
+  --red-soft:rgba(176,69,61,0.12);
+  --font-display:'Shippori Mincho', serif;
+  --font-body:'Zen Kaku Gothic New', sans-serif;
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  background:#000000;
+  color:var(--cream);
+  font-family:var(--font-body);
+  min-height:100vh;
+  padding:28px 16px 60px;
+  position:relative;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:#000000;
+}
+@media (prefers-reduced-motion: reduce){
+  body::before{animation:none;}
+}
+
+.stars-layer{position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; overflow:hidden;}
+.star{
+  position:absolute; border-radius:50%;
+  contain:layout paint style;
+  background:radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.45) 45%, rgba(255,255,255,0) 78%);
+  opacity:0;
+  will-change:opacity;
+  animation-name:twinkle; animation-iteration-count:infinite; animation-timing-function:ease-in-out;
+}
+@keyframes twinkle{0%,100%{opacity:0;} 50%{opacity:var(--peak,0.25);}}
+@media (prefers-reduced-motion: reduce){
+  .star{animation:none; opacity:.08;}
+}
+
+.meteor{
+  position:absolute; top:0; left:0;
+  width:3px; height:3px;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 0 8px 2px rgba(255,255,255,0.85), 0 0 18px 5px rgba(190,210,255,0.3);
+  pointer-events:none;
+  will-change:transform, opacity;
+  opacity:0;
+}
+.meteor::before{
+  content:'';
+  position:absolute;
+  top:50%; right:100%;
+  width:var(--trail-len,110px); height:1.4px;
+  background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(220,232,255,0.55) 55%, rgba(255,255,255,0.9) 100%);
+  transform:translateY(-50%);
+  border-radius:2px;
+}
+.meteor::after{
+  content:'';
+  position:absolute;
+  top:50%; right:100%;
+  width:calc(var(--trail-len,110px) * 0.62); height:5px;
+  background:linear-gradient(90deg, rgba(190,210,255,0) 0%, rgba(190,210,255,0.28) 100%);
+  transform:translateY(-50%);
+  border-radius:4px;
+  filter:blur(1.6px);
+}
+@media (prefers-reduced-motion: reduce){
+  .meteor{display:none;}
+}
+
+.wrap{max-width:920px; margin:0 auto; position:relative; z-index:1;}
+
+/* ---------- HEADER ---------- */
+header{text-align:center; margin-bottom:32px;}
+.eyebrow{
+  font-size:11px; letter-spacing:.28em; color:var(--gold);
+  text-transform:uppercase; margin-bottom:10px; font-weight:900;
+  opacity:.85;
+}
+h1{
+  font-family:var(--font-display);
+  font-size:clamp(32px,6vw,52px);
+  margin:0 0 8px;
+  color:var(--cream);
+  font-weight:700;
+  letter-spacing:-0.02em;
+  line-height:1.1;
+}
+h1 span{
+  background:linear-gradient(135deg, var(--gold), #e8c87a);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.subtitle{
+  color:var(--muted);
+  font-size:15px;
+  margin:0;
+  font-weight:400;
+  letter-spacing:.01em;
+  line-height:1.5;
+  max-width:480px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.title-wave{
+  width:180px; height:12px; margin:20px auto 0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'%3E%3Cpath d='M0,6 C5,0 15,12 20,6 C25,0 35,12 40,6' fill='none' stroke='%23cda355' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:repeat-x;
+  background-size:40px 12px;
+  opacity:.5;
+}
+
+/* ---------- TABS (shoji slider, liquid glass) ---------- */
+.tabs{
+  position:relative;
+  display:flex;
+  width:min(400px,100%);
+  margin:26px auto 0;
+  overflow:hidden;
+  background:transparent;
+  border:1px solid rgba(205,163,85,0.15);
+  border-radius:999px;
+  padding:5px;
+}
+.tabs .indicator{
+  position:absolute; top:5px; left:5px;
+  width:calc((100% - 10px)/3); height:calc(100% - 10px);
+  background:linear-gradient(135deg,var(--gold),#b8944a);
+  border-radius:999px;
+  box-shadow:0 3px 14px rgba(205,163,85,0.30);
+  transition:transform .35s cubic-bezier(.65,.05,.36,1), background .35s ease, box-shadow .35s ease;
+}
+.tabs.pos-quiz .indicator{transform:translateX(100%);}
+.tabs.pos-known .indicator{
+  transform:translateX(200%);
+  background:linear-gradient(135deg,var(--green),#4a8a46);
+  box-shadow:0 3px 14px rgba(74,138,70,0.30);
+}
+.tab-btn{
+  position:relative; z-index:1; flex:1;
+  border:none; background:transparent; cursor:pointer;
+  padding:11px 16px; font-family:var(--font-body); font-weight:700;
+  font-size:13.5px; color:var(--muted); transition:color .25s;
+  border-radius:999px; letter-spacing:.02em;
+}
+.tab-btn.active{color:#1a1208;}
+.tab-btn-known{color:var(--green);}
+.tab-btn-known.active{color:#12220f;}
+
+section.view{display:none;}
+section.view.active{display:block;}
+/* Bo'limlar orasidagi yumshoq fade-o'tish (JS bilan boshqariladi) */
+section.view.fade-in{animation:fadein .38s ease;}
+section.view.fade-out{animation:fadeout .22s ease forwards;}
+@keyframes fadein{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+@keyframes fadeout{from{opacity:1; transform:translateY(0);} to{opacity:0; transform:translateY(-6px);}}
+@media (prefers-reduced-motion: reduce){
+  section.view.fade-in, section.view.fade-out{animation:none;}
+}
+
+/* Kartochkalar ekranga (svayp/skroll bilan) yaqinlashganda sekin, silliq chiqib keladi.
+   IntersectionObserver karta ko'rinish maydoniga yetib kelishidan biroz oldin animatsiyani
+   ishga tushiradi — shu sababli mobilda tez svayp qilinganda kartalar na "birdan qotib
+   paydo bo'ladi", na "kech, ko'rinmay qolib" chiqadi. */
+.card.pre-reveal{opacity:0; transform:translateY(16px) translateZ(0);}
+@keyframes cardStagger{
+  from{opacity:0; transform:translateY(16px) scale(.97);}
+  to{opacity:1; transform:translateY(0) scale(1);}
+}
+.card.stagger-in{
+  animation:cardStagger .62s cubic-bezier(.16,.8,.24,1) both;
+  will-change:transform, opacity;
+}
+@media (prefers-reduced-motion: reduce){
+  .card.pre-reveal{opacity:1; transform:none;}
+  .card.stagger-in{animation:none;}
+}
+
+/* ---------- SUBNAV (Hammasi / Kunlik vazifa) ---------- */
+.subnav{
+  display:flex; justify-content:flex-start; gap:8px; margin-top:24px; flex-wrap:wrap;
+  align-items:center;
+}
+.sub-btn{
+  border:1px solid rgba(255,255,255,0.06);
+  background:rgba(255,255,255,0.03);
+  color:var(--muted);
+  padding:7px 16px; border-radius:999px; font-family:var(--font-body); font-weight:700;
+  font-size:12.5px; cursor:pointer; transition:all .2s;
+  letter-spacing:.02em;
+}
+.sub-btn:hover{border-color:rgba(205,163,85,0.3); color:var(--cream);}
+.sub-btn.active{background:linear-gradient(135deg, rgba(205,163,85,0.15), rgba(205,163,85,0.05)); color:var(--gold); border-color:rgba(205,163,85,0.35);}
+.sub-btn .dot{display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--gold); margin-left:6px; vertical-align:middle;}
+
+/* ---------- BILAMAN tugmasi va bo'limi ---------- */
+.know-btn{
+  position:relative; z-index:1; margin-top:10px;
+  font-size:10px; font-weight:700; letter-spacing:.02em;
+  padding:5px 11px; border-radius:999px; cursor:pointer;
+  border:1px solid rgba(95,155,91,0.4);
+  background:rgba(95,155,91,0.14); color:var(--green);
+  transition:transform .12s, background .15s;
+}
+.know-btn:active{transform:scale(.92);}
+.card.known-card .face.front{
+  border-color:var(--green);
+  background:transparent;
+}
+.card.known-card .know-btn{
+  border-color:rgba(142,163,179,0.4); background:rgba(142,163,179,0.14); color:var(--muted);
+}
+.quiz-note{
+  text-align:center; color:var(--muted); font-size:13px; margin:20px 0 4px;
+}
+.quiz-note b{color:var(--gold);}
+
+/* ---------- FLASHCARDS ---------- */
+.grid{
+  margin-top:28px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:14px;
+}
+.card{
+  perspective:1000px;
+  -webkit-perspective:1000px;
+  height:150px;
+  cursor:pointer;
+  contain:layout style;
+  transition:transform .25s ease;
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
+  transform-style:preserve-3d;
+  -webkit-transform-style:preserve-3d;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  -webkit-touch-callout:none;
+  user-select:none;
+  -webkit-user-select:none;
+}
+.card-inner{
+  position:relative; width:100%; height:100%;
+  transition:transform .5s cubic-bezier(.3,.1,.2,1);
+  transform:rotateY(0deg) translateZ(0);
+  -webkit-transform:rotateY(0deg) translateZ(0);
+  transform-style:preserve-3d;
+  -webkit-transform-style:preserve-3d;
+  will-change:transform;
+}
+.card.flipped .card-inner{transform:rotateY(180deg) translateZ(0); -webkit-transform:rotateY(180deg) translateZ(0);}
+.face{
+  position:absolute; inset:0;
+  border-radius:18px;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transform:rotateY(0deg) translateZ(0.01px);
+  -webkit-transform:rotateY(0deg) translateZ(0.01px);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  padding:14px; text-align:center;
+  overflow:hidden;
+  border:1px solid rgba(205,163,85,0.22);
+  background:transparent;
+  box-shadow: inset 0 0 0 1px rgba(205,163,85,0.06), 0 0 20px rgba(205,163,85,0.04);
+}
+@media (hover:hover) and (pointer:fine){
+  .card:not(.flipped):hover{transform:translateY(-3px) translateZ(0);}
+  .card.flipped:hover{transform:translateY(-3px) translateZ(0);}
+}
+.face.back{
+  transform:rotateY(180deg) translateZ(0.01px);
+  -webkit-transform:rotateY(180deg) translateZ(0.01px);
+  background:transparent;
+  border-color:var(--gold);
+  box-shadow: inset 0 0 0 1px rgba(205,163,85,0.10), 0 0 24px rgba(205,163,85,0.08);
+}
+
+.face.front::before{
+  content:'';
+  position:absolute; top:10px; left:50%; transform:translateX(-50%);
+  width:20px; height:4px; border-radius:2px;
+  background:var(--gold); opacity:.35;
+}
+.tag{
+  position:relative; z-index:1;
+  font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--gold); font-weight:700; margin-bottom:10px;
+}
+.uz-word{position:relative; z-index:1; font-size:17px; font-weight:700; color:var(--cream); line-height:1.25;}
+.uz-note{position:relative; z-index:1; font-size:11.5px; font-weight:400; color:var(--muted); line-height:1.3; margin-top:4px;}
+.kana{position:relative; z-index:1; font-family:var(--font-display); font-size:24px; font-weight:700; color:var(--gold);}
+.romaji{position:relative; z-index:1; font-size:12px; color:var(--muted); margin-top:6px; font-style:italic;}
+.hint{position:relative; z-index:1; font-size:11px; color:var(--muted); margin-top:10px;}
+
+/* ---------- QUIZ ---------- */
+.progress-row{display:flex; gap:6px; justify-content:center; margin:28px 0 10px; flex-wrap:wrap;}
+.mat{width:10px; height:10px; border-radius:50%; background:var(--panel-2); border:1px solid rgba(255,255,255,0.06); transition:background .25s,border-color .25s,transform .25s;}
+.mat.done-correct{background:var(--green); border-color:rgba(74,138,70,0.5);}
+.mat.done-wrong{background:var(--red); border-color:rgba(176,69,61,0.5);}
+.mat.current{border-color:var(--gold); background:rgba(205,163,85,0.15); box-shadow:0 0 8px rgba(205,163,85,0.15);}
+.mat.flash{animation:dotFlash .55s ease both;}
+@keyframes dotFlash{
+  0%{transform:scale(1); box-shadow:0 0 0 0 rgba(255,255,255,0);}
+  35%{transform:scale(1.8); box-shadow:0 0 16px 7px rgba(255,255,255,0.55);}
+  100%{transform:scale(1); box-shadow:0 0 0 0 rgba(255,255,255,0);}
+}
+.score-line{text-align:center; color:var(--muted); font-size:13px; margin-bottom:20px; letter-spacing:.02em; font-weight:500;}
+
+.quiz-stage{display:flex; justify-content:center;}
+.quiz-card{
+  width:min(480px,100%);
+  background:transparent;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:30px 26px 26px;
+  position:relative;
+  transition:transform .4s ease, opacity .4s ease, border-color .3s, box-shadow .3s, background .3s;
+}
+.quiz-card.flash-correct{border-color:var(--green);}
+.quiz-card.flash-wrong{border-color:var(--red);}
+.quiz-card.leaving{opacity:0; transform:scale(.92) translateY(-6px);}
+
+.q-tag{font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); font-weight:900; text-align:center; opacity:.9;}
+.q-word{font-family:var(--font-display); font-size:clamp(22px,5vw,30px); font-weight:700; text-align:center; margin:10px 0 6px; color:var(--cream); line-height:1.2;}
+.q-note{font-size:13px; font-weight:400; text-align:center; margin:0 0 20px; color:var(--muted); line-height:1.45; max-width:360px; margin-left:auto; margin-right:auto;}
+
+.answer-strip{
+  min-height:56px;
+  width:100%;
+  display:block;
+  font-family:var(--font-display);
+  font-size:24px; letter-spacing:.06em; color:var(--gold);
+  padding:8px 14px; margin-bottom:16px; word-break:break-all;
+  text-align:center;
+  outline:none;
+  box-sizing:border-box;
+  border-radius:14px;
+  border:1px solid var(--border);
+  background:transparent;
+  transition:border-color .2s, box-shadow .2s, background .2s;
+}
+.answer-strip::placeholder{color:var(--muted); font-family:var(--font-body); font-size:13px; letter-spacing:0;}
+.answer-strip:focus{
+  border-color:var(--gold);
+  background:transparent;
+  box-shadow:0 0 0 2px var(--gold-soft);
+}
+
+.reveal-answer{text-align:center; font-size:14px; color:var(--muted); min-height:20px; margin-bottom:12px; font-weight:500;}
+.reveal-answer b{color:var(--gold); font-family:var(--font-display); font-size:18px; font-weight:700;}
+
+.action-row{display:flex; gap:8px;}
+.action-row button{
+  flex:1; padding:12px 0; border-radius:12px; border:1px solid rgba(255,255,255,0.06);
+  font-family:var(--font-body); font-weight:700; font-size:14px; cursor:pointer;
+  background:rgba(255,255,255,0.03); color:var(--cream);
+  transition:background .18s, border-color .18s, color .18s, transform .12s, filter .15s;
+  letter-spacing:.02em;
+}
+.action-row .btn-clear{
+  background:transparent;
+  border-color:var(--border);
+  color:var(--muted);
+}
+@media (hover:hover) and (pointer:fine){
+  .action-row .btn-clear:hover{border-color:var(--muted); color:var(--cream); background:transparent;}
+  .action-row .submit-btn:hover{filter:brightness(1.08);}
+}
+.action-row .submit-btn{background:linear-gradient(135deg,var(--gold),#a9823f); color:#1a1208; border:none;}
+.action-row button:active{transform:scale(.94);}
+.action-row .btn-clear:active{background:transparent;}
+.action-row .submit-btn:active{filter:brightness(.92);}
+.action-row button:disabled{opacity:.45; cursor:not-allowed; transform:none;}
+
+.stamp{
+  position:absolute; top:-14px; right:-14px; width:66px; height:66px;
+  border:3px solid var(--red); border-radius:50%; color:var(--red);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-display); font-weight:700; font-size:12px;
+  transform:rotate(-18deg) scale(0); opacity:0;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1), opacity .25s;
+  background-image:
+    radial-gradient(circle at 30% 26%, rgba(194,83,74,0.45), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgba(194,83,74,0.32), transparent 55%),
+    radial-gradient(circle at 46% 82%, rgba(194,83,74,0.30), transparent 50%);
+  background-color:rgba(194,83,74,0.07);
+  text-align:center; line-height:1.1; letter-spacing:.05em;
+  overflow:hidden;
+}
+.stamp::after{
+  content:'';
+  position:absolute; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:90px 90px;
+  opacity:.4;
+  mix-blend-mode:multiply;
+  pointer-events:none;
+}
+.stamp.show{transform:rotate(-18deg) scale(1); opacity:1;}
+.stamp.ok{
+  border-color:var(--green); color:var(--green);
+  background-image:
+    radial-gradient(circle at 30% 26%, rgba(95,155,91,0.45), transparent 55%),
+    radial-gradient(circle at 70% 60%, rgba(95,155,91,0.32), transparent 55%),
+    radial-gradient(circle at 46% 82%, rgba(95,155,91,0.30), transparent 50%);
+  background-color:rgba(95,155,91,0.07);
+}
+
+/* ---------- DONE SCREEN ---------- */
+.done-card{
+  width:min(480px,100%); margin:0 auto;
+  background:transparent;
+  border:1px solid rgba(205,163,85,0.12); border-radius:20px; padding:36px 28px; text-align:center;
+}
+.done-card h2{font-family:var(--font-display); margin:0 0 8px; color:var(--gold); font-size:28px; letter-spacing:-0.01em;}
+.done-stats{display:flex; justify-content:center; gap:32px; margin:22px 0 26px;}
+.done-stats div{text-align:center;}
+.done-stats .num{font-size:32px; font-weight:900; display:block; line-height:1;}
+.done-stats .num.g{color:var(--green);}
+.done-stats .num.r{color:var(--red);}
+.done-stats .lbl{font-size:10px; color:var(--muted); letter-spacing:.12em; text-transform:uppercase; margin-top:6px; display:block; font-weight:700;}
+.mistake-list{text-align:left; margin:0 0 24px; padding:0; list-style:none; max-height:220px; overflow:auto;}
+.mistake-list li{
+  display:flex; justify-content:space-between; padding:10px 6px; border-bottom:1px solid rgba(255,255,255,0.04);
+  font-size:14px;
+}
+.mistake-list b{color:var(--gold); font-family:var(--font-display); font-size:16px;}
+
+footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; margin-top:40px; letter-spacing:.04em; font-weight:500;}
+@media(max-width:420px){.kb-grid{grid-template-columns:repeat(5,1fr);}}
+
+/* ---------- KONFETTI (100% natija uchun) ---------- */
+.confetti-layer{
+  position:absolute; inset:0; overflow:visible; pointer-events:none; z-index:5;
+}
+.confetti-piece{
+  position:absolute; top:-10px; left:50%;
+  width:8px; height:14px;
+  opacity:0;
+  will-change:transform, opacity;
+  animation-name:confettiFall; animation-timing-function:cubic-bezier(.15,.6,.4,1); animation-fill-mode:forwards;
+}
+@keyframes confettiFall{
+  0%{opacity:1; transform:translate(0,0) rotate(0deg);}
+  100%{opacity:0; transform:translate(var(--drift,0px),260px) rotate(var(--spin,540deg));}
+}
+@media (prefers-reduced-motion: reduce){
+  .confetti-piece{display:none;}
+}
+
+/* ---------- QUIZ OPTIONS (4-variant) ---------- */
+.options-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:14px;
+}
+.option-btn{
+  padding:16px 12px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.06);
+  background:rgba(255,255,255,0.02);
+  color:var(--cream);
+  font-family:var(--font-body);
+  font-weight:700;
+  font-size:16px;
+  cursor:pointer;
+  transition:all .18s ease;
+  text-align:center;
+  line-height:1.3;
+  letter-spacing:.02em;
+}
+.option-btn:hover:not(:disabled){ border-color:var(--gold); background:var(--gold-soft); }
+.option-btn:active:not(:disabled){ transform:scale(.96); }
+.option-btn:disabled{ cursor:default; }
+.option-btn.correct{ border-color:var(--green); background:var(--green-soft); color:var(--green); }
+.option-btn.wrong{ border-color:var(--red); background:var(--red-soft); color:var(--red); }
+.option-btn.dim{ opacity:.35; }
+@media(max-width:420px){
+  .options-grid{grid-template-columns:1fr;}
+}
+
+/* ---------- QUIZ SUCCESS ANIMATION ---------- */
+.success-burst{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  z-index:2;
+}
+.success-text{
+  font-family:var(--font-display);
+  font-size:52px;
+  font-weight:700;
+  color:var(--green);
+  text-shadow:0 0 30px rgba(74,138,70,0.4), 0 0 60px rgba(74,138,70,0.15);
+  opacity:0;
+  transform:scale(0.5) translateY(20px);
+  animation:successPop .55s cubic-bezier(.34,1.56,.64,1) forwards;
+}
+@keyframes successPop{
+  0%{opacity:0; transform:scale(0.5) translateY(20px);}
+  60%{opacity:1; transform:scale(1.15) translateY(-4px);}
+  100%{opacity:1; transform:scale(1) translateY(0);}
+}
+.success-ring{
+  position:absolute;
+  inset:10px;
+  border-radius:16px;
+  border:2px solid var(--green);
+  opacity:0;
+  animation:ringExpand .7s ease-out forwards;
+  pointer-events:none;
+}
+@keyframes ringExpand{
+  0%{opacity:0.8; transform:scale(0.96);}
+  100%{opacity:0; transform:scale(1.04);}
+}
+
+/* Stamp only for wrong answers */
+.stamp{ display:none; }
+.stamp.show{ display:flex; }
+
+/* ---------- SHAKE ANIMATION for wrong option ---------- */
+@keyframes shakeX{
+  0%,100%{transform:translateX(0);}
+  15%{transform:translateX(-10px);}
+  30%{transform:translateX(9px);}
+  45%{transform:translateX(-7px);}
+  60%{transform:translateX(5px);}
+  75%{transform:translateX(-3px);}
+  90%{transform:translateX(1px);}
+}
+.shake-wrong{
+  animation:shakeX .50s ease-in-out both;
+  transition:none !important;
+}
+
+/* ---------- DROPDOWN (Hammasi) ---------- */
+.dropdown-wrap{position:relative;display:inline-block;}
+.dropdown-btn{
+  border:1px solid rgba(205,163,85,0.25);
+  background:rgba(205,163,85,0.06);
+  color:var(--gold);
+  padding:8px 18px; border-radius:999px; font-family:var(--font-body); font-weight:700;
+  font-size:12.5px; cursor:pointer; transition:all .2s;
+  display:inline-flex; align-items:center; gap:6px;
+  letter-spacing:.04em;
+}
+.dropdown-btn:hover{background:rgba(205,163,85,0.12); border-color:rgba(205,163,85,0.4);}
+.dropdown-btn.active{background:rgba(205,163,85,0.18); color:var(--gold); border-color:var(--gold);}
+.dropdown-btn::after{
+  content:''; width:0; height:0;
+  border-left:4px solid transparent; border-right:4px solid transparent;
+  border-top:4px solid currentColor; transition:transform .2s;
+}
+.dropdown-btn.active::after{transform:rotate(180deg);}
+.dropdown-panel{
+  display:none; position:absolute; top:calc(100% + 8px); left:0;
+  background:var(--panel); border:1px solid var(--border); border-radius:14px;
+  padding:10px; z-index:10;
+  box-shadow:0 8px 30px rgba(0,0,0,0.5);
+  flex-wrap:wrap; gap:6px; max-width:320px;
+}
+.dropdown-wrap.open .dropdown-panel{display:flex; animation:dropIn .18s ease both;}
+@keyframes dropIn{from{opacity:0; transform:translateY(-6px);} to{opacity:1; transform:translateY(0);}}
+.dropdown-panel .sub-btn{
+  display:inline-block; width:auto; text-align:center; border-radius:999px; margin:0;
+  border:1px solid var(--border); background:transparent; color:var(--muted);
+  padding:7px 14px; font-family:var(--font-body); font-weight:700;
+  font-size:12px; cursor:pointer; transition:all .15s; white-space:nowrap;
+}
+.dropdown-panel .sub-btn:hover{background:var(--gold-soft); color:var(--gold); border-color:var(--gold);}
+.dropdown-panel .sub-btn.active{background:var(--gold-soft); color:var(--gold); border-color:var(--gold);}
+
+/* ---------- PROGRESS SCALE ---------- */
+.scale-wrap{
+  width:min(480px,100%);
+  margin:24px auto 8px;
+  position:relative;
+}
+.scale-track{
+  width:100%; height:6px;
+  background:rgba(255,255,255,0.04);
+  border-radius:999px;
+  overflow:hidden;
+  position:relative;
+}
+.scale-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg, var(--gold), #e8c87a);
+  border-radius:999px;
+  transition:width .45s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 0 12px rgba(205,163,85,0.25);
+  position:relative;
+}
+.scale-fill::after{
+  content:'';
+  position:absolute; right:0; top:50%; transform:translate(50%,-50%);
+  width:10px; height:10px;
+  background:var(--gold);
+  border-radius:50%;
+  box-shadow:0 0 10px rgba(205,163,85,0.5);
+}
+.scale-label{
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-top:10px;
+}
+.scale-label b{
+  color:var(--gold);
+  font-weight:900;
+}
+
+/* ---------- MODE SWITCHER ---------- */
+.mode-switch{
+  display:flex;
+  gap:4px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:999px;
+  padding:4px;
+}
+.mode-btn{
+  border:none;
+  background:transparent;
+  color:var(--muted);
+  font-family:var(--font-body);
+  font-weight:700;
+  font-size:12px;
+  padding:7px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:all .2s;
+  letter-spacing:.02em;
+}
+.mode-btn.active{
+  background:linear-gradient(135deg, var(--gold), #b8944a);
+  color:#1a1208;
+  box-shadow:0 2px 10px rgba(205,163,85,0.25);
+}
+
+/* ---------- TIME TRIAL TYPING AREA ---------- */
+.type-area{
+  margin-top:6px;
+}
+.type-area .answer-strip{
+  margin-bottom:10px;
+  font-size:22px;
+}
+.type-area .action-row{
+  margin-top:0;
+}
+.type-area .action-row button{
+  padding:12px 0;
+}
+
+/* ---------- TIMER BAR ---------- */
+.timer-bar-wrap{
+  display:none;
+  margin-bottom:14px;
+}
+.timer-bar-wrap.show{
+  display:block;
+  animation: fadein .25s ease;
+}
+.timer-bar-track{
+  width:100%;
+  height:5px;
+  background:rgba(255,255,255,0.05);
+  border-radius:999px;
+  overflow:hidden;
+  position:relative;
+}
+.timer-bar-fill{
+  height:100%;
+  width:100%;
+  background:linear-gradient(90deg, var(--gold), #e8c87a);
+  border-radius:999px;
+  transform-origin:left;
+  transition:background .3s;
+}
+.timer-bar-fill.urgent{
+  background:linear-gradient(90deg, var(--red), #c2534a);
+}
+.timer-text{
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+  margin-top:6px;
+  letter-spacing:.08em;
+}
+.timer-text.urgent{
+  color:var(--red);
+}
+
+/* ---------- QUIZ DOTS (under scale) ---------- */
+.dots-row{
+  display:flex;
+  gap:5px;
+  justify-content:center;
+  flex-wrap:wrap;
+  padding-top:10px;
+  min-height:8px;
+}
+.dot-pill{
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  transition:all .45s cubic-bezier(.34,1.56,.64,1);
+  position:relative;
+  flex-shrink:0;
+}
+
+/* Bir marta yorqin porlab, keyin tinch, soya-siz holatga qaytadi */
+.dot-pill.correct{
+  animation: dotPulseGreen .75s ease both;
+}
+.dot-pill.wrong{
+  animation: dotPulseRed .75s ease both;
+}
+
+@keyframes dotPulseGreen{
+  0%  { transform:scale(1); background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); box-shadow:none; }
+  30% { transform:scale(1.35); background:var(--green); border-color:var(--green); box-shadow:0 0 14px 4px rgba(74,138,70,0.55), 0 0 28px 8px rgba(74,138,70,0.18); }
+  100%{ transform:scale(1); background:rgba(74,138,70,0.14); border-color:rgba(74,138,70,0.30); box-shadow:none; }
+}
+@keyframes dotPulseRed{
+  0%  { transform:scale(1); background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); box-shadow:none; }
+  30% { transform:scale(1.35); background:var(--red); border-color:var(--red); box-shadow:0 0 14px 4px rgba(176,69,61,0.55), 0 0 28px 8px rgba(176,69,61,0.18); }
+  100%{ transform:scale(1); background:rgba(176,69,61,0.14); border-color:rgba(176,69,61,0.30); box-shadow:none; }
+}
+
+.dot-pill.current{
+  border-color:var(--gold);
+  background:rgba(205,163,85,0.18);
+  box-shadow:0 0 6px 2px rgba(205,163,85,0.25);
+  transform:scale(1.1);
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Uyga vazifa <span>so'zlari</span></h1>
+    <p class="subtitle">Uyga vazifa qilib berilgan yapon so'zlari &mdash; kartochka bilan yodlang, viktorina bilan tekshiring</p>
+    <div class="title-wave" aria-hidden="true"></div>
+
+    <div class="tabs" id="tabs">
+      <div class="indicator"></div>
+      <button class="tab-btn active" id="tabFlash">Flashcard</button>
+      <button class="tab-btn" id="tabQuiz">Viktorina</button>
+      <button class="tab-btn tab-btn-known" id="tabKnown">✓ Bilaman <span id="knownCount"></span></button>
+    </div>
+  </header>
+
+  <section class="view active" id="viewFlash">
+    <div class="subnav" id="flashSubnav">
+      <div class="dropdown-wrap" id="flashDropdown">
+        <button class="dropdown-btn" id="flashDropdownBtn" type="button">Mavzular</button>
+        <div class="dropdown-panel" id="flashDropdownPanel">
+          <button class="sub-btn" data-set="daily" id="flashSubDaily">1-mavzu</button>
+          <button class="sub-btn" data-set="new" id="flashSubNew">2-mavzu</button>
+          <button class="sub-btn" data-set="today" id="flashSubToday">3-mavzu</button>
+          <button class="sub-btn" data-set="today2" id="flashSubToday2">4-mavzu</button>
+          <button class="sub-btn" data-set="chorshanba" id="flashSubChorshanba">5-mavzu</button>
+          <button class="sub-btn" data-set="payshanba30" id="flashSubPayshanba30">6-mavzu</button>
+          <button class="sub-btn active" data-set="juma31" id="flashSubJuma31">7-mavzu</button>
+          <button class="sub-btn" data-set="numbers" id="flashSubNumbers">Raqamlar</button>
+        </div>
+      </div>
+      <div style="flex:1;"></div>
+    </div>
+    <div class="grid" id="flashGrid"></div>
+  </section>
+
+  <section class="view" id="viewQuiz">
+    <div class="subnav" id="quizSubnav">
+      <div class="dropdown-wrap" id="quizDropdown">
+        <button class="dropdown-btn" id="quizDropdownBtn" type="button">Mavzular</button>
+        <div class="dropdown-panel" id="quizDropdownPanel"></div>
+      </div>
+      <div style="flex:1;"></div>
+      <div class="mode-switch" id="modeSwitch">
+        <button class="mode-btn active" data-mode="options" id="modeOptions" type="button">4 variant</button>
+        <button class="mode-btn" data-mode="timetrial" id="modeTime" type="button">Vaqt sinovi</button>
+      </div>
+    </div>
+
+    <div class="scale-wrap" id="scaleWrap" style="display:none;">
+      <div class="scale-track">
+        <div class="scale-fill" id="scaleFill"></div>
+      </div>
+      <div class="scale-label" id="scaleLabel"></div>
+      <div class="dots-row" id="dotsRow"></div>
+    </div>
+
+    <div class="quiz-stage" id="quizStage"></div>
+    <div id="doneStage" style="display:none;"></div>
+  </section>
+
+  <section class="view" id="viewKnown">
+    <div class="subnav" id="knownSubnav">
+      <div class="dropdown-wrap" id="knownDropdown">
+        <button class="dropdown-btn" id="knownDropdownBtn" type="button">Mavzular</button>
+        <div class="dropdown-panel" id="knownDropdownPanel"></div>
+      </div>
+      <div style="flex:1;"></div>
+    </div>
+    <div class="grid" id="knownGrid"></div>
+  </section>
+
+  <footer class="note">Kartani bosib ochib-yoping &middot; Viktorinada 4 ta variantdan to'g'risini tanlang</footer>
+</div>
+
+<script>
+/* ============================================================
+   SO'ZLAR RO'YXATI — yangi so'z qo'shish shu yerda, oddiy usulda.
+   Har bir so'z uchun quyidagi shaklda bitta qator qo'shing:
+
+   {uz:"O'zbekcha ma'no", kana:"ko'rinadigan yozuv", accepted:["to'g'ri javob(lar)"], romaji:"talaffuz", group:"Guruh nomi", kb:"hira" yoki "kata"},
+
+   - accepted: viktorinada shu yozuvlardan biri to'g'ri deb hisoblanadi (bir nechta variant bo'lsa vergul bilan)
+   - kb: so'z hiragana bilan yozilsa "hira", katakana bilan yozilsa "kata"
+   - group: kartochkada chiqadigan kichik yorliq (masalan "Oshxona", "Kiyim" va h.k.) — istagan nom bo'lishi mumkin
+   Klaviatura tugmalari pastda AVTOMATIK hisoblanadi, qo'lda sozlash shart emas.
+   ============================================================ */
+/* "Kunlik vazifa" bo'limi — Flashcard va Viktorina shu ro'yxat bilan ishlaydi.
+   Format: {uz, kana, accepted:[...], romaji, group, kb:"hira"/"kata"} */
+const DAILY_WORDS = [
+
+  {uz:"Men", kana:"わたし", accepted:["わたし"], romaji:"watashi", group:"Odamlar", kb:"hira"},
+  {uz:"Sen", kana:"あなた", accepted:["あなた"], romaji:"anata", group:"Odamlar", kb:"hira"},
+  {uz:"Hamma,barcha", kana:"みなさん", accepted:["みなさん"], romaji:"minasan", group:"Odamlar", kb:"hira"},
+  {uz:"U kishi", kana:"あのひと", accepted:["あのひと"], romaji:"ano hito", group:"Odamlar", kb:"hira"},
+  {uz:"Janob / Xonim", note:"(kishilarning ismidan so'ng qo'shiladi va hurmatni ifodalaydi)", kana:"さん", accepted:["さん"], romaji:"san", group:"Odamlar", kb:"hira"},
+  {uz:"~lik", note:"(biror kishining millatini bildiradigan suffiks)", kana:"じん", accepted:["じん"], romaji:"jin", group:"Odamlar", kb:"hira"},
+  {uz:"~ yosh", kana:"さい", accepted:["さい"], romaji:"sai", group:"Odamlar", kb:"hira"},
+  {uz:"Ism", kana:"なまえ", accepted:["なまえ"], romaji:"namae", group:"Shaxsiy ma'lumot", kb:"hira"},
+  {uz:"Shifokor", kana:"いしゃ", accepted:["いしゃ"], romaji:"isha", group:"Kasblar", kb:"hira"},
+  {uz:"Kompaniya xodimi / Ishchi", kana:"かいしゃいん", accepted:["かいしゃいん"], romaji:"kaishain", group:"Kasblar", kb:"hira"},
+  {uz:"Talaba", kana:"がくせい", accepted:["がくせい"], romaji:"gakusei", group:"Kasblar", kb:"hira"},
+  {uz:"Bank xodimi", kana:"ぎんこういん", accepted:["ぎんこういん"], romaji:"ginkouin", group:"Kasblar", kb:"hira"},
+  {uz:"Tadqiqotchi", kana:"けんきゅうしゃ", accepted:["けんきゅうしゃ"], romaji:"kenkyuusha", group:"Kasblar", kb:"hira"},
+  {uz:"Xodim", kana:"しゃいん", accepted:["しゃいん"], romaji:"shain", group:"Kasblar", kb:"hira"},
+  {uz:"O'qituvchi", kana:"せんせい", accepted:["せんせい"], romaji:"sensei", group:"Kasblar", kb:"hira"},
+  {uz:"Kompaniya", kana:"カンパニー", accepted:["カンパニー"], romaji:"kanpanii", group:"Joylar", kb:"kata"},
+  {uz:"Sinf", kana:"クラス", accepted:["クラス"], romaji:"kurasu", group:"Joylar", kb:"kata"},
+  {uz:"Universitet", kana:"だいがく", accepted:["だいがく"], romaji:"daigaku", group:"Joylar", kb:"hira"},
+  {uz:"Shifoxona", kana:"びょういん", accepted:["びょういん"], romaji:"byouin", group:"Joylar", kb:"hira"},
+  {uz:"Idora,ofis", kana:"じむしつ", accepted:["じむしつ"], romaji:"jimushitsu", group:"Joylar", kb:"hira"},
+  {uz:"-qavat", kana:"かい", accepted:["かい"], romaji:"kai", group:"Joylar", kb:"hira"},
+  {uz:"Ertalabki vaqt", kana:"ごぜん", accepted:["ごぜん"], romaji:"gozen", group:"Vaqt", kb:"hira"},
+  {uz:"Tushdan so'nggi vaqt", kana:"ごご", accepted:["ごご"], romaji:"gogo", group:"Vaqt", kb:"hira"},
+  {uz:"Yapon tili", kana:"にほんご", accepted:["にほんご"], romaji:"nihongo", group:"Til", kb:"hira"},
+  {uz:"Amerika", kana:"アメリカ", accepted:["アメリカ"], romaji:"amerika", group:"Davlatlar/Shaharlar", kb:"kata"},
+  {uz:"Janubiy Koreya", kana:"かんこく", accepted:["かんこく"], romaji:"kankoku", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Seul", kana:"ソウル", accepted:["ソウル"], romaji:"souru", group:"Davlatlar/Shaharlar", kb:"kata"},
+  {uz:"Xitoy", kana:"ちゅうごく", accepted:["ちゅうごく"], romaji:"chuugoku", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Pekin", kana:"ぺきん", accepted:["ぺきん"], romaji:"pekin", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Yaponiya", kana:"にほん", accepted:["にほん"], romaji:"nihon", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Filippin", kana:"フィリピン", accepted:["フィリピン"], romaji:"firipin", group:"Davlatlar/Shaharlar", kb:"kata"},
+  {uz:"Manila", kana:"マニラ", accepted:["マニラ"], romaji:"manira", group:"Davlatlar/Shaharlar", kb:"kata"},
+  {uz:"Vyetnam", kana:"ベトナム", accepted:["ベトナム"], romaji:"betonamu", group:"Davlatlar/Shaharlar", kb:"kata"},
+  {uz:"Xanoy", kana:"ハノイ", accepted:["ハノイ"], romaji:"hanoi", group:"Davlatlar/Shaharlar", kb:"kata"},
+  {uz:"Myanma", kana:"ミャンマー", accepted:["ミャンマー"], romaji:"myanmaa", group:"Davlatlar/Shaharlar", kb:"kata"},
+  {uz:"Yangon", kana:"ヤンゴン", accepted:["ヤンゴン"], romaji:"yangon", group:"Davlatlar/Shaharlar", kb:"kata"},
+  {uz:"Angliya", kana:"イギリス", accepted:["イギリス"], romaji:"igirisu", group:"Davlatlar/Shaharlar", kb:"kata"},
+  {uz:"London", kana:"ロンドン", accepted:["ロンドン"], romaji:"rondon", group:"Davlatlar/Shaharlar", kb:"kata"},
+  {uz:"O'zimni tanishtirishga ruxsat bersangiz.", kana:"はじめまして", accepted:["はじめまして"], romaji:"hajimemashite", group:"Tanishuv", kb:"hira"},
+  {uz:"Tanishganimdan mamnunman", kana:"どうぞよろしくおねがいします", accepted:["どうぞよろしくおねがいします","どうぞ、よろしくおねがいします"], romaji:"douzo yoroshiku onegaishimasu", group:"Tanishuv", kb:"hira"},
+  {uz:"Kechirasiz,~", kana:"しつれいですが", accepted:["しつれいですが"], romaji:"shitsurei desu ga", group:"Tanishuv", kb:"hira"},
+  {uz:"~dan kelganman", note:"(~davlat nomi) Bu so'z qaysi mamlakatdan kelganligi aytish uchun ishlatiladi.", kana:"からきました", accepted:["からきました"], romaji:"kara kimashita", group:"Tanishuv", kb:"hira"},
+  {uz:"Ha", kana:"はい", accepted:["はい"], romaji:"hai", group:"Tanishuv", kb:"hira"},
+  {uz:"Yo'q", kana:"いいえ", accepted:["いいえ"], romaji:"iie", group:"Tanishuv", kb:"hira"},
+  {uz:"Kim", kana:"だれ", accepted:["だれ"], romaji:"dare", group:"Tanishuv", kb:"hira"},
+  {uz:"Necha yosh", kana:"なんさい", accepted:["なんさい"], romaji:"nansai", group:"Tanishuv", kb:"hira"},
+  {uz:"Yoshingiz nechida?", note:"(Hurmat shakl)", kana:"おいくつ", accepted:["おいくつ"], romaji:"oikutsu", group:"Tanishuv", kb:"hira"},
+  {uz:"Ismingiz nima?", kana:"おなまえは", accepted:["おなまえは"], romaji:"onamae wa", group:"Tanishuv", kb:"hira"},
+  {uz:"Mashq", kana:"れんしゅう", accepted:["れんしゅう"], romaji:"renshuu", group:"Darslik so'zlari", kb:"hira"},
+  {uz:"Namuna", kana:"れい", accepted:["れい"], romaji:"rei", group:"Darslik so'zlari", kb:"hira"},
+  {uz:"Keling,o'zimizni tanishtiraylik", kana:"じこしょうかいしましょう", accepted:["じこしょうかいしましょう"], romaji:"jikoshoukai shimashou", group:"Darslik so'zlari", kb:"hira"},
+  {uz:"2 kishi bo'lib gaplashaylik", note:"(juft bo'lib)", kana:"ペアではなしましょう", accepted:["ペアではなしましょう"], romaji:"pea de hanashimashou", group:"Darslik so'zlari", kb:"hira"}
+
+];
+
+/* "Yangi so'zlar" bo'limi — navbatdagi so'zlar shu yerga qo'shiladi.
+   Bu ro'yxat ham Flashcard'da alohida bo'lim sifatida va Viktorinada
+   "Kunlik vazifa" bilan birga ishtirok etadi.
+   Format bir xil: {uz, note(ixtiyoriy), kana, accepted:[...], romaji, group, kb:"hira"/"kata"} */
+const NEW_WORDS = [
+
+  {uz:"bu", kana:"これ", accepted:["これ"], romaji:"kore", group:"Olmoshlar", kb:"hira"},
+  {uz:"u", kana:"それ", accepted:["それ"], romaji:"sore", group:"Olmoshlar", kb:"hira"},
+  {uz:"ana u", kana:"あれ", accepted:["あれ"], romaji:"are", group:"Olmoshlar", kb:"hira"},
+  {uz:"kitob", kana:"ほん", accepted:["ほん"], romaji:"hon", group:"Bosma narsalar", kb:"hira"},
+  {uz:"lug'at", kana:"じしょ", accepted:["じしょ"], romaji:"jisho", group:"Bosma narsalar", kb:"hira"},
+  {uz:"gazeta", kana:"しんぶん", accepted:["しんぶん"], romaji:"shinbun", group:"Bosma narsalar", kb:"hira"},
+  {uz:"tashrif qog'ozi", kana:"めいし", accepted:["めいし"], romaji:"meishi", group:"Bosma narsalar", kb:"hira"},
+  {uz:"jurnal", kana:"ざっし", accepted:["ざっし"], romaji:"zasshi", group:"Bosma narsalar", kb:"hira"},
+  {uz:"daftar", kana:"ノート", accepted:["ノート"], romaji:"nooto", group:"Yozuv anjomlari", kb:"kata"},
+  {uz:"karta", kana:"カード", accepted:["カード"], romaji:"kaado", group:"Yozuv anjomlari", kb:"kata"},
+  {uz:"qalam", kana:"えんぴつ", accepted:["えんぴつ"], romaji:"enpitsu", group:"Yozuv anjomlari", kb:"hira"},
+  {uz:"ruchka", kana:"ボールペン", accepted:["ボールペン"], romaji:"boorupen", group:"Yozuv anjomlari", kb:"kata"},
+  {uz:"avto qalam", kana:"シャープペンシル", accepted:["シャープペンシル"], romaji:"shaapupenshiru", group:"Yozuv anjomlari", kb:"kata"},
+  {uz:"kalit", kana:"かぎ", accepted:["かぎ"], romaji:"kagi", group:"Shaxsiy buyumlar", kb:"hira"},
+  {uz:"soyabon", kana:"かさ", accepted:["かさ"], romaji:"kasa", group:"Shaxsiy buyumlar", kb:"hira"},
+  {uz:"soat", kana:"とけい", accepted:["とけい"], romaji:"tokei", group:"Shaxsiy buyumlar", kb:"hira"},
+  {uz:"sumka", kana:"かばん", accepted:["かばん"], romaji:"kaban", group:"Shaxsiy buyumlar", kb:"hira"},
+  {uz:"televizor", kana:"テレビ", accepted:["テレビ"], romaji:"terebi", group:"Texnika", kb:"kata"},
+  {uz:"kamera", kana:"カメラ", accepted:["カメラ"], romaji:"kamera", group:"Texnika", kb:"kata"},
+  {uz:"mobil telefon", kana:"けいたいでんわ", accepted:["けいたいでんわ"], romaji:"keitai denwa", group:"Texnika", kb:"hira"},
+  {uz:"kompyuter", kana:"パソコン", accepted:["パソコン"], romaji:"pasokon", group:"Texnika", kb:"kata"},
+  {uz:"avtomobil / mashina", kana:"じどうしゃ", accepted:["じどうしゃ","くるま"], romaji:"jidousha / kuruma", group:"Transport", kb:"hira"},
+  {uz:"stol", kana:"つくえ", accepted:["つくえ"], romaji:"tsukue", group:"Mebel", kb:"hira"},
+  {uz:"stul", kana:"いす", accepted:["いす"], romaji:"isu", group:"Mebel", kb:"hira"},
+  {uz:"shokolad", kana:"チョコレート", accepted:["チョコレート"], romaji:"chokoreeto", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"qahva", kana:"コーヒー", accepted:["コーヒー"], romaji:"koohii", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"ingliz tili", kana:"えいご", accepted:["えいご"], romaji:"eigo", group:"Tillar", kb:"hira"},
+  {uz:"yapon tili", kana:"にほんご", accepted:["にほんご"], romaji:"nihongo", group:"Tillar", kb:"hira"},
+  {uz:"~ tili", kana:"ご", accepted:["ご"], romaji:"go", group:"Tillar", kb:"hira"},
+  {uz:"uy", kana:"うち", accepted:["うち"], romaji:"uchi", group:"Boshqa", kb:"hira"},
+  {uz:"Tay tili", note:"(Taylandda ishlatiladi)", kana:"たいご", accepted:["たいご"], romaji:"taigo", group:"Tillar", kb:"hira"},
+  {uz:"sovg'a", kana:"おみやげ", accepted:["おみやげ"], romaji:"omiyage", group:"Boshqa", kb:"hira"},
+  {uz:"Braziliya", kana:"ブラジル", accepted:["ブラジル"], romaji:"burajiru", group:"Davlatlar/Shaharlar", kb:"kata"},
+  {uz:"bu", kana:"この", accepted:["この"], romaji:"kono", group:"Olmoshlar", kb:"hira"},
+  {uz:"u", kana:"その", accepted:["その"], romaji:"sono", group:"Olmoshlar", kb:"hira"},
+  {uz:"Ana u", kana:"あの", accepted:["あの"], romaji:"ano", group:"Olmoshlar", kb:"hira"},
+  {uz:"nima", kana:"なん", accepted:["なん"], romaji:"nan", group:"Olmoshlar", kb:"hira"}
+
+];
+
+/* "Kunlik vazifa" bo'limi (yangi, joriy kun) — quyidagi ro'yxat eng dolzarb so'zlar.
+   Format bir xil: {uz, note(ixtiyoriy), kana, accepted:[...], romaji, group, kb:"hira"/"kata"} */
+const TODAY_WORDS = [
+
+  {uz:"bu yer", kana:"ここ", accepted:["ここ"], romaji:"koko", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"u yer", kana:"そこ", accepted:["そこ"], romaji:"soko", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"ana u yer", kana:"あそこ", accepted:["あそこ"], romaji:"asoko", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"bu yer", note:"(hurmat shakli)", kana:"こちら", accepted:["こちら"], romaji:"kochira", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"u yer", note:"(hurmat shakli)", kana:"そちら", accepted:["そちら"], romaji:"sochira", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"ana u yer", note:"(hurmat shakli)", kana:"あちら", accepted:["あちら"], romaji:"achira", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"mustaqil o'rganish xonasi", kana:"じしゅうしつ", accepted:["じしゅうしつ"], romaji:"jishuushitsu", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"sinfxona", kana:"きょうしつ", accepted:["きょうしつ"], romaji:"kyoushitsu", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"oshxona", kana:"しょくどう", accepted:["しょくどう"], romaji:"shokudou", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"maktab", kana:"がっこう", accepted:["がっこう"], romaji:"gakkou", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"qabulxona", kana:"うけつけ", accepted:["うけつけ"], romaji:"uketsuke", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"dahliz (lobbi)", kana:"ロビー", accepted:["ロビー"], romaji:"robii", group:"Joylar va Ko'rsatkichlar", kb:"kata"},
+  {uz:"xona", kana:"へや", accepted:["へや"], romaji:"heya", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"hojatxona", kana:"といれ", accepted:["といれ"], romaji:"toire", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"zinapoya", kana:"かいだん", accepted:["かいだん"], romaji:"kaidan", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"lift", kana:"えれべーたー", accepted:["えれべーたー"], romaji:"erebeetaa", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"eskalator", kana:"えすかれーたー", accepted:["えすかれーたー"], romaji:"esukareetaa", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"kompaniya, firma", kana:"かいしゃ", accepted:["かいしゃ"], romaji:"kaisha", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"sotuv rastasi", kana:"うりば", accepted:["うりば"], romaji:"uriba", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"yerosti", kana:"ちか", accepted:["ちか"], romaji:"chika", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"buyumlar do'koni", kana:"でぱーと", accepted:["でぱーと"], romaji:"depaato", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+
+  {uz:"bank", kana:"ぎんこう", accepted:["ぎんこう"], romaji:"ginkou", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"pochta bo'limi", kana:"ゆうびんきょく", accepted:["ゆうびんきょく"], romaji:"yuubinkyoku", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"kutubxona", kana:"としょかん", accepted:["としょかん"], romaji:"toshokan", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"san'at muzeyi", kana:"びじゅつかん", accepted:["びじゅつかん"], romaji:"bijutsukan", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"go'zallik saloni", kana:"びよういん", accepted:["びよういん"], romaji:"biyouin", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"yotoqxona", kana:"りょう", accepted:["りょう"], romaji:"ryou", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"ofis", kana:"じむしょ", accepted:["じむしょ"], romaji:"jimusho", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"davlat, mamlakat", kana:"(お)くに", accepted:["おくに","くに"], romaji:"(o)kuni", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"Indoneziya", kana:"いんどねしあ", accepted:["いんどねしあ"], romaji:"indoneshia", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"Jakarta", kana:"じゃかるた", accepted:["じゃかるた"], romaji:"jakaruta", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"erkak kishi", kana:"おとこのひと", accepted:["おとこのひと"], romaji:"otoko no hito", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"ayol kishi", kana:"おんなのひと", accepted:["おんなのひと"], romaji:"onna no hito", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"telefon", kana:"でんわ", accepted:["でんわ"], romaji:"denwa", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"kserokopiya mashinasi", kana:"こぴーき", accepted:["こぴーき"], romaji:"kopiiki", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"avtomatik sotuvchi mashinasi", kana:"じどうはんばいき", accepted:["じどうはんばいき"], romaji:"jidouhanbaiki", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"Rahmat / Katta rahmat", note:"(どうも)", kana:"ありがとうございます", accepted:["ありがとうございます","どうもありがとうございます"], romaji:"(doumo) arigatou gozaimasu", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"xato, noto'g'ri", kana:"ちがいます", accepted:["ちがいます"], romaji:"chigaimasu", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"to'g'ri, shunday", kana:"そうです", accepted:["そうです"], romaji:"sou desu", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"Shundaymi?", kana:"そうですか", accepted:["そうですか"], romaji:"sou desu ka", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"Hmmm..., haligi", kana:"あのう", accepted:["あのう"], romaji:"anou", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"marhamat", kana:"どうぞ", accepted:["どうぞ"], romaji:"douzo", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"Qayer?", kana:"どこ", accepted:["どこ"], romaji:"doko", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"Qaysi tomon?", kana:"どちら", accepted:["どちら"], romaji:"dochira", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"nechi qavat?", kana:"なんかい", accepted:["なんかい"], romaji:"nankai", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"}
+
+];
+
+/* "Kunlik vazifa 2" bo'limi — ことば (Lug'at) rasmidagi yangi so'zlar.
+   Format bir xil: {uz, note(ixtiyoriy), kana, accepted:[...], romaji, group, kb:"hira"/"kata"} */
+const TODAY2_WORDS = [
+
+  {uz:"do'kon", kana:"みせ", accepted:["みせ"], romaji:"mise", group:"Joylar", kb:"hira"},
+  {uz:"oyoq kiyim", kana:"くつ", accepted:["くつ"], romaji:"kutsu", group:"Kiyim-kechak", kb:"hira"},
+  {uz:"galstuk", kana:"ネクタイ", accepted:["ネクタイ"], romaji:"nekutai", group:"Kiyim-kechak", kb:"kata"},
+  {uz:"vino", kana:"ワイン", accepted:["ワイン"], romaji:"wain", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"sigaret", kana:"たばこ", accepted:["たばこ"], romaji:"tabako", group:"Boshqa", kb:"hira"},
+  {uz:"bento", kana:"べんとう", accepted:["べんとう"], romaji:"bentou", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"gamburger", kana:"ハンバーガー", accepted:["ハンバーガー"], romaji:"hanbaagaa", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"pechenye", kana:"クッキー", accepted:["クッキー"], romaji:"kukkii", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"bepul bozor", kana:"フリーマーケット", accepted:["フリーマーケット"], romaji:"furiimaaketto", group:"Joylar", kb:"kata"},
+  {uz:"yen", kana:"えん", accepted:["えん"], romaji:"en", group:"Pul va raqamlar", kb:"hira"},
+  {uz:"yuz", kana:"ひゃく", accepted:["ひゃく"], romaji:"hyaku", group:"Pul va raqamlar", kb:"hira"},
+  {uz:"ming", kana:"せん", accepted:["せん"], romaji:"sen", group:"Pul va raqamlar", kb:"hira"},
+  {uz:"o'n ming", kana:"まん", accepted:["まん"], romaji:"man", group:"Pul va raqamlar", kb:"hira"},
+  {uz:"Iltimos, ~ni ko'rsating", kana:"みせてください", accepted:["みせてください","をみせてください"], romaji:"misete kudasai", group:"Xarid qilish iboralari", kb:"hira"},
+  {uz:"qancha, necha pul", kana:"いくら", accepted:["いくら"], romaji:"ikura", group:"Xarid qilish iboralari", kb:"hira"}
+
+];
+
+/* "5-mavzu" bo'limi — yangi so'zlar */
+const CHORSHANBA_WORDS = [
+
+  {uz:"ma'lumot xizmati", note:"(※番号案内)", kana:"ばんごうあんない", accepted:["ばんごうあんない"], romaji:"bangou annai", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"telefon raqami", note:"(※電話番号)", kana:"でんわばんごう", accepted:["でんわばんごう"], romaji:"denwa bangou", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"test", kana:"テスト", accepted:["テスト"], romaji:"tesuto", group:"Darslik so'zlari", kb:"kata"},
+  {uz:"hozir", kana:"いま", accepted:["いま"], romaji:"ima", group:"Vaqt", kb:"hira"},
+  {uz:"soat ~", kana:"じ", accepted:["じ"], romaji:"ji", group:"Vaqt", kb:"hira"},
+  {uz:"~ daqiqa", kana:"ふん", accepted:["ふん"], romaji:"fun", group:"Vaqt", kb:"hira"},
+  {uz:"yarim", kana:"はん", accepted:["はん"], romaji:"han", group:"Vaqt", kb:"hira"},
+  {uz:"ertalab", kana:"あさ", accepted:["あさ"], romaji:"asa", group:"Vaqt", kb:"hira"},
+  {uz:"kunduzi", kana:"ひる", accepted:["ひる"], romaji:"hiru", group:"Vaqt", kb:"hira"},
+  {uz:"kechqurun", kana:"よる", accepted:["よる"], romaji:"yoru", group:"Vaqt", kb:"hira"},
+  {uz:"dam olish", kana:"やすみ", accepted:["やすみ"], romaji:"yasumi", group:"Vaqt", kb:"hira"},
+  {uz:"tushlik vaqti", kana:"ひるやすみ", accepted:["ひるやすみ"], romaji:"hiruyasumi", group:"Vaqt", kb:"hira"},
+  {uz:"Dushanba", kana:"げつようび", accepted:["げつようび"], romaji:"getsuyoubi", group:"Hafta kunlari", kb:"hira"},
+  {uz:"Seshanba", kana:"かようび", accepted:["かようび"], romaji:"kayoubi", group:"Hafta kunlari", kb:"hira"},
+  {uz:"Chorshanba", kana:"すいようび", accepted:["すいようび"], romaji:"suiyoubi", group:"Hafta kunlari", kb:"hira"},
+  {uz:"Payshanba", kana:"もくようび", accepted:["もくようび"], romaji:"mokuyoubi", group:"Hafta kunlari", kb:"hira"},
+  {uz:"Juma", kana:"きんようび", accepted:["きんようび"], romaji:"kinyoubi", group:"Hafta kunlari", kb:"hira"},
+  {uz:"Shanba", kana:"どようび", accepted:["どようび"], romaji:"doyoubi", group:"Hafta kunlari", kb:"hira"},
+  {uz:"Yakshanba", kana:"にちようび", accepted:["にちようび"], romaji:"nichiyoubi", group:"Hafta kunlari", kb:"hira"},
+  {uz:"Qaysi kun?", kana:"なんようび", accepted:["なんようび"], romaji:"nanyoubi", group:"Hafta kunlari", kb:"hira"},
+  {uz:"u yer", note:"(hurmat shakli)", kana:"そちら", accepted:["そちら"], romaji:"sochira", group:"Joylar va Ko'rsatkichlar", kb:"hira"},
+  {uz:"bazm", kana:"パーティー", accepted:["パーティー"], romaji:"paatii", group:"Boshqa", kb:"kata"},
+  {uz:"imtihon", kana:"しけん", accepted:["しけん"], romaji:"shiken", group:"Darslik so'zlari", kb:"hira"},
+  {uz:"~ dars", kana:"じかんめ", accepted:["じかんめ"], romaji:"jikanme", group:"Darslik so'zlari", kb:"hira"},
+  {uz:"restoran", note:"(※レストラン)", kana:"レストラン", accepted:["レストラン"], romaji:"resutoran", group:"Joylar", kb:"kata"},
+  {uz:"supermarket", note:"(※スーパー)", kana:"スーパー", accepted:["スーパー"], romaji:"suupaa", group:"Joylar", kb:"kata"},
+  {uz:"Iltimos", kana:"おねがいします", accepted:["おねがいします"], romaji:"onegaishimasu", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"Katta rahmat", note:"(どうも)", kana:"ありがとうございました", accepted:["ありがとうございました","どうもありがとうございました"], romaji:"(doumo) arigatou gozaimashita", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"Tabriklayman", kana:"おめでとうございます", accepted:["おめでとうございます"], romaji:"omedetou gozaimasu", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"Alo?", note:"(※もしもし)", kana:"もしもし", accepted:["もしもし"], romaji:"moshimoshi", group:"Tashkilotlar, Buyumlar va Savollar", kb:"hira"},
+  {uz:"~dan", kana:"から", accepted:["から"], romaji:"kara", group:"Boshqa", kb:"hira"},
+  {uz:"~gacha", kana:"まで", accepted:["まで"], romaji:"made", group:"Boshqa", kb:"hira"},
+  {uz:"~va~", kana:"と", accepted:["と"], romaji:"to", group:"Boshqa", kb:"hira"},
+  {uz:"Soat nechchi?", kana:"なんじ", accepted:["なんじ"], romaji:"nanji", group:"Vaqt", kb:"hira"},
+  {uz:"Necha daqiqa?", kana:"なんぷん", accepted:["なんぷん"], romaji:"nanpun", group:"Vaqt", kb:"hira"}
+
+];
+
+/* "6-mavzu" bo'limi — yangi so'zlar */
+const PAYSHANBA_WORDS = [
+
+  {uz:"uyg'onmoq / turmoq", note:"(起きます) II guruh fe'li", kana:"おきます", accepted:["おきます"], romaji:"okimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"uxlamoq", note:"(寝ます) II guruh fe'li", kana:"ねます", accepted:["ねます"], romaji:"nemasu", group:"Fe'llar", kb:"hira"},
+  {uz:"ishlamoq", note:"(働きます) I guruh fe'li", kana:"はたらきます", accepted:["はたらきます"], romaji:"hatarakimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"dam olmoq", note:"(休みます) I guruh fe'li", kana:"やすみます", accepted:["やすみます"], romaji:"yasumimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"dars qilmoq", note:"(勉強します) III guruh fe'li", kana:"べんきょうします", accepted:["べんきょうします"], romaji:"benkyou shimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"tugamoq / yakunlamoq", note:"(終わります) I guruh fe'li", kana:"おわります", accepted:["おわります"], romaji:"owarimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"qiyin / og'ir", note:"(大変・な)", kana:"たいへん", accepted:["たいへん"], romaji:"taihen", group:"Sifatlar", kb:"hira"},
+  {uz:"avvalgi kun", note:"(一昨日)", kana:"おととい", accepted:["おととい"], romaji:"ototoi", group:"Vaqt", kb:"hira"},
+  {uz:"kecha", note:"(昨日)", kana:"きのう", accepted:["きのう"], romaji:"kinou", group:"Vaqt", kb:"hira"},
+  {uz:"bugun", note:"(今日)", kana:"きょう", accepted:["きょう"], romaji:"kyou", group:"Vaqt", kb:"hira"},
+  {uz:"ertaga", note:"(明日)", kana:"あした", accepted:["あした"], romaji:"ashita", group:"Vaqt", kb:"hira"},
+  {uz:"indinga", note:"(明後日)", kana:"あさって", accepted:["あさって"], romaji:"asatte", group:"Vaqt", kb:"hira"},
+  {uz:"bugun ertalab", note:"(今朝)", kana:"けさ", accepted:["けさ"], romaji:"kesa", group:"Vaqt", kb:"hira"},
+  {uz:"bugun kechqurun", note:"(今晩)", kana:"こんばん", accepted:["こんばん"], romaji:"konban", group:"Vaqt", kb:"hira"},
+  {uz:"har kuni ertalab", note:"(毎朝)", kana:"まいあさ", accepted:["まいあさ"], romaji:"maiasa", group:"Vaqt", kb:"hira"},
+  {uz:"har kuni kechqurun", note:"(毎晩)", kana:"まいばん", accepted:["まいばん"], romaji:"maiban", group:"Vaqt", kb:"hira"},
+  {uz:"har kuni", note:"(毎日)", kana:"まいにち", accepted:["まいにち"], romaji:"mainichi", group:"Vaqt", kb:"hira"},
+  {uz:"Qiyin ekan", note:"(大変ですね)", kana:"たいへんですね", accepted:["たいへんですね"], romaji:"taihen desu ne", group:"Iboralar", kb:"hira"}
+
+];
+
+/* "7-mavzu" bo'limi — yangi so'zlar */
+const JUMA31_WORDS = [
+
+  {uz:"bormoq", note:"(行きます) I guruh fe'li", kana:"いきます", accepted:["いきます"], romaji:"ikimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"kelmoq", note:"(来ます) III guruh fe'li", kana:"きます", accepted:["きます"], romaji:"kimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"qaytmoq", note:"(帰ります) I guruh fe'li", kana:"かえります", accepted:["かえります"], romaji:"kaerimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"piyoda", note:"(歩いて) I guruh fe'li", kana:"あるいて", accepted:["あるいて"], romaji:"aruite", group:"Fe'llar", kb:"hira"},
+
+  {uz:"supermarket", kana:"スーパー", accepted:["スーパー"], romaji:"suupaa", group:"Joylar", kb:"kata"},
+  {uz:"vokzal", note:"(駅)", kana:"えき", accepted:["えき"], romaji:"eki", group:"Joylar", kb:"hira"},
+
+  {uz:"samolyot", note:"(飛行機)", kana:"ひこうき", accepted:["ひこうき"], romaji:"hikouki", group:"Transport", kb:"hira"},
+  {uz:"kema", note:"(船)", kana:"ふね", accepted:["ふね"], romaji:"fune", group:"Transport", kb:"hira"},
+  {uz:"avtobus", kana:"バス", accepted:["バス"], romaji:"basu", group:"Transport", kb:"kata"},
+  {uz:"metro", note:"(地下鉄)", kana:"ちかてつ", accepted:["ちかてつ"], romaji:"chikatetsu", group:"Transport", kb:"hira"},
+  {uz:"poyezd", note:"(電車)", kana:"でんしゃ", accepted:["でんしゃ"], romaji:"densha", group:"Transport", kb:"hira"},
+  {uz:"taksi", kana:"タクシー", accepted:["タクシー"], romaji:"takushii", group:"Transport", kb:"kata"},
+  {uz:"velosiped", note:"(自転車)", kana:"じてんしゃ", accepted:["じてんしゃ"], romaji:"jitensha", group:"Transport", kb:"hira"},
+
+  {uz:"inson", note:"(人)", kana:"ひと", accepted:["ひと"], romaji:"hito", group:"Odamlar", kb:"hira"},
+  {uz:"do'st", note:"(友だち)", kana:"ともだち", accepted:["ともだち"], romaji:"tomodachi", group:"Odamlar", kb:"hira"},
+  {uz:"u (o'g'il bolalar uchun)", note:"(彼)", kana:"かれ", accepted:["かれ"], romaji:"kare", group:"Odamlar", kb:"hira"},
+  {uz:"u (qizlar uchun)", note:"(彼女)", kana:"かのじょ", accepted:["かのじょ"], romaji:"kanojo", group:"Odamlar", kb:"hira"},
+  {uz:"oila", note:"(家族)", kana:"かぞく", accepted:["かぞく"], romaji:"kazoku", group:"Odamlar", kb:"hira"},
+  {uz:"yolg'iz", note:"(一人で)", kana:"ひとりで", accepted:["ひとりで"], romaji:"hitoride", group:"Boshqa", kb:"hira"},
+
+  {uz:"o'tgan hafta", note:"(先週)", kana:"せんしゅう", accepted:["せんしゅう"], romaji:"senshuu", group:"Vaqt", kb:"hira"},
+  {uz:"bu hafta", note:"(今週)", kana:"こんしゅう", accepted:["こんしゅう"], romaji:"konshuu", group:"Vaqt", kb:"hira"},
+  {uz:"keyingi hafta", note:"(来週)", kana:"らいしゅう", accepted:["らいしゅう"], romaji:"raishuu", group:"Vaqt", kb:"hira"},
+  {uz:"o'tgan oy", note:"(先月)", kana:"せんげつ", accepted:["せんげつ"], romaji:"sengetsu", group:"Vaqt", kb:"hira"},
+  {uz:"bu oy", note:"(今月)", kana:"こんげつ", accepted:["こんげつ"], romaji:"kongetsu", group:"Vaqt", kb:"hira"},
+  {uz:"keyingi oy", note:"(来月)", kana:"らいげつ", accepted:["らいげつ"], romaji:"raigetsu", group:"Vaqt", kb:"hira"},
+  {uz:"o'tgan yili", note:"(去年)", kana:"きょねん", accepted:["きょねん"], romaji:"kyonen", group:"Vaqt", kb:"hira"},
+  {uz:"bu yil", note:"(今年)", kana:"ことし", accepted:["ことし"], romaji:"kotoshi", group:"Vaqt", kb:"hira"},
+  {uz:"keyingi yil", note:"(来年)", kana:"らいねん", accepted:["らいねん"], romaji:"rainen", group:"Vaqt", kb:"hira"},
+  {uz:"tug'ilgan kun", note:"(誕生日)", kana:"たんじょうび", accepted:["たんじょうび"], romaji:"tanjoubi", group:"Vaqt", kb:"hira"},
+
+  {uz:"do'kon", note:"(※コンビニ)", kana:"コンビニ", accepted:["コンビニ"], romaji:"konbini", group:"Joylar", kb:"kata"},
+  {uz:"aeroport", note:"(※空港)", kana:"くうこう", accepted:["くうこう"], romaji:"kuukou", group:"Joylar", kb:"hira"},
+
+  {uz:"keyingi", note:"(次の)", kana:"つぎの", accepted:["つぎの"], romaji:"tsugi no", group:"Boshqa", kb:"hira"},
+  {uz:"qaysi oy?", note:"(何月)", kana:"なんがつ", accepted:["なんがつ"], romaji:"nangatsu", group:"Vaqt", kb:"hira"},
+  {uz:"qaysi kun", note:"(何日)", kana:"なんにち", accepted:["なんにち"], romaji:"nannichi", group:"Vaqt", kb:"hira"},
+  {uz:"qachon", kana:"いつ", accepted:["いつ"], romaji:"itsu", group:"Vaqt", kb:"hira"}
+
+];
+
+/* "Raqamlar" bo'limi — 0 dan 90 gacha raqamlarning o'qilishi.
+   Bu ro'yxat faqat Flashcard'da alohida bo'lim sifatida chiqadi,
+   Viktorinada ISHTIROK ETMAYDI. */
+const NUMBER_WORDS = [
+
+  {uz:"0", kana:"ゼロ、れい", accepted:["ゼロ","れい"], romaji:"zero, rei", group:"Raqamlar", kb:"kata"},
+  {uz:"1", kana:"いち", accepted:["いち"], romaji:"ichi", group:"Raqamlar", kb:"hira"},
+  {uz:"2", kana:"に", accepted:["に"], romaji:"ni", group:"Raqamlar", kb:"hira"},
+  {uz:"3", kana:"さん", accepted:["さん"], romaji:"san", group:"Raqamlar", kb:"hira"},
+  {uz:"4", kana:"よん、し", accepted:["よん","し"], romaji:"yon, shi", group:"Raqamlar", kb:"hira"},
+  {uz:"5", kana:"ご", accepted:["ご"], romaji:"go", group:"Raqamlar", kb:"hira"},
+  {uz:"6", kana:"ろく", accepted:["ろく"], romaji:"roku", group:"Raqamlar", kb:"hira"},
+  {uz:"7", kana:"なな、しち", accepted:["なな","しち"], romaji:"nana, shichi", group:"Raqamlar", kb:"hira"},
+  {uz:"8", kana:"はち", accepted:["はち"], romaji:"hachi", group:"Raqamlar", kb:"hira"},
+  {uz:"9", kana:"きゅう、く", accepted:["きゅう","く"], romaji:"kyuu, ku", group:"Raqamlar", kb:"hira"},
+  {uz:"10", kana:"じゅう", accepted:["じゅう"], romaji:"juu", group:"Raqamlar", kb:"hira"},
+  {uz:"11", kana:"じゅういち", accepted:["じゅういち"], romaji:"juuichi", group:"Raqamlar", kb:"hira"},
+  {uz:"12", kana:"じゅうに", accepted:["じゅうに"], romaji:"juuni", group:"Raqamlar", kb:"hira"},
+  {uz:"13", kana:"じゅうさん", accepted:["じゅうさん"], romaji:"juusan", group:"Raqamlar", kb:"hira"},
+  {uz:"14", kana:"じゅうよん、じゅうし", accepted:["じゅうよん","じゅうし"], romaji:"juuyon, juushi", group:"Raqamlar", kb:"hira"},
+  {uz:"15", kana:"じゅうご", accepted:["じゅうご"], romaji:"juugo", group:"Raqamlar", kb:"hira"},
+  {uz:"16", kana:"じゅうろく", accepted:["じゅうろく"], romaji:"juuroku", group:"Raqamlar", kb:"hira"},
+  {uz:"17", kana:"じゅうなな、じゅうしち", accepted:["じゅうなな","じゅうしち"], romaji:"juunana, juushichi", group:"Raqamlar", kb:"hira"},
+  {uz:"18", kana:"じゅうはち", accepted:["じゅうはち"], romaji:"juuhachi", group:"Raqamlar", kb:"hira"},
+  {uz:"19", kana:"じゅうきゅう、じゅうく", accepted:["じゅうきゅう","じゅうく"], romaji:"juukyuu, juuku", group:"Raqamlar", kb:"hira"},
+  {uz:"20", kana:"にじゅう", accepted:["にじゅう"], romaji:"nijuu", group:"Raqamlar", kb:"hira"},
+  {uz:"30", kana:"さんじゅう", accepted:["さんじゅう"], romaji:"sanjuu", group:"Raqamlar", kb:"hira"},
+  {uz:"40", kana:"よんじゅう", accepted:["よんじゅう"], romaji:"yonjuu", group:"Raqamlar", kb:"hira"},
+  {uz:"50", kana:"ごじゅう", accepted:["ごじゅう"], romaji:"gojuu", group:"Raqamlar", kb:"hira"},
+  {uz:"60", kana:"ろくじゅう", accepted:["ろくじゅう"], romaji:"rokujuu", group:"Raqamlar", kb:"hira"},
+  {uz:"70", kana:"ななじゅう", accepted:["ななじゅう"], romaji:"nanajuu", group:"Raqamlar", kb:"hira"},
+  {uz:"80", kana:"はちじゅう", accepted:["はちじゅう"], romaji:"hachijuu", group:"Raqamlar", kb:"hira"},
+  {uz:"90", kana:"きゅうじゅう", accepted:["きゅうじゅう"], romaji:"kyuujuu", group:"Raqamlar", kb:"hira"},
+
+  {uz:"100", kana:"ひゃく", accepted:["ひゃく"], romaji:"hyaku", group:"Raqamlar", kb:"hira"},
+  {uz:"200", kana:"にひゃく", accepted:["にひゃく"], romaji:"nihyaku", group:"Raqamlar", kb:"hira"},
+  {uz:"300", kana:"さんびゃく", accepted:["さんびゃく"], romaji:"sanbyaku", group:"Raqamlar", kb:"hira"},
+  {uz:"400", kana:"よんひゃく", accepted:["よんひゃく"], romaji:"yonhyaku", group:"Raqamlar", kb:"hira"},
+  {uz:"500", kana:"ごひゃく", accepted:["ごひゃく"], romaji:"gohyaku", group:"Raqamlar", kb:"hira"},
+  {uz:"600", kana:"ろっぴゃく", accepted:["ろっぴゃく"], romaji:"roppyaku", group:"Raqamlar", kb:"hira"},
+  {uz:"700", kana:"ななひゃく", accepted:["ななひゃく"], romaji:"nanahyaku", group:"Raqamlar", kb:"hira"},
+  {uz:"800", kana:"はっぴゃく", accepted:["はっぴゃく"], romaji:"happyaku", group:"Raqamlar", kb:"hira"},
+  {uz:"900", kana:"きゅうひゃく", accepted:["きゅうひゃく"], romaji:"kyuuhyaku", group:"Raqamlar", kb:"hira"},
+
+  {uz:"1,000", kana:"せん", accepted:["せん"], romaji:"sen", group:"Raqamlar", kb:"hira"},
+  {uz:"2,000", kana:"にせん", accepted:["にせん"], romaji:"nisen", group:"Raqamlar", kb:"hira"},
+  {uz:"3,000", kana:"さんぜん", accepted:["さんぜん"], romaji:"sanzen", group:"Raqamlar", kb:"hira"},
+  {uz:"4,000", kana:"よんせん", accepted:["よんせん"], romaji:"yonsen", group:"Raqamlar", kb:"hira"},
+  {uz:"5,000", kana:"ごせん", accepted:["ごせん"], romaji:"gosen", group:"Raqamlar", kb:"hira"},
+  {uz:"6,000", kana:"ろくせん", accepted:["ろくせん"], romaji:"rokusen", group:"Raqamlar", kb:"hira"},
+  {uz:"7,000", kana:"ななせん", accepted:["ななせん"], romaji:"nanasen", group:"Raqamlar", kb:"hira"},
+  {uz:"8,000", kana:"はっせん", accepted:["はっせん"], romaji:"hassen", group:"Raqamlar", kb:"hira"},
+  {uz:"9,000", kana:"きゅうせん", accepted:["きゅうせん"], romaji:"kyuusen", group:"Raqamlar", kb:"hira"},
+
+  {uz:"10,000", kana:"いちまん", accepted:["いちまん"], romaji:"ichiman", group:"Raqamlar", kb:"hira"},
+  {uz:"20,000", kana:"にまん", accepted:["にまん"], romaji:"niman", group:"Raqamlar", kb:"hira"},
+  {uz:"30,000", kana:"さんまん", accepted:["さんまん"], romaji:"sanman", group:"Raqamlar", kb:"hira"},
+  {uz:"40,000", kana:"よんまん", accepted:["よんまん"], romaji:"yonman", group:"Raqamlar", kb:"hira"},
+  {uz:"50,000", kana:"ごまん", accepted:["ごまん"], romaji:"goman", group:"Raqamlar", kb:"hira"},
+  {uz:"60,000", kana:"ろくまん", accepted:["ろくまん"], romaji:"rokuman", group:"Raqamlar", kb:"hira"},
+  {uz:"70,000", kana:"ななまん", accepted:["ななまん"], romaji:"nanaman", group:"Raqamlar", kb:"hira"},
+  {uz:"80,000", kana:"はちまん", accepted:["はちまん"], romaji:"hachiman", group:"Raqamlar", kb:"hira"},
+  {uz:"90,000", kana:"きゅうまん", accepted:["きゅうまん"], romaji:"kyuuman", group:"Raqamlar", kb:"hira"}
+
+];
+const tabs = document.getElementById('tabs');
+const tabFlash = document.getElementById('tabFlash');
+const tabQuiz = document.getElementById('tabQuiz');
+const tabKnown = document.getElementById('tabKnown');
+const viewFlash = document.getElementById('viewFlash');
+const viewQuiz = document.getElementById('viewQuiz');
+const viewKnown = document.getElementById('viewKnown');
+
+function switchView(showEl, hideEl, onShown){
+  if(showEl === hideEl || showEl.classList.contains('active')){ if(onShown) onShown(); return; }
+  hideEl.classList.remove('fade-in');
+  hideEl.classList.add('fade-out');
+  const finishOut = ()=>{
+    hideEl.classList.remove('active','fade-out');
+    showEl.classList.add('active','fade-in');
+    if(onShown) onShown();
+    showEl.addEventListener('animationend', function clr(){ showEl.classList.remove('fade-in'); showEl.removeEventListener('animationend', clr); });
+  };
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced){ finishOut(); return; }
+  hideEl.addEventListener('animationend', function done(){ hideEl.removeEventListener('animationend', done); finishOut(); });
+}
+
+let activeView = viewFlash;
+function selectTab(btn, posClass, view, onShown){
+  if(btn.classList.contains('active')) return;
+  [tabFlash, tabQuiz, tabKnown].forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  tabs.classList.remove('pos-quiz','pos-known');
+  if(posClass) tabs.classList.add(posClass);
+  switchView(view, activeView, onShown);
+  activeView = view;
+}
+tabFlash.addEventListener('click', ()=> selectTab(tabFlash, null, viewFlash));
+tabQuiz.addEventListener('click', ()=> selectTab(tabQuiz, 'pos-quiz', viewQuiz, ()=>{ if(!quizStarted) startQuiz(getQuizWords()); }));
+tabKnown.addEventListener('click', ()=> selectTab(tabKnown, 'pos-known', viewKnown, renderKnownGrid));
+
+/* ---------------- FLASHCARDS ---------------- */
+const flashGrid = document.getElementById('flashGrid');
+const flashSubToday = document.getElementById('flashSubToday');
+const flashSubToday2 = document.getElementById('flashSubToday2');
+const flashSubChorshanba = document.getElementById('flashSubChorshanba');
+const flashSubPayshanba30 = document.getElementById('flashSubPayshanba30');
+const flashSubJuma31 = document.getElementById('flashSubJuma31');
+const flashSubDaily = document.getElementById('flashSubDaily');
+const flashSubNew = document.getElementById('flashSubNew');
+const flashSubNumbers = document.getElementById('flashSubNumbers');
+const knownCountEl = document.getElementById('knownCount');
+
+/* ---------------- BILAMAN: bilgan so'zlarni alohida saqlash ---------------- */
+/* Har bir so'zga avtomatik id beriladi — so'z ro'yxatini qo'lda tahrirlashda hech narsa o'zgartirish shart emas. */
+DAILY_WORDS.forEach((w,i)=>{ w.id = 'd'+i; });
+NEW_WORDS.forEach((w,i)=>{ w.id = 'n'+i; });
+NUMBER_WORDS.forEach((w,i)=>{ w.id = 'r'+i; });
+TODAY_WORDS.forEach((w,i)=>{ w.id = 't'+i; });
+TODAY2_WORDS.forEach((w,i)=>{ w.id = 't2_'+i; });
+CHORSHANBA_WORDS.forEach((w,i)=>{ w.id = 'c_'+i; });
+PAYSHANBA_WORDS.forEach((w,i)=>{ w.id = 'p30_'+i; });
+JUMA31_WORDS.forEach((w,i)=>{ w.id = 'j31_'+i; });
+const ALL_WORDS = DAILY_WORDS.concat(NEW_WORDS, NUMBER_WORDS, TODAY_WORDS, TODAY2_WORDS, CHORSHANBA_WORDS, PAYSHANBA_WORDS, JUMA31_WORDS);
+
+const KNOWN_KEY = 'yaponcha_bilaman_sozlar';
+let knownIds = new Set(JSON.parse(localStorage.getItem(KNOWN_KEY) || '[]'));
+function saveKnown(){ localStorage.setItem(KNOWN_KEY, JSON.stringify([...knownIds])); }
+function updateKnownCount(){ knownCountEl.textContent = knownIds.size ? `(${knownIds.size})` : ''; }
+
+/* ---------------- KUNLAR RO'YXATI ---------------- */
+/* Bilganlarim va Viktorina shu ro'yxat asosida kunlarga ajratilgan holda ishlaydi. */
+const SETS = [
+  {key:'daily', label:"1-mavzu", words:DAILY_WORDS},
+  {key:'new', label:"2-mavzu", words:NEW_WORDS},
+  {key:'today', label:"3-mavzu", words:TODAY_WORDS},
+  {key:'today2', label:"4-mavzu", words:TODAY2_WORDS},
+  {key:'chorshanba', label:"5-mavzu", words:CHORSHANBA_WORDS},
+  {key:'payshanba30', label:"6-mavzu", words:PAYSHANBA_WORDS},
+  {key:'juma31', label:"7-mavzu", words:JUMA31_WORDS},
+  {key:'numbers', label:"Raqamlar", words:NUMBER_WORDS}
+];
+
+function buildDaySubnav(container, activeKey, onSelect, panelEl, btnEl){
+  if(!panelEl) container.innerHTML = '';
+  if(panelEl) panelEl.innerHTML = '';
+  SETS.forEach(s=>{
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'sub-btn' + (s.key === activeKey ? ' active' : '');
+    btn.textContent = s.label;
+    btn.addEventListener('click', ()=>{
+      if(btn.classList.contains('active')) return;
+      const parent = panelEl || container;
+      [...parent.children].forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      if(btnEl) btnEl.textContent = s.label;
+      if(panelEl){
+        const wrap = panelEl.closest('.dropdown-wrap');
+        if(wrap) wrap.classList.remove('open');
+        if(btnEl) btnEl.classList.remove('active');
+      }
+      onSelect(s.key);
+    });
+    if(panelEl) panelEl.appendChild(btn);
+    else container.appendChild(btn);
+  });
+}
+
+function renderFlashGrid(words, isKnownView, targetGrid, refresh){
+  targetGrid = targetGrid || flashGrid;
+  refresh = refresh || renderActiveSet;
+  targetGrid.innerHTML = '';
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const toReveal = [];
+  words.forEach((w,i)=>{
+    const card = document.createElement('div');
+    card.className = 'card' + (isKnownView ? ' known-card' : '');
+    if(!reduced){
+      card.classList.add('pre-reveal');
+      toReveal.push(card);
+    }
+    card.innerHTML = `
+      <div class="card-inner">
+        <div class="face front">
+          <div class="tag">${w.group}</div>
+          <div class="uz-word">${w.uz}</div>
+          ${w.note ? `<div class="uz-note">${w.note}</div>` : ''}
+          <button type="button" class="know-btn">${isKnownView ? '↺ Qaytarish' : '✓ Bilaman'}</button>
+        </div>
+        <div class="face back">
+          <div class="kana">${w.kana}</div>
+          <div class="romaji">${w.romaji}</div>
+          <div class="hint">${w.uz}</div>
+        </div>
+      </div>`;
+    card.addEventListener('click', ()=>{
+      card.classList.toggle('flipped');
+    });
+    card.querySelector('.know-btn').addEventListener('click', (e)=>{
+      e.stopPropagation();
+      if(isKnownView) knownIds.delete(w.id); else knownIds.add(w.id);
+      saveKnown();
+      refresh();
+    });
+    targetGrid.appendChild(card);
+  });
+  updateKnownCount();
+  if(toReveal.length) observeCardReveal(toReveal);
+}
+
+/* ---------------- KARTALARNI SVAYPGA MOS, SEKIN CHIQARISH ---------------- */
+/* Har bir karta ekranga (yoki ekranga yaqin hududga) kirgandagina sekin-astalik bilan
+   paydo bo'ladi. Shu tufayli tez svayp qilinganda kartalar na birdan "qotib" chiqadi,
+   na pastda ko'rinmay, kech paydo bo'ladi — barchasi silliq, bir xilda chiqib keladi. */
+let cardRevealObserver = null;
+let revealBatchIndex = 0, revealBatchTimer = null;
+function observeCardReveal(cards){
+  if(!('IntersectionObserver' in window)){
+    cards.forEach(c=>c.classList.remove('pre-reveal'));
+    return;
+  }
+  if(cardRevealObserver) cardRevealObserver.disconnect();
+  revealBatchIndex = 0;
+  cardRevealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      const card = entry.target;
+      cardRevealObserver.unobserve(card);
+      const delay = Math.min(revealBatchIndex, 6) * 45;
+      revealBatchIndex++;
+      clearTimeout(revealBatchTimer);
+      revealBatchTimer = setTimeout(()=>{ revealBatchIndex = 0; }, 150);
+      card.style.animationDelay = delay + 'ms';
+      card.classList.remove('pre-reveal');
+      card.classList.add('stagger-in');
+      card.addEventListener('animationend', function clr(){
+        card.classList.remove('stagger-in');
+        card.style.animationDelay = '';
+        card.removeEventListener('animationend', clr);
+      });
+    });
+  }, { root:null, rootMargin:'70px 0px 100px 0px', threshold:0.01 });
+  cards.forEach(c=>cardRevealObserver.observe(c));
+}
+
+function renderActiveSet(){
+  const set = document.querySelector('.sub-btn.active').dataset.set;
+  if(set === 'today') renderFlashGrid(TODAY_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'today2') renderFlashGrid(TODAY2_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'chorshanba') renderFlashGrid(CHORSHANBA_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'payshanba30') renderFlashGrid(PAYSHANBA_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'juma31') renderFlashGrid(JUMA31_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'daily') renderFlashGrid(DAILY_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'new') renderFlashGrid(NEW_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'numbers') renderFlashGrid(NUMBER_WORDS.filter(w=>!knownIds.has(w.id)));
+}
+
+function setActiveSubBtn(activeBtn){
+  [flashSubToday, flashSubToday2, flashSubChorshanba, flashSubPayshanba30, flashSubJuma31, flashSubDaily, flashSubNew, flashSubNumbers].forEach(b=>b.classList.toggle('active', b===activeBtn));
+}
+// Dropdown toggle
+const flashDropdown = document.getElementById('flashDropdown');
+const flashDropdownBtn = document.getElementById('flashDropdownBtn');
+flashDropdownBtn.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  flashDropdown.classList.toggle('open');
+  flashDropdownBtn.classList.toggle('active');
+});
+document.addEventListener('click', ()=>{
+  flashDropdown.classList.remove('open');
+  flashDropdownBtn.classList.remove('active');
+});
+
+// Sub-buttons inside dropdown
+function setActiveDropdownBtn(activeBtn){
+  [flashSubDaily, flashSubNew, flashSubToday, flashSubToday2, flashSubChorshanba, flashSubPayshanba30, flashSubJuma31, flashSubNumbers].forEach(b=>b.classList.toggle('active', b===activeBtn));
+  flashDropdown.classList.remove('open');
+  flashDropdownBtn.classList.remove('active');
+  // Update button text to show current topic
+  flashDropdownBtn.textContent = activeBtn.textContent;
+}
+
+flashSubToday.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubToday); renderActiveSet(); });
+flashSubToday2.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubToday2); renderActiveSet(); });
+flashSubChorshanba.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubChorshanba); renderActiveSet(); });
+flashSubPayshanba30.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubPayshanba30); renderActiveSet(); });
+flashSubJuma31.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubJuma31); renderActiveSet(); });
+flashSubDaily.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubDaily); renderActiveSet(); });
+flashSubNew.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubNew); renderActiveSet(); });
+flashSubNumbers.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubNumbers); renderActiveSet(); });
+
+renderActiveSet();
+
+/* ---------------- BILAMAN (alohida bo'lim, kunlar bo'yicha) ---------------- */
+const knownGrid = document.getElementById('knownGrid');
+const knownSubnav = document.getElementById('knownSubnav');
+let knownActiveKey = SETS[SETS.length - 1].key; // eng oxirgi (bugungi) kun bilan boshlanadi
+function renderKnownGrid(){
+  const set = SETS.find(s=>s.key===knownActiveKey) || SETS[SETS.length-1];
+  const words = set.words.filter(w=>knownIds.has(w.id));
+  if(words.length === 0){
+    knownGrid.innerHTML = `<p style="grid-column:1/-1;text-align:center;color:var(--muted);font-size:13.5px;padding:18px 0;">Bu kunda hali "Bilaman" deb belgilangan so'z yo'q.</p>`;
+    updateKnownCount();
+    return;
+  }
+  renderFlashGrid(words, true, knownGrid, renderKnownGrid);
+}
+const knownDropdownPanel = document.getElementById('knownDropdownPanel');
+const knownDropdownBtn = document.getElementById('knownDropdownBtn');
+const knownDropdown = document.getElementById('knownDropdown');
+
+// Known dropdown toggle
+knownDropdownBtn.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  knownDropdown.classList.toggle('open');
+  knownDropdownBtn.classList.toggle('active');
+});
+document.addEventListener('click', ()=>{
+  knownDropdown.classList.remove('open');
+  knownDropdownBtn.classList.remove('active');
+});
+
+buildDaySubnav(knownSubnav, knownActiveKey, (key)=>{ knownActiveKey = key; renderKnownGrid(); }, knownDropdownPanel, knownDropdownBtn);
+
+
+/* ---------------- QUIZ (4 VARIANT) ---------------- */
+let quizStarted = false;
+let queue = [];
+let idx = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let mistakes = [];
+let busy = false;
+let resultLog = [];
+let currentQuizWords = [];
+let quizMode = 'options'; // 'options' | 'timetrial'
+let timerId = null;
+let timerStart = 0;
+const TIME_LIMIT = 10000; // 10 seconds
+
+const quizSubnav = document.getElementById('quizSubnav');
+let quizActiveKey = SETS[SETS.length - 1].key;
+
+function getQuizWords(){
+  const set = SETS.find(s=>s.key===quizActiveKey) || SETS[SETS.length-1];
+  return set.words.filter(w=>knownIds.has(w.id));
+}
+const quizDropdownPanel = document.getElementById('quizDropdownPanel');
+const quizDropdownBtn = document.getElementById('quizDropdownBtn');
+const quizDropdown = document.getElementById('quizDropdown');
+
+// Quiz dropdown toggle
+quizDropdownBtn.addEventListener('click', (e)=>{
+  e.stopPropagation();
+  quizDropdown.classList.toggle('open');
+  quizDropdownBtn.classList.toggle('active');
+});
+document.addEventListener('click', ()=>{
+  quizDropdown.classList.remove('open');
+  quizDropdownBtn.classList.remove('active');
+});
+
+/* ---------- MODE SWITCHER ---------- */
+const modeOptions = document.getElementById('modeOptions');
+const modeTime = document.getElementById('modeTime');
+function setQuizMode(mode){
+  quizMode = mode;
+  modeOptions.classList.toggle('active', mode === 'options');
+  modeTime.classList.toggle('active', mode === 'timetrial');
+  startQuiz(currentQuizWords);
+}
+modeOptions.addEventListener('click', ()=> setQuizMode('options'));
+modeTime.addEventListener('click', ()=> setQuizMode('timetrial'));
+
+buildDaySubnav(quizSubnav, quizActiveKey, (key)=>{ quizActiveKey = key; startQuiz(getQuizWords()); }, quizDropdownPanel, quizDropdownBtn);
+
+function shuffle(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function generateOptions(correctWord, sourceWords){
+  const correctKana = correctWord.kana;
+  const pool = sourceWords.filter(w => w.id !== correctWord.id && w.kana !== correctKana);
+  const distractors = shuffle(pool).slice(0,3);
+  const options = [{kana: correctKana, correct: true, word: correctWord}];
+  distractors.forEach(w => options.push({kana: w.kana, correct: false, word: w}));
+  return shuffle(options);
+}
+
+/* ---------- AUDIO EFFECTS (Web Audio API) ---------- */
+let audioCtx = null;
+function getAudioCtx(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  return audioCtx;
+}
+function playCorrectSound(){
+  try{
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+    // Pleasant major chord arpeggio
+    const freqs = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+    freqs.forEach((f, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = f;
+      gain.gain.setValueAtTime(0, now);
+      gain.gain.linearRampToValueAtTime(0.12, now + 0.02 + i*0.06);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35 + i*0.06);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + i*0.06);
+      osc.stop(now + 0.4 + i*0.06);
+    });
+  }catch(e){}
+}
+function playWrongSound(){
+  try{
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+
+    // Gentle "error" bloop — two soft descending notes
+    const notes = [
+      {f: 330, t: 0.00, d: 0.18},   // E4
+      {f: 262, t: 0.14, d: 0.22}    // C4 (lower, softer)
+    ];
+    notes.forEach(n => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(n.f, now + n.t);
+      gain.gain.setValueAtTime(0, now + n.t);
+      gain.gain.linearRampToValueAtTime(0.10, now + n.t + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + n.t + n.d);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + n.t);
+      osc.stop(now + n.t + n.d);
+    });
+
+    // Soft low click for "tap" feel
+    const clickOsc = ctx.createOscillator();
+    const clickGain = ctx.createGain();
+    clickOsc.type = 'triangle';
+    clickOsc.frequency.setValueAtTime(120, now);
+    clickGain.gain.setValueAtTime(0.06, now);
+    clickGain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+    clickOsc.connect(clickGain);
+    clickGain.connect(ctx.destination);
+    clickOsc.start(now);
+    clickOsc.stop(now + 0.10);
+  }catch(e){}
+}
+
+function startQuiz(sourceWords){
+  quizStarted = true;
+  currentQuizWords = sourceWords;
+  queue = shuffle(sourceWords);
+  idx = 0; correctCount = 0; wrongCount = 0; mistakes = []; resultLog = [];
+  const scaleWrap = document.getElementById('scaleWrap');
+
+  const dotsRow = document.getElementById('dotsRow');
+  if(queue.length === 0){
+    if(scaleWrap) scaleWrap.style.display = 'none';
+    quizStage.style.display = 'none';
+    doneStage.style.display = 'block';
+    doneStage.innerHTML = `
+      <div class="done-card">
+        <h2>Bu kunda hali so'z yo'q</h2>
+        <p style="color:var(--muted);font-size:13px;">Viktorina faqat "✓ Bilaman" bo'limiga qo'shilgan so'zlar bilan ishlaydi.<br>Avval Flashcard bo'limida shu kundagi so'zlarni "✓ Bilaman" deb belgilang.</p>
+      </div>`;
+    return;
+  }
+  if(scaleWrap) scaleWrap.style.display = 'block';
+  if(dotsRow){
+    dotsRow.innerHTML = '';
+    queue.forEach((_,i)=>{
+      const d = document.createElement('div');
+      d.className = 'dot-pill' + (i===0 ? ' current' : '');
+      dotsRow.appendChild(d);
+    });
+  }
+  const timerWrap = document.getElementById('timerWrap');
+  if(timerWrap) timerWrap.classList.toggle('show', quizMode === 'timetrial');
+
+  quizStage.style.display = 'flex';
+  doneStage.style.display = 'none';
+  renderScale();
+  renderQuestion();
+}
+
+function renderScale(){
+  const total = queue.length;
+  const fill = document.getElementById('scaleFill');
+  const label = document.getElementById('scaleLabel');
+  if(!fill || !label) return;
+  const pct = total > 0 ? (idx / total) * 100 : 0;
+  fill.style.width = pct + '%';
+  label.innerHTML = `<b>${idx}</b> / ${total} savol`;
+}
+
+function clearQuizTimer(){
+  if(timerId){ clearInterval(timerId); timerId = null; }
+}
+function startQuizTimer(){
+  clearQuizTimer();
+  if(quizMode !== 'timetrial') return;
+  const fill = document.getElementById('timerFill');
+  const text = document.getElementById('timerText');
+  if(!fill || !text) return;
+  fill.classList.remove('urgent');
+  text.classList.remove('urgent');
+  fill.style.transition = 'none';
+  fill.style.transform = 'scaleX(1)';
+  fill.style.background = 'linear-gradient(90deg, var(--gold), #e8c87a)';
+  text.textContent = '10';
+  // force reflow
+  void fill.offsetWidth;
+  fill.style.transition = 'transform 10s linear, background .3s';
+  requestAnimationFrame(()=>{
+    fill.style.transform = 'scaleX(0)';
+  });
+  let remaining = 10;
+  timerId = setInterval(()=>{
+    remaining--;
+    if(text) text.textContent = remaining > 0 ? remaining : '0';
+    if(remaining <= 3 && fill){ fill.classList.add('urgent'); }
+    if(remaining <= 3 && text){ text.classList.add('urgent'); }
+    if(remaining <= 0){
+      clearQuizTimer();
+      autoTimeUp();
+    }
+  }, 1000);
+}
+function autoTimeUp(){
+  if(busy) return;
+  busy = true;
+  const w = queue[idx];
+  const card = document.getElementById('qCard');
+  const reveal = document.getElementById('typeReveal') || document.getElementById('revealAnswer');
+  const input = document.getElementById('typeInput');
+  const submitBtn = document.getElementById('typeSubmit');
+  if(input) input.disabled = true;
+  if(submitBtn) submitBtn.disabled = true;
+  // If in options mode, highlight correct answer
+  const allBtns = document.querySelectorAll('.option-btn');
+  allBtns.forEach(btn => {
+    btn.disabled = true;
+    if(btn.dataset.correct === 'true'){
+      btn.classList.add('correct');
+    } else {
+      btn.classList.add('dim');
+    }
+  });
+  wrongCount++;
+  mistakes.push(w);
+  resultLog[idx] = 'wrong';
+  if(card) card.classList.add('flash-wrong');
+  playWrongSound();
+  if(reveal) reveal.innerHTML = `Vaqt tugadi! To'g'ri javob: <b>${w.kana}</b>`;
+  const dots = document.querySelectorAll('.dot-pill');
+  if(dots[idx]){ dots[idx].classList.remove('current'); dots[idx].classList.add('wrong'); }
+  renderScale();
+  setTimeout(()=>{
+    if(card) card.classList.add('leaving');
+    setTimeout(()=>{
+      idx++;
+      renderQuestion();
+    }, 380);
+  }, 1800);
+}
+
+function renderQuestion(){
+  if(idx >= queue.length){ showDone(); return; }
+  const w = queue[idx];
+  busy = false;
+  const dots = document.querySelectorAll('.dot-pill');
+  if(dots[idx]){
+    dots.forEach(d=>d.classList.remove('current'));
+    dots[idx].classList.add('current');
+  }
+  startQuizTimer();
+
+  const options = generateOptions(w, currentQuizWords);
+  const optionsHtml = options.map((opt, i) =>
+    `<button class="option-btn" data-idx="${i}" data-correct="${opt.correct}" type="button">${opt.kana}</button>`
+  ).join('');
+
+  quizStage.innerHTML = `
+    <div class="quiz-card" id="qCard">
+      <div class="q-tag">${w.group}</div>
+      <div class="q-word">${w.uz}</div>
+      ${w.note ? `<div class="q-note">${w.note}</div>` : ''}
+      <div class="timer-bar-wrap" id="timerWrap">
+        <div class="timer-bar-track">
+          <div class="timer-bar-fill" id="timerFill"></div>
+        </div>
+        <div class="timer-text" id="timerText">10</div>
+      </div>
+      <div class="options-grid" id="optionsGrid">
+        ${optionsHtml}
+      </div>
+      <div class="type-area" id="typeArea" style="display:none;">
+        <input type="text" class="answer-strip" id="typeInput" placeholder="Yaponcha yozing va Enter bosing..." autocomplete="off" spellcheck="false">
+        <div class="reveal-answer" id="typeReveal" style="min-height:20px; margin-bottom:8px;"></div>
+        <div class="action-row" id="typeActions">
+          <button class="submit-btn" id="typeSubmit" type="button">Tekshirish</button>
+        </div>
+      </div>
+      <div class="reveal-answer" id="revealAnswer" style="margin-top:10px;"></div>
+    </div>`;
+
+  const buttons = document.querySelectorAll('.option-btn');
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if(busy) return;
+      submitAnswer(btn.dataset.correct === 'true', btn);
+    });
+  });
+
+  renderScale();
+}
+
+function normalizeTyped(str){
+  return str.replace(/\s+/g, '').replace(/[　]/g, '').trim();
+}
+function submitTypedAnswer(val){
+  if(busy) return;
+  busy = true;
+  clearQuizTimer();
+  const w = queue[idx];
+  const card = document.getElementById('qCard');
+  const reveal = document.getElementById('typeReveal');
+  const input = document.getElementById('typeInput');
+  const submitBtn = document.getElementById('typeSubmit');
+  if(input) input.disabled = true;
+  if(submitBtn) submitBtn.disabled = true;
+
+  const normalized = normalizeTyped(val);
+  const accepted = (w.accepted || [w.kana]).map(a=>normalizeTyped(a));
+  const isCorrect = accepted.includes(normalized);
+
+  if(isCorrect){
+    correctCount++;
+    resultLog[idx] = 'correct';
+    if(card) card.classList.add('flash-correct');
+    playCorrectSound();
+    if(reveal) reveal.innerHTML = `<span style="color:var(--green);font-weight:700;">✓ To'g'ri!</span>`;
+  } else {
+    wrongCount++;
+    mistakes.push(w);
+    resultLog[idx] = 'wrong';
+    if(card) card.classList.add('flash-wrong');
+    playWrongSound();
+    if(reveal) reveal.innerHTML = `To'g'ri javob: <b>${w.kana}</b>`;
+  }
+  const dots = document.querySelectorAll('.dot-pill');
+  if(dots[idx]){ dots[idx].classList.remove('current'); dots[idx].classList.add(isCorrect ? 'correct' : 'wrong'); }
+  renderScale();
+
+  const delay = isCorrect ? 1100 : 1800;
+  setTimeout(()=>{
+    if(card) card.classList.add('leaving');
+    setTimeout(()=>{
+      idx++;
+      renderQuestion();
+    }, 380);
+  }, delay);
+}
+
+function submitAnswer(isCorrect, selectedBtn){
+  if(busy) return;
+  busy = true;
+  clearQuizTimer();
+  const w = queue[idx];
+  const card = document.getElementById('qCard');
+  const reveal = document.getElementById('revealAnswer');
+  const allBtns = document.querySelectorAll('.option-btn');
+
+  allBtns.forEach(btn => {
+    btn.disabled = true;
+    const btnCorrect = btn.dataset.correct === 'true';
+    if(btnCorrect){
+      btn.classList.add('correct');
+    } else if(btn === selectedBtn && !isCorrect){
+      btn.classList.add('wrong');
+    } else {
+      btn.classList.add('dim');
+    }
+  });
+
+  if(isCorrect){
+    correctCount++;
+    resultLog[idx] = 'correct';
+    card.classList.add('flash-correct');
+    playCorrectSound();
+    const dots = document.querySelectorAll('.dot-pill');
+    if(dots[idx]){ dots[idx].classList.remove('current'); dots[idx].classList.add('correct'); }
+    // Success animation overlay
+    const burst = document.createElement('div');
+    burst.className = 'success-burst';
+    burst.innerHTML = `<div class="success-ring"></div><div class="success-text">✓ To'g'ri</div>`;
+    card.appendChild(burst);
+  } else {
+    wrongCount++;
+    mistakes.push(w);
+    resultLog[idx] = 'wrong';
+    card.classList.add('flash-wrong');
+    playWrongSound();
+    selectedBtn.classList.add('shake-wrong');
+    reveal.innerHTML = `To'g'ri javob: <b>${w.kana}</b>`;
+    const dots = document.querySelectorAll('.dot-pill');
+    if(dots[idx]){ dots[idx].classList.remove('current'); dots[idx].classList.add('wrong'); }
+  }
+  renderScale();
+
+  const delay = isCorrect ? 1100 : 1500;
+  setTimeout(()=>{
+    card.classList.add('leaving');
+    setTimeout(()=>{
+      idx++;
+      renderQuestion();
+    }, 380);
+  }, delay);
+}
+
+function showDone(){
+  clearQuizTimer();
+  const scaleWrap = document.getElementById('scaleWrap');
+  const timerWrap = document.getElementById('timerWrap');
+  if(scaleWrap) scaleWrap.style.display = 'none';
+  if(timerWrap) timerWrap.classList.remove('show');
+  quizStage.style.display = 'none';
+  doneStage.style.display = 'block';
+  const total = queue.length;
+  let mistakeHtml = '';
+  if(mistakes.length){
+    mistakeHtml = `<ul class="mistake-list">${mistakes.map(m=>`<li><span>${m.uz}</span><b>${m.kana}</b></li>`).join('')}</ul>
+      <button class="submit-btn" id="btnRetry" style="width:100%;padding:12px;border:none;border-radius:10px;font-weight:700;cursor:pointer;margin-bottom:10px;">Xatolarni qaytarish</button>`;
+  }
+  doneStage.innerHTML = `
+    <div class="done-card">
+      <h2>Viktorina tugadi</h2>
+      <p style="color:var(--muted);font-size:13px;">Barcha ${total} ta so'z ko'rib chiqildi</p>
+      <div class="done-stats">
+        <div><span class="num g">${correctCount}</span><span class="lbl">To'g'ri</span></div>
+        <div><span class="num r">${wrongCount}</span><span class="lbl">Xato</span></div>
+      </div>
+      ${mistakeHtml}
+      <button id="btnRestart" style="width:100%;padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--bg-soft);color:var(--cream);font-weight:700;cursor:pointer;">Qaytadan boshlash (${total} ta)</button>
+    </div>`;
+  document.getElementById('btnRestart').addEventListener('click', ()=>startQuiz(currentQuizWords));
+  if(mistakes.length){
+    document.getElementById('btnRetry').addEventListener('click', ()=>startQuiz(mistakes));
+  }
+
+  if(wrongCount === 0 && total > 0){
+    spawnConfetti(document.querySelector('.done-card'));
+  }
+}
+/* ---------------- KONFETTI: 100% natija uchun kichik zarracha portlashi ---------------- */
+function spawnConfetti(anchorEl){
+  if(!anchorEl) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const colors = ['#cda355','#5f9b5b','#78aadc','#c2534a','#f1ead9'];
+  const layer = document.createElement('div');
+  layer.className = 'confetti-layer';
+  anchorEl.style.position = anchorEl.style.position || 'relative';
+  anchorEl.appendChild(layer);
+  const COUNT = 46;
+  for(let i=0;i<COUNT;i++){
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    const color = colors[Math.floor(Math.random()*colors.length)];
+    p.style.background = color;
+    p.style.left = (46 + Math.random()*8) + '%';
+    p.style.setProperty('--drift', ((Math.random()-0.5)*260).toFixed(0)+'px');
+    p.style.setProperty('--spin', (360 + Math.random()*540).toFixed(0)+'deg');
+    const dur = (1.1 + Math.random()*0.7).toFixed(2)+'s';
+    p.style.animationDuration = dur;
+    p.style.animationDelay = (Math.random()*0.35).toFixed(2)+'s';
+    p.style.borderRadius = Math.random() < 0.4 ? '50%' : '2px';
+    layer.appendChild(p);
+  }
+  setTimeout(()=>{ layer.remove(); }, 2400);
+}
+
+/* ---------------- ORQA FON: MILTILLOVCHI NUQTALAR ---------------- */
+(function(){
+  const layer = document.createElement('div');
+  layer.className = 'stars-layer';
+  document.body.insertBefore(layer, document.body.firstChild);
+
+  function placeStars(){
+    layer.innerHTML = '';
+    const docW = document.documentElement.scrollWidth;
+    const docH = document.documentElement.scrollHeight;
+    const COUNT = 104;
+    const frag = document.createDocumentFragment();
+    let placed = 0, attempts = 0;
+    while(placed < COUNT && attempts < COUNT*10){
+      attempts++;
+      const x = Math.random()*docW;
+      const y = Math.random()*docH;
+      const s = document.createElement('div');
+      s.className = 'star';
+      const big = Math.random() < 0.18;
+      const size = big ? (4 + Math.random()*3) : (1 + Math.random()*1.8);
+      s.style.width = size.toFixed(1)+'px';
+      s.style.height = size.toFixed(1)+'px';
+      s.style.left = x.toFixed(1)+'px';
+      s.style.top = y.toFixed(1)+'px';
+      s.style.setProperty('--peak', (big ? (0.4+Math.random()*0.25) : (0.16+Math.random()*0.24)).toFixed(2));
+      s.style.animationDuration = (3 + Math.random()*4.5).toFixed(2)+'s';
+      s.style.animationDelay = (Math.random()*5).toFixed(2)+'s';
+      frag.appendChild(s);
+      placed++;
+    }
+    layer.appendChild(frag);
+  }
+
+  let resizeTimer;
+  window.addEventListener('resize', ()=>{ clearTimeout(resizeTimer); resizeTimer = setTimeout(placeStars, 220); });
+  tabFlash.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  tabQuiz.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  tabKnown.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubToday.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubToday2.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubChorshanba.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubPayshanba30.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubJuma31.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubDaily.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubNew.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubNumbers.addEventListener('click', ()=>setTimeout(placeStars, 60));
+
+  placeStars();
+
+  function spawnMeteor(){
+    const m = document.createElement('div');
+    m.className = 'meteor';
+    const mirror = Math.random() < 0.5 ? 1 : -1;
+    const angle = mirror * (18 + Math.random()*35); // 18-53 daraja, chapga yoki o'ngga
+    const startX = window.scrollX + Math.random()*window.innerWidth;
+    const startY = window.scrollY + Math.random()*window.innerHeight*0.6;
+
+    /* depth: 0 -> juda uzoqdan uchayotgandek (kichik, xira, sekin, qisqa yo'l va dum),
+              1 -> juda yaqindan uchib o'tayotgandek (katta, yorqin, tez, uzoq yo'l va dum) */
+    const depth = Math.random();
+    const lerp = (a,b,t)=> a + (b-a)*t;
+
+    const distance = window.innerWidth*lerp(0.24,0.58,depth) + Math.random()*window.innerWidth*0.16;
+    const duration = lerp(1.4, 0.55, depth) + Math.random()*0.25;
+    const headSize = lerp(1.1, 4.4, depth) + Math.random()*0.5;
+    const trailLen = lerp(55, 170, depth) + Math.random()*22;
+    const peakOpacity = lerp(0.42, 0.98, depth);
+    const glowA = lerp(0.45, 0.9, depth);
+    const glowB = lerp(0.14, 0.34, depth);
+
+    m.style.width = headSize.toFixed(1)+'px';
+    m.style.height = headSize.toFixed(1)+'px';
+    m.style.setProperty('--trail-len', trailLen.toFixed(0)+'px');
+    m.style.left = startX.toFixed(1)+'px';
+    m.style.top = startY.toFixed(1)+'px';
+    m.style.boxShadow = `0 0 ${(4+depth*7).toFixed(1)}px ${(1+depth*2.2).toFixed(1)}px rgba(255,255,255,${glowA.toFixed(2)}), 0 0 ${(9+depth*13).toFixed(1)}px ${(2.5+depth*4).toFixed(1)}px rgba(190,210,255,${glowB.toFixed(2)})`;
+    m.style.transform = `rotate(${angle}deg) translateX(0px)`;
+    m.style.opacity = peakOpacity.toFixed(2);
+    m.style.transition = `transform ${duration}s linear, opacity ${duration}s ease-in`;
+    layer.appendChild(m);
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        m.style.transform = `rotate(${angle}deg) translateX(${distance}px)`;
+        m.style.opacity = '0';
+      });
+    });
+    setTimeout(()=>{ m.remove(); }, (duration*1000)+120);
+  }
+
+  function scheduleMeteor(){
+    const delay = 5000 + Math.random()*2000;
+    setTimeout(()=>{
+      /* Ko'zga ko'rinmayotgan (background) tabda hisoblashni tejash uchun chizmaymiz */
+      if(!document.hidden) spawnMeteor();
+      scheduleMeteor();
+    }, delay);
+  }
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    scheduleMeteor();
+  }
+})();
+
+/* ---------------- PWA: service worker ro'yxatdan o'tkazish ---------------- */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('sw.js').catch(()=>{ /* sw.js topilmasa, sahifa baribir oddiy ishlayveradi */ });
+  });
+}
+</script>
+</body>
+</html>
