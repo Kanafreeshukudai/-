@@ -1318,6 +1318,62 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 }
 .mochi-send-btn:hover{filter:brightness(1.1);}
 .mochi-send-btn:active{transform:scale(.9);}
+.mochi-mic-btn{
+  position:relative;
+  width:34px; height:34px;
+  border-radius:50%;
+  border:1px solid rgba(157,78,221,0.35);
+  background:linear-gradient(135deg, rgba(157,78,221,0.16), rgba(199,125,255,0.08));
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+  color:#e0c3ff;
+  font-size:14px;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:transform .18s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+  flex-shrink:0;
+  overflow:visible;
+}
+.mochi-mic-btn:hover{
+  transform:scale(1.08);
+  background:linear-gradient(135deg, rgba(157,78,221,0.28), rgba(199,125,255,0.16));
+  border-color:rgba(157,78,221,0.55);
+  box-shadow:0 0 14px rgba(157,78,221,0.35);
+}
+.mochi-mic-btn:active{transform:scale(.92);}
+.mochi-mic-icon{
+  width:16px; height:16px;
+  position:relative; z-index:2;
+  filter:drop-shadow(0 0 3px rgba(157,78,221,0.35));
+  transition:transform .18s ease, filter .18s ease;
+}
+.mochi-mic-ring{
+  position:absolute; inset:0;
+  border-radius:50%;
+  border:1.5px solid rgba(199,125,255,0.55);
+  opacity:0;
+  pointer-events:none;
+}
+.mochi-mic-btn.listening{
+  background:linear-gradient(135deg, #7b2cbf, #c77dff);
+  border-color:transparent;
+  color:#fff;
+  box-shadow:0 0 16px rgba(157,78,221,0.55);
+}
+.mochi-mic-btn.listening .mochi-mic-icon{
+  transform:scale(1.06);
+  filter:drop-shadow(0 0 6px rgba(255,255,255,0.65));
+}
+.mochi-mic-btn.listening .mochi-mic-ring{animation:micRingPulse 1.6s ease-out infinite;}
+.mochi-mic-btn.listening .mochi-mic-ring-2{animation-delay:.55s;}
+@keyframes micRingPulse{
+  0%{opacity:.55; transform:scale(1);}
+  100%{opacity:0; transform:scale(1.95);}
+}
+.mochi-mic-btn.unsupported{opacity:.3; cursor:not-allowed; filter:grayscale(1);}
+@media (prefers-reduced-motion: reduce){
+  .mochi-mic-btn.listening .mochi-mic-ring{animation:none; opacity:0;}
+}
 
 /* Typing indicator */
 .mochi-typing{
@@ -3187,6 +3243,7 @@ class MochiAI {
     this.content = document.getElementById('mochiBubbleContent');
     this.input = document.getElementById('mochiInput');
     this.sendBtn = document.getElementById('mochiSend');
+    this.micBtn = document.getElementById('mochiMic');
     this.typing = document.getElementById('mochiTyping');
     this.chips = document.getElementById('mochiChips');
     this.hint = document.getElementById('mochiHint');
@@ -3196,8 +3253,11 @@ class MochiAI {
     this.context = 'flash'; // flash | quiz | known
     this.lastQuizResult = null; // 'correct' | 'wrong' | null
     this.voiceEnabled = 'speechSynthesis' in window;
+    this.isListening = false;
+    this.recognition = null;
     this.conversationHistory = [];
     this.greeted = false;
+    this.setupSpeechRecognition();
     this.init();
   }
 
@@ -3205,6 +3265,9 @@ class MochiAI {
     // Event listeners
     this.sendBtn.addEventListener('click', ()=>this.handleUserInput());
     this.input.addEventListener('keypress', (e)=>{ if(e.key==='Enter') this.handleUserInput(); });
+    if(this.micBtn){
+      this.micBtn.addEventListener('click', ()=>this.toggleListening());
+    }
 
     // Chip buttons
     this.chips.querySelectorAll('.mochi-chip').forEach(chip=>{
@@ -3251,6 +3314,66 @@ class MochiAI {
         }
         originalSubmit(isCorrect, selectedBtn);
       };
+    }
+  }
+
+  setupSpeechRecognition(){
+    const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if(!SpeechRecognitionCtor){
+      if(this.micBtn){
+        this.micBtn.classList.add('unsupported');
+        this.micBtn.title = "Bu brauzerda ovozli kiritish qo'llanmaydi";
+      }
+      return;
+    }
+    this.recognition = new SpeechRecognitionCtor();
+    this.recognition.lang = 'uz-UZ';
+    this.recognition.interimResults = false;
+    this.recognition.maxAlternatives = 1;
+    this.recognition.continuous = false;
+
+    this.recognition.onstart = ()=>{
+      this.isListening = true;
+      if(this.micBtn) this.micBtn.classList.add('listening');
+      this.input.placeholder = "Tinglayapman...";
+    };
+
+    this.recognition.onresult = (event)=>{
+      const transcript = event.results[0][0].transcript;
+      this.input.value = transcript;
+      this.handleUserInput();
+    };
+
+    this.recognition.onerror = (event)=>{
+      console.warn('Ovozni tanish xatosi:', event.error);
+      if(event.error === 'no-speech'){
+        this.showHint("Ovoz eshitilmadi, qayta urinib ko'ring 🎤");
+      } else if(event.error === 'not-allowed' || event.error === 'service-not-allowed'){
+        this.showHint("Mikrofonga ruxsat bering 🎙️");
+      }
+    };
+
+    this.recognition.onend = ()=>{
+      this.isListening = false;
+      if(this.micBtn) this.micBtn.classList.remove('listening');
+      this.input.placeholder = "Savol yozing yoki gapiring...";
+    };
+  }
+
+  toggleListening(){
+    if(!this.recognition) return;
+    if(!this.isOpen) this.open();
+    if(this.isListening){
+      this.recognition.stop();
+      return;
+    }
+    // Don't let Mochi hear itself talking
+    this.stopSpeaking();
+    try{
+      this.recognition.start();
+    }catch(err){
+      // start() throws if called while already active; ignore
+      console.warn('Mikrofonni ishga tushirib bo\'lmadi:', err);
     }
   }
 
@@ -3378,7 +3501,7 @@ class MochiAI {
     return msgs[Math.floor(Math.random()*msgs.length)];
   }
 
-  handleUserInput(){
+  async handleUserInput(){
     const text = this.input.value.trim();
     if(!text) return;
     this.input.value = '';
@@ -3386,14 +3509,104 @@ class MochiAI {
     // Add user message
     this.addMessage("Siz: " + text, 'user');
 
-    // Generate response
-    const response = this.generateResponse(text);
+    // Show thinking state immediately while we wait for the real AI
+    this.typing.classList.add('show');
+    this.mochiBody.classList.add('thinking');
+    this.stopSpeaking();
 
-    // Type response
-    setTimeout(()=>{
-      this.typeMessage(response);
-      this.speak(response.replace(/<[^>]*>/g, ''));
-    }, 400);
+    try{
+      const reply = await this.askRealAI(text);
+      this.typing.classList.remove('show');
+      this.mochiBody.classList.remove('thinking');
+      this.mochiBody.classList.add('speaking');
+      this.content.innerHTML = reply;
+      this.content.scrollTop = 0;
+      const plain = reply.replace(/<[^>]*>/g, '');
+      this.speak(plain);
+      const speakTime = Math.max(2000, reply.length * 40);
+      setTimeout(()=>{ this.mochiBody.classList.remove('speaking'); }, speakTime);
+    }catch(err){
+      console.error('Mochi AI xatosi:', err);
+      this.typing.classList.remove('show');
+      this.mochiBody.classList.remove('thinking');
+      this.typeMessage("😔 Kechirasiz, hozir javob bera olmadim (aloqa xatosi). Birozdan keyin qayta urinib ko'ring, iltimos.");
+    }
+  }
+
+  buildVocabContext(){
+    // Compact vocab dump so the AI grounds its answers in exactly the words in this app
+    if(this._vocabContextCache) return this._vocabContextCache;
+    const compact = ALL_WORDS.map(w=>({uz:w.uz, kana:w.kana, romaji:w.romaji, group:w.group, note:w.note||undefined}));
+    this._vocabContextCache = JSON.stringify(compact);
+    return this._vocabContextCache;
+  }
+
+  buildSystemPrompt(){
+    const contextNames = {flash:"Flashcard (so'z kartalari)", quiz:"Viktorina", known:"Bilaman (o'rganilgan so'zlar)"};
+    const currentScreen = contextNames[this.context] || contextNames.flash;
+    let quizNote = '';
+    if(this.context === 'quiz' && this.lastQuizResult){
+      quizNote = this.lastQuizResult === 'correct'
+        ? "\nFoydalanuvchi hozirgina viktorinada TO'G'RI javob berdi."
+        : "\nFoydalanuvchi hozirgina viktorinada XATO javob berdi — uni ruhlantiring va tushuntiring.";
+    }
+    return `Sen "Mochi" ismli, do'stona va quvnoq AI yordamchisan. Sen o'zbek tilida so'zlashuvchi foydalanuvchiga yapon tilini o'rganishda yordam berasan. Bu ilova — "Uyga vazifa so'zlari" nomli yapon tili lug'at/flashcard/viktorina ilovasi.
+
+Qoidalar:
+- Har doim FAQAT o'zbek tilida javob ber (yapon so'zlari, kana va romaji bundan mustasno).
+- Javoblaring qisqa, iliq va tushunarli bo'lsin (odatda 2-5 gap), lekin savol chuqur tushuntirish talab qilsa kengroq yoz.
+- Iloji bo'lsa, javobingda tegishli emoji ishlat va HTML <b>, <br>, <em> teglaridan foydalanib formatlashing mumkin (Markdown emas, faqat shu HTML teglar).
+- Foydalanuvchi biror so'z haqida so'rasa, quyidagi lug'at ma'lumotlaridan foydalan (bu — ilovadagi aniq so'zlar ro'yxati, JSON formatida): agar so'z shu ro'yxatda bo'lsa, aniq kana/romaji/guruhini bergin; bo'lmasa, umumiy yapon tili bilimingdan foydalanib yordam ber va buni yashirma.
+- Foydalanuvchi hozir ilovaning "${currentScreen}" bo'limida turibdi.${quizNote}
+- Sen shunchaki skript emassan — foydalanuvchi bilan erkin, tabiiy suhbat qura olasan, savollariga chinakam javob ber.
+
+Lug'at (JSON): ${this.buildVocabContext()}`;
+  }
+
+  async askRealAI(userText){
+    this.conversationHistory.push({role:'user', content:userText});
+    // Keep history bounded so requests stay small
+    if(this.conversationHistory.length > 16){
+      this.conversationHistory = this.conversationHistory.slice(-16);
+    }
+
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-6",
+        max_tokens: 1000,
+        system: this.buildSystemPrompt(),
+        messages: this.conversationHistory
+      })
+    });
+
+    if(!response.ok){
+      throw new Error('API javobi muvaffaqiyatsiz: ' + response.status);
+    }
+
+    const data = await response.json();
+    const rawText = (data.content || [])
+      .filter(block => block.type === 'text')
+      .map(block => block.text)
+      .join('\n')
+      .trim();
+
+    const finalText = rawText || "🤔 Kechirasiz, javob shakllantira olmadim. Boshqacharoq so'rab ko'ring.";
+    this.conversationHistory.push({role:'assistant', content: finalText});
+
+    return this.formatAIText(finalText);
+  }
+
+  formatAIText(text){
+    // Escape any accidental HTML from the model, then convert markdown-ish bold/newlines
+    const escaped = text
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;');
+    return escaped
+      .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+      .replace(/\n/g, '<br>');
   }
 
   addMessage(text, sender){
@@ -3407,69 +3620,6 @@ class MochiAI {
     }
     this.content.appendChild(div);
     this.content.scrollTop = this.content.scrollHeight;
-  }
-
-  generateResponse(input){
-    const lower = input.toLowerCase();
-
-    // Check for specific word queries
-    const matchedWord = ALL_WORDS.find(w=>{
-      const searchTerms = [w.uz.toLowerCase(), w.romaji.toLowerCase(), w.kana];
-      return searchTerms.some(t=>lower.includes(t.toLowerCase()));
-    });
-
-    if(matchedWord){
-      return `🎯 <b>${matchedWord.uz}</b><br>🇯🇵 ${matchedWord.kana}<br>🔤 ${matchedWord.romaji}<br>📂 ${matchedWord.group}<br>${matchedWord.note ? '📝 ' + matchedWord.note + '<br>' : ''}<br>Bu so'zni to'g'ri o'qish uchun: <b>${matchedWord.romaji}</b>`;
-    }
-
-    // Pattern matching
-    if(lower.includes('salom') || lower.includes('hello')){
-      return this.getGreeting();
-    }
-    if(lower.includes('rahmat') || lower.includes('thank')){
-      return "🙏 Arigatou! (ありがとう!) — Sizga yordam berishdan xursandman!";
-    }
-    if(lower.includes('yordam') || lower.includes('help')){
-      return this.handleChipClick('help');
-    }
-    if(lower.includes('maslahat') || lower.includes('tip') || lower.includes('usul')){
-      return this.getStudyTip();
-    }
-    if(lower.includes('motiv') || lower.includes('ruh')){
-      return this.getEncouragement();
-    }
-    if(lower.includes('xato') || lower.includes('error') || lower.includes('wrong')){
-      return "❌ Xato — o'rganishning ajralmas qismi. Muhim narsa: xatoni tushunish va uni to'g'rilash. Qayta urinib ko'ring! 💪";
-    }
-    if(lower.includes('qiyin') || lower.includes('hard')){
-      return "🧠 Boshida hamma narsa qiyin tuyuladi. Lekin har kuni 10 daqiqa — bir oyda 5 soat! Vaqt o'tishi bilan yengillashadi.";
-    }
-    if(lower.includes('raqam') || lower.includes('son') || lower.includes('number')){
-      return "🔢 Raqamlar bo'limida 0 dan 90,000 gacha raqamlar bor. Yaponlarda 10,000 (いちまん) — alohida birlik. Bu biroz odatlanish talab qiladi!";
-    }
-    if(lower.includes('kun') || lower.includes('hafta')){
-      return "📅 Hafta kunlari: げつようび (dushanba), かようび (seshanba), すいようび (chorshanba)... 'youbi' (ようび) — hafta kunlarining oxirida keladi.";
-    }
-    if(lower.includes('fe') || lower.includes('verb')){
-      return "📝 Yapon tilida 3 ta fe'l guruhi bor:<br>• <b>I guruh:</b> いきます (bormoq) — oxirgi 'u' + 'imasu'<br>• <b>II guruh:</b> おきます (turmoq) — oxirgi 'i/e' + 'masu'<br>• <b>III guruh:</b> べんきょうします (o'qimoq) — maxsus!";
-    }
-    if(lower.includes('salomlash') || lower.includes('tanish')){
-      return "🤝 Tanishuv: はじめまして (Hajimemashite) — 'Birinchi marta uchrashaylik'. Javob: どうぞよろしくおねがいします (Yaxshi tanishaylik)!";
-    }
-    if(lower.includes('qayer') || lower.includes('where')){
-      return "📍 Qayer: どこ (doko) — oddiy, どちら (dochira) — hurmatli. Javob: ~はここです (Bu yerda).";
-    }
-    if(lower.includes('pul') || lower.includes('money')){
-      return "💴 Yapon puli: えん (en/yen). 100円 = ひゃくえん. 1000円 = せんえん. 10,000円 = いちまんえん.";
-    }
-
-    // Default contextual responses
-    const defaults = [
-      "🤔 Qiziq savol! Men hali bu mavzuda to'liq o'rganishim kerak. Boshqa narsa so'rang — masalan, 'hafta kunlari', 'fe'llar' yoki 'raqamlar'.",
-      "💬 Bu haqida aniqroq ayta olmasam ham, sizga yordam berishga harakat qilaman! Qanday so'zni o'rganmoqchisiz?",
-      "🌟 Yaxshi savol! Menga aniq so'zni aytsangiz, uning ma'nosini va yozilishini tushuntirib beraman."
-    ];
-    return defaults[Math.floor(Math.random()*defaults.length)];
   }
 
   typeMessage(html){
@@ -3569,7 +3719,15 @@ window.addEventListener('DOMContentLoaded', ()=>{
         <button class="mochi-chip" data-chip="tip">Maslahat</button>
       </div>
       <div class="mochi-input-wrap">
-        <input type="text" class="mochi-input" id="mochiInput" placeholder="Savol yozing..." autocomplete="off">
+        <input type="text" class="mochi-input" id="mochiInput" placeholder="Savol yozing yoki gapiring..." autocomplete="off">
+        <button class="mochi-mic-btn" id="mochiMic" title="Gapiring">
+          <span class="mochi-mic-ring"></span>
+          <span class="mochi-mic-ring mochi-mic-ring-2"></span>
+          <svg class="mochi-mic-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 15.5c1.93 0 3.5-1.57 3.5-3.5V6c0-1.93-1.57-3.5-3.5-3.5S8.5 4.07 8.5 6v6c0 1.93 1.57 3.5 3.5 3.5z" fill="currentColor"/>
+            <path d="M17.5 12c0 3.03-2.47 5.5-5.5 5.5S6.5 15.03 6.5 12H5c0 3.53 2.61 6.43 6 6.92V21h2v-2.08c3.39-.49 6-3.39 6-6.92h-1.5z" fill="currentColor"/>
+          </svg>
+        </button>
         <button class="mochi-send-btn" id="mochiSend">➤</button>
       </div>
     </div>
