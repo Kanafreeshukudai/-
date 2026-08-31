@@ -25,8 +25,8 @@
   --panel:#0a0a0a;
   --panel-2:#080808;
   --border:#1a1a1a;
-  --gold:#cda355;
-  --gold-soft:rgba(205,163,85,0.10);
+  --gold:#14b8a6;
+  --gold-soft:rgba(45,212,191,0.10);
   --cream:#e0e0e0;
   --muted:#555555;
   --green:#4a8a46;
@@ -79,7 +79,7 @@ body::before{
   position:absolute; top:0; left:0;
   width:3px; height:3px;
   border-radius:50%;
-  background:#fff;
+  background:#ccfbf1;
   box-shadow:0 0 8px 2px rgba(255,255,255,0.85), 0 0 18px 5px rgba(190,210,255,0.3);
   pointer-events:none;
   will-change:transform, opacity;
@@ -113,7 +113,7 @@ body::before{
 /* ---------- HEADER ---------- */
 header{text-align:center; margin-bottom:32px;}
 .eyebrow{
-  font-size:11px; letter-spacing:.28em; color:var(--gold);
+  font-size:11px; letter-spacing:.28em; color:#2dd4bf;
   text-transform:uppercase; margin-bottom:10px; font-weight:900;
   opacity:.85;
 }
@@ -127,7 +127,7 @@ h1{
   line-height:1.1;
 }
 h1 span{
-  background:linear-gradient(135deg, var(--gold), #e8c87a);
+  background:linear-gradient(135deg, #14b8a6, #2dd4bf);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   background-clip:text;
@@ -159,16 +159,16 @@ h1 span{
   margin:26px auto 0;
   overflow:hidden;
   background:transparent;
-  border:1px solid rgba(205,163,85,0.15);
+  border:1px solid rgba(45,212,191,0.15);
   border-radius:999px;
   padding:5px;
 }
 .tabs .indicator{
   position:absolute; top:5px; left:5px;
   width:calc((100% - 10px)/3); height:calc(100% - 10px);
-  background:linear-gradient(135deg,var(--gold),#b8944a);
+  background:linear-gradient(135deg,var(--gold),#0d9488);
   border-radius:999px;
-  box-shadow:0 3px 14px rgba(205,163,85,0.30);
+  box-shadow:0 3px 14px rgba(45,212,191,0.30);
   transition:transform .35s cubic-bezier(.65,.05,.36,1), background .35s ease, box-shadow .35s ease;
 }
 .tabs.pos-quiz .indicator{transform:translateX(100%);}
@@ -230,9 +230,9 @@ section.view.fade-out{animation:fadeout .22s ease forwards;}
   font-size:12.5px; cursor:pointer; transition:all .2s;
   letter-spacing:.02em;
 }
-.sub-btn:hover{border-color:rgba(205,163,85,0.3); color:var(--cream);}
-.sub-btn.active{background:linear-gradient(135deg, rgba(205,163,85,0.15), rgba(205,163,85,0.05)); color:var(--gold); border-color:rgba(205,163,85,0.35);}
-.sub-btn .dot{display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--gold); margin-left:6px; vertical-align:middle;}
+.sub-btn:hover{border-color:rgba(45,212,191,0.3); color:var(--cream);}
+.sub-btn.active{background:linear-gradient(135deg, rgba(45,212,191,0.15), rgba(45,212,191,0.05)); color:#2dd4bf; border-color:rgba(45,212,191,0.35);}
+.sub-btn .dot{display:inline-block; width:5px; height:5px; border-radius:50%; background:#2dd4bf; margin-left:6px; vertical-align:middle;}
 
 /* ---------- BILAMAN tugmasi va bo'limi ---------- */
 .know-btn{
@@ -254,7 +254,7 @@ section.view.fade-out{animation:fadeout .22s ease forwards;}
 .quiz-note{
   text-align:center; color:var(--muted); font-size:13px; margin:20px 0 4px;
 }
-.quiz-note b{color:var(--gold);}
+.quiz-note b{color:#2dd4bf;}
 
 /* ---------- FLASHCARDS ---------- */
 .grid{
@@ -300,9 +300,9 @@ section.view.fade-out{animation:fadeout .22s ease forwards;}
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   padding:14px; text-align:center;
   overflow:hidden;
-  border:1px solid rgba(205,163,85,0.22);
+  border:1px solid rgba(45,212,191,0.22);
   background:transparent;
-  box-shadow: inset 0 0 0 1px rgba(205,163,85,0.06), 0 0 20px rgba(205,163,85,0.04);
+  box-shadow: inset 0 0 0 1px rgba(45,212,191,0.06), 0 0 20px rgba(45,212,191,0.04);
 }
 @media (hover:hover) and (pointer:fine){
   .card:not(.flipped):hover{transform:translateY(-3px) translateZ(0);}
@@ -312,33 +312,33 @@ section.view.fade-out{animation:fadeout .22s ease forwards;}
   transform:rotateY(180deg) translateZ(0.01px);
   -webkit-transform:rotateY(180deg) translateZ(0.01px);
   background:transparent;
-  border-color:var(--gold);
-  box-shadow: inset 0 0 0 1px rgba(205,163,85,0.10), 0 0 24px rgba(205,163,85,0.08);
+  border-color:#2dd4bf;
+  box-shadow: inset 0 0 0 1px rgba(45,212,191,0.10), 0 0 24px rgba(45,212,191,0.08);
 }
 
 .face.front::before{
   content:'';
   position:absolute; top:10px; left:50%; transform:translateX(-50%);
   width:20px; height:4px; border-radius:2px;
-  background:var(--gold); opacity:.35;
+  background:#2dd4bf; opacity:.35;
 }
 .tag{
   position:relative; z-index:1;
   font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--gold); font-weight:700; margin-bottom:10px;
+  color:#2dd4bf; font-weight:700; margin-bottom:10px;
 }
 .uz-word{position:relative; z-index:1; font-size:17px; font-weight:700; color:var(--cream); line-height:1.25;}
 .uz-note{position:relative; z-index:1; font-size:11.5px; font-weight:400; color:var(--muted); line-height:1.3; margin-top:4px;}
-.kana{position:relative; z-index:1; font-family:var(--font-display); font-size:24px; font-weight:700; color:var(--gold);}
+.kana{position:relative; z-index:1; font-family:var(--font-display); font-size:24px; font-weight:700; color:#2dd4bf;}
 .romaji{position:relative; z-index:1; font-size:12px; color:var(--muted); margin-top:6px; font-style:italic;}
 .hint{position:relative; z-index:1; font-size:11px; color:var(--muted); margin-top:10px;}
 
 /* ---------- QUIZ ---------- */
 .progress-row{display:flex; gap:6px; justify-content:center; margin:28px 0 10px; flex-wrap:wrap;}
 .mat{width:10px; height:10px; border-radius:50%; background:var(--panel-2); border:1px solid rgba(255,255,255,0.06); transition:background .25s,border-color .25s,transform .25s;}
-.mat.done-correct{background:var(--green); border-color:rgba(74,138,70,0.5);}
+.mat.done-correct{background:#14b8a6; border-color:rgba(74,138,70,0.5);}
 .mat.done-wrong{background:var(--red); border-color:rgba(176,69,61,0.5);}
-.mat.current{border-color:var(--gold); background:rgba(205,163,85,0.15); box-shadow:0 0 8px rgba(205,163,85,0.15);}
+.mat.current{border-color:#2dd4bf; background:rgba(20,184,166,0.2); box-shadow:0 0 8px rgba(45,212,191,0.15);}
 .mat.flash{animation:dotFlash .55s ease both;}
 @keyframes dotFlash{
   0%{transform:scale(1); box-shadow:0 0 0 0 rgba(255,255,255,0);}
@@ -361,7 +361,7 @@ section.view.fade-out{animation:fadeout .22s ease forwards;}
 .quiz-card.flash-wrong{border-color:var(--red);}
 .quiz-card.leaving{opacity:0; transform:scale(.92) translateY(-6px);}
 
-.q-tag{font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); font-weight:900; text-align:center; opacity:.9;}
+.q-tag{font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#2dd4bf; font-weight:900; text-align:center; opacity:.9;}
 .q-word{font-family:var(--font-display); font-size:clamp(22px,5vw,30px); font-weight:700; text-align:center; margin:10px 0 6px; color:var(--cream); line-height:1.2;}
 .q-note{font-size:13px; font-weight:400; text-align:center; margin:0 0 20px; color:var(--muted); line-height:1.45; max-width:360px; margin-left:auto; margin-right:auto;}
 
@@ -370,7 +370,7 @@ section.view.fade-out{animation:fadeout .22s ease forwards;}
   width:100%;
   display:block;
   font-family:var(--font-display);
-  font-size:24px; letter-spacing:.06em; color:var(--gold);
+  font-size:24px; letter-spacing:.06em; color:#2dd4bf;
   padding:8px 14px; margin-bottom:16px; word-break:break-all;
   text-align:center;
   outline:none;
@@ -382,13 +382,13 @@ section.view.fade-out{animation:fadeout .22s ease forwards;}
 }
 .answer-strip::placeholder{color:var(--muted); font-family:var(--font-body); font-size:13px; letter-spacing:0;}
 .answer-strip:focus{
-  border-color:var(--gold);
+  border-color:#2dd4bf;
   background:transparent;
   box-shadow:0 0 0 2px var(--gold-soft);
 }
 
 .reveal-answer{text-align:center; font-size:14px; color:var(--muted); min-height:20px; margin-bottom:12px; font-weight:500;}
-.reveal-answer b{color:var(--gold); font-family:var(--font-display); font-size:18px; font-weight:700;}
+.reveal-answer b{color:#2dd4bf; font-family:var(--font-display); font-size:18px; font-weight:700;}
 
 .action-row{display:flex; gap:8px;}
 .action-row button{
@@ -407,7 +407,7 @@ section.view.fade-out{animation:fadeout .22s ease forwards;}
   .action-row .btn-clear:hover{border-color:var(--muted); color:var(--cream); background:transparent;}
   .action-row .submit-btn:hover{filter:brightness(1.08);}
 }
-.action-row .submit-btn{background:linear-gradient(135deg,var(--gold),#a9823f); color:#1a1208; border:none;}
+.action-row .submit-btn{background:linear-gradient(135deg,var(--gold),#0f766e); color:#1a1208; border:none;}
 .action-row button:active{transform:scale(.94);}
 .action-row .btn-clear:active{background:transparent;}
 .action-row .submit-btn:active{filter:brightness(.92);}
@@ -451,9 +451,9 @@ section.view.fade-out{animation:fadeout .22s ease forwards;}
 .done-card{
   width:min(480px,100%); margin:0 auto;
   background:transparent;
-  border:1px solid rgba(205,163,85,0.12); border-radius:20px; padding:36px 28px; text-align:center;
+  border:1px solid rgba(45,212,191,0.12); border-radius:20px; padding:36px 28px; text-align:center;
 }
-.done-card h2{font-family:var(--font-display); margin:0 0 8px; color:var(--gold); font-size:28px; letter-spacing:-0.01em;}
+.done-card h2{font-family:var(--font-display); margin:0 0 8px; color:#2dd4bf; font-size:28px; letter-spacing:-0.01em;}
 .done-stats{display:flex; justify-content:center; gap:32px; margin:22px 0 26px;}
 .done-stats div{text-align:center;}
 .done-stats .num{font-size:32px; font-weight:900; display:block; line-height:1;}
@@ -465,7 +465,7 @@ section.view.fade-out{animation:fadeout .22s ease forwards;}
   display:flex; justify-content:space-between; padding:10px 6px; border-bottom:1px solid rgba(255,255,255,0.04);
   font-size:14px;
 }
-.mistake-list b{color:var(--gold); font-family:var(--font-display); font-size:16px;}
+.mistake-list b{color:#2dd4bf; font-family:var(--font-display); font-size:16px;}
 
 footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; margin-top:40px; letter-spacing:.04em; font-weight:500;}
 @media(max-width:420px){.kb-grid{grid-template-columns:repeat(5,1fr);}}
@@ -511,7 +511,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   line-height:1.3;
   letter-spacing:.02em;
 }
-.option-btn:hover:not(:disabled){ border-color:var(--gold); background:var(--gold-soft); }
+.option-btn:hover:not(:disabled){ border-color:#2dd4bf; background:var(--gold-soft); }
 .option-btn:active:not(:disabled){ transform:scale(.96); }
 .option-btn:disabled{ cursor:default; }
 .option-btn.correct{ border-color:var(--green); background:var(--green-soft); color:var(--green); }
@@ -582,16 +582,16 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 /* ---------- DROPDOWN (Hammasi) ---------- */
 .dropdown-wrap{position:relative;display:inline-block;}
 .dropdown-btn{
-  border:1px solid rgba(205,163,85,0.25);
-  background:rgba(205,163,85,0.06);
-  color:var(--gold);
+  border:1px solid rgba(20,184,166,0.4);
+  background:rgba(20,184,166,0.1);
+  color:#2dd4bf;
   padding:8px 18px; border-radius:999px; font-family:var(--font-body); font-weight:700;
   font-size:12.5px; cursor:pointer; transition:all .2s;
   display:inline-flex; align-items:center; gap:6px;
   letter-spacing:.04em;
 }
-.dropdown-btn:hover{background:rgba(205,163,85,0.12); border-color:rgba(205,163,85,0.4);}
-.dropdown-btn.active{background:rgba(205,163,85,0.18); color:var(--gold); border-color:var(--gold);}
+.dropdown-btn:hover{background:rgba(20,184,166,0.15); border-color:rgba(20,184,166,0.5);}
+.dropdown-btn.active{background:rgba(45,212,191,0.18); color:#2dd4bf; border-color:#2dd4bf;}
 .dropdown-btn::after{
   content:''; width:0; height:0;
   border-left:4px solid transparent; border-right:4px solid transparent;
@@ -613,8 +613,8 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   padding:7px 14px; font-family:var(--font-body); font-weight:700;
   font-size:12px; cursor:pointer; transition:all .15s; white-space:nowrap;
 }
-.dropdown-panel .sub-btn:hover{background:var(--gold-soft); color:var(--gold); border-color:var(--gold);}
-.dropdown-panel .sub-btn.active{background:var(--gold-soft); color:var(--gold); border-color:var(--gold);}
+.dropdown-panel .sub-btn:hover{background:var(--gold-soft); color:#2dd4bf; border-color:#2dd4bf;}
+.dropdown-panel .sub-btn.active{background:var(--gold-soft); color:#2dd4bf; border-color:#2dd4bf;}
 
 /* ---------- PROGRESS SCALE ---------- */
 .scale-wrap{
@@ -632,19 +632,19 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 .scale-fill{
   height:100%;
   width:0%;
-  background:linear-gradient(90deg, var(--gold), #e8c87a);
+  background:linear-gradient(90deg, var(--gold), #2dd4bf);
   border-radius:999px;
   transition:width .45s cubic-bezier(.34,1.56,.64,1);
-  box-shadow:0 0 12px rgba(205,163,85,0.25);
+  box-shadow:0 0 12px rgba(45,212,191,0.25);
   position:relative;
 }
 .scale-fill::after{
   content:'';
   position:absolute; right:0; top:50%; transform:translate(50%,-50%);
   width:10px; height:10px;
-  background:var(--gold);
+  background:#2dd4bf;
   border-radius:50%;
-  box-shadow:0 0 10px rgba(205,163,85,0.5);
+  box-shadow:0 0 10px rgba(45,212,191,0.5);
 }
 .scale-label{
   text-align:center;
@@ -656,7 +656,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   margin-top:10px;
 }
 .scale-label b{
-  color:var(--gold);
+  color:#2dd4bf;
   font-weight:900;
 }
 
@@ -683,9 +683,9 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   letter-spacing:.02em;
 }
 .mode-btn.active{
-  background:linear-gradient(135deg, var(--gold), #b8944a);
+  background:linear-gradient(135deg, #0d9488, #14b8a6);
   color:#1a1208;
-  box-shadow:0 2px 10px rgba(205,163,85,0.25);
+  box-shadow:0 2px 10px rgba(45,212,191,0.25);
 }
 
 /* ---------- TIME TRIAL TYPING AREA ---------- */
@@ -708,7 +708,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   font-family:var(--font-display);
   font-size:32px;
   font-weight:700;
-  color:var(--gold);
+  color:#2dd4bf;
   text-align:center;
   margin:14px 0 4px;
 }
@@ -740,7 +740,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 .timer-bar-fill{
   height:100%;
   width:100%;
-  background:linear-gradient(90deg, var(--gold), #e8c87a, #f0d78a);
+  background:linear-gradient(90deg, var(--gold), #2dd4bf, #99f6e4);
   border-radius:999px;
   transform-origin:left;
   transition:background .3s;
@@ -754,9 +754,9 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   transform:translate(50%,-50%);
   width:10px;
   height:10px;
-  background:#fff;
+  background:#ccfbf1;
   border-radius:50%;
-  box-shadow:0 0 10px 3px rgba(205,163,85,0.6), 0 0 20px 6px rgba(205,163,85,0.2);
+  box-shadow:0 0 10px 3px rgba(45,212,191,0.6), 0 0 20px 6px rgba(45,212,191,0.2);
   opacity:0.9;
 }
 .timer-bar-fill.urgent{
@@ -767,13 +767,13 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 }
 .timer-text{
   text-align:center;
-  color:var(--gold);
+  color:#2dd4bf;
   font-size:28px;
   font-weight:900;
   margin-top:12px;
   letter-spacing:.08em;
   font-family:var(--font-body);
-  text-shadow:0 0 12px rgba(205,163,85,0.35), 0 0 30px rgba(205,163,85,0.12);
+  text-shadow:0 0 12px rgba(45,212,191,0.35), 0 0 30px rgba(45,212,191,0.12);
   transition:color .25s, text-shadow .25s, transform .25s;
 }
 .timer-text.urgent{
@@ -816,7 +816,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 
 @keyframes dotPulseGreen{
   0%  { transform:scale(1); background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); box-shadow:none; }
-  30% { transform:scale(1.35); background:var(--green); border-color:var(--green); box-shadow:0 0 14px 4px rgba(74,138,70,0.55), 0 0 28px 8px rgba(74,138,70,0.18); }
+  30% { transform:scale(1.35); background:#14b8a6; border-color:var(--green); box-shadow:0 0 14px 4px rgba(74,138,70,0.55), 0 0 28px 8px rgba(74,138,70,0.18); }
   100%{ transform:scale(1); background:rgba(74,138,70,0.14); border-color:rgba(74,138,70,0.30); box-shadow:none; }
 }
 @keyframes dotPulseRed{
@@ -826,14 +826,14 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 }
 @keyframes dotPulseGold{
   0%  { transform:scale(1); background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.08); box-shadow:none; }
-  30% { transform:scale(1.35); background:var(--gold); border-color:var(--gold); box-shadow:0 0 14px 4px rgba(205,163,85,0.55), 0 0 28px 8px rgba(205,163,85,0.18); }
-  100%{ transform:scale(1); background:rgba(205,163,85,0.14); border-color:rgba(205,163,85,0.30); box-shadow:none; }
+  30% { transform:scale(1.35); background:#2dd4bf; border-color:#2dd4bf; box-shadow:0 0 14px 4px rgba(45,212,191,0.55), 0 0 28px 8px rgba(45,212,191,0.18); }
+  100%{ transform:scale(1); background:rgba(45,212,191,0.14); border-color:rgba(45,212,191,0.30); box-shadow:none; }
 }
 
 .dot-pill.current{
-  border-color:var(--gold);
-  background:rgba(205,163,85,0.18);
-  box-shadow:0 0 6px 2px rgba(205,163,85,0.25);
+  border-color:#2dd4bf;
+  background:rgba(45,212,191,0.18);
+  box-shadow:0 0 6px 2px rgba(45,212,191,0.25);
   transform:scale(1.1);
 }
 
@@ -851,12 +851,13 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 .mochi-body{
   width:72px; height:72px;
   border-radius:50%;
-  background:radial-gradient(circle at 32% 28%, #f5e6c8 0%, #e8c87a 35%, #cda355 70%, #a9823f 100%);
+  background:radial-gradient(circle at 32% 28%, #e0aaff 0%, #c77dff 25%, #9d4edd 50%, #7b2cbf 75%, #5a189a 100%);
   box-shadow:
-    inset -4px -4px 12px rgba(0,0,0,0.18),
-    inset 4px 4px 10px rgba(255,255,255,0.35),
-    0 6px 20px rgba(205,163,85,0.35),
-    0 2px 6px rgba(0,0,0,0.25);
+    inset -4px -4px 12px rgba(0,0,0,0.25),
+    inset 4px 4px 10px rgba(224,170,255,0.25),
+    0 6px 24px rgba(123,44,191,0.55),
+    0 2px 8px rgba(90,24,154,0.45),
+    0 0 40px rgba(157,78,221,0.2);
   position:relative;
   animation:mochiBreathe 3s ease-in-out infinite;
 }
@@ -869,7 +870,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   top:10px; left:14px;
   width:18px; height:10px;
   border-radius:50%;
-  background:rgba(255,255,255,0.55);
+  background:rgba(224,170,255,0.6);
   filter:blur(2px);
   transform:rotate(-25deg);
 }
@@ -885,9 +886,9 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   top:26px;
   width:14px; height:16px;
   border-radius:50%;
-  background:#1a1208;
+  background:#2d1b4e;
   overflow:hidden;
-  box-shadow:inset 0 1px 2px rgba(0,0,0,0.4);
+  box-shadow:inset 0 1px 3px rgba(0,0,0,0.5), 0 0 4px rgba(157,78,221,0.3);
 }
 .mochi-eye.left{left:18px;}
 .mochi-eye.right{right:18px;}
@@ -896,7 +897,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   top:3px; left:3px;
   width:6px; height:6px;
   border-radius:50%;
-  background:#fff;
+  background:#f3e5ff;
   transition:transform .15s ease-out;
 }
 .mochi-blush{
@@ -904,7 +905,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   top:40px;
   width:10px; height:5px;
   border-radius:50%;
-  background:rgba(194,83,74,0.35);
+  background:rgba(157,78,221,0.35);
   filter:blur(2px);
 }
 .mochi-blush.left{left:14px;}
@@ -914,7 +915,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   top:44px; left:50%; transform:translateX(-50%);
   width:8px; height:4px;
   border-radius:0 0 8px 8px;
-  border:1.5px solid #1a1208;
+  border:1.5px solid #2d1b4e;
   border-top:none;
   background:transparent;
 }
@@ -923,7 +924,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   bottom:-10px; left:50%; transform:translateX(-50%);
   width:50px; height:10px;
   border-radius:50%;
-  background:rgba(0,0,0,0.18);
+  background:rgba(60,20,100,0.25);
   filter:blur(4px);
   animation:mochiShadow 3s ease-in-out infinite;
 }
@@ -936,8 +937,8 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   animation:mochiExcited .5s ease-in-out infinite;
 }
 @keyframes mochiExcited{
-  0%,100%{transform:scale(1.08) translateY(-4px);}
-  50%{transform:scale(1.12) translateY(-8px);}
+  0%,100%{transform:scale(1.08) translateY(-4px); filter: brightness(1.1);}
+  50%{transform:scale(1.12) translateY(-8px); filter: brightness(1.25) drop-shadow(0 0 20px rgba(157,78,221,0.6));}
 }
 .mochi-wrap:hover .mochi-shadow{
   animation:none;
@@ -956,7 +957,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 /* ---------- MOCHI EXPRESSIONS: xursand & hafa ---------- */
 /* Asosiy elementlarga silliq qaytish uchun transition */
 .mochi-body{
-  transition:background 0.8s ease, box-shadow 0.8s ease;
+  transition:background 0.8s ease, box-shadow 0.8s ease, filter 0.5s ease;
 }
 .mochi-eye{
   transition:height 0.55s ease, top 0.55s ease, border-radius 0.55s ease;
@@ -973,12 +974,13 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 
 /* ---- HAPPY ---- */
 .mochi-body.happy{
-  background:radial-gradient(circle at 32% 28%, #fff5d6 0%, #f0d060 35%, #e0b040 70%, #c89030 100%);
+  background:radial-gradient(circle at 32% 28%, #f3e5ff 0%, #d8b4fe 30%, #c77dff 55%, #9d4edd 80%, #7b2cbf 100%);
   box-shadow:
-    inset -4px -4px 12px rgba(0,0,0,0.12),
-    inset 4px 4px 14px rgba(255,255,255,0.5),
-    0 8px 28px rgba(205,163,85,0.5),
-    0 3px 10px rgba(0,0,0,0.2);
+    inset -4px -4px 12px rgba(0,0,0,0.15),
+    inset 4px 4px 14px rgba(224,170,255,0.35),
+    0 8px 32px rgba(157,78,221,0.65),
+    0 3px 12px rgba(90,24,154,0.5),
+    0 0 50px rgba(199,125,255,0.3);
   animation:mochiHappy .55s cubic-bezier(.34,1.56,.64,1) both;
 }
 @keyframes mochiHappy{
@@ -990,9 +992,9 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 .mochi-body.happy .mochi-mouth{
   width:14px; height:10px;
   border-radius:0 0 14px 14px;
-  border:2px solid #1a1208;
+  border:2px solid #2d1b4e;
   border-top:none;
-  background:#c2534a;
+  background:#9d4edd;
   top:42px;
   animation:mochiMouthHappy .4s ease both;
 }
@@ -1011,18 +1013,18 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 }
 .mochi-body.happy .mochi-blush{
   width:14px; height:7px;
-  background:rgba(194,83,74,0.5);
+  background:rgba(157,78,221,0.6);
   top:38px;
 }
 
 /* ---- SAD: jozibali, och kulrang-oltin, yoqimli ---- */
 .mochi-body.sad{
-  background:radial-gradient(circle at 32% 28%, #e8e0c8 0%, #d4c898 35%, #b8a878 70%, #a09060 100%);
+  background:radial-gradient(circle at 32% 28%, #c8b8d8 0%, #a080c0 35%, #8060a8 70%, #604888 100%);
   box-shadow:
-    inset -4px -4px 12px rgba(0,0,0,0.10),
-    inset 4px 4px 14px rgba(255,255,255,0.30),
-    0 6px 20px rgba(160,150,80,0.22),
-    0 2px 6px rgba(0,0,0,0.12);
+    inset -4px -4px 12px rgba(0,0,0,0.15),
+    inset 4px 4px 14px rgba(200,180,255,0.15),
+    0 6px 20px rgba(100,60,160,0.3),
+    0 2px 6px rgba(0,0,0,0.2);
   animation:mochiSad .6s cubic-bezier(.34,1.56,.64,1) both;
 }
 @keyframes mochiSad{
@@ -1037,14 +1039,14 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   border-radius:50%;
   background:transparent;
   border:none;
-  border-bottom:2.5px solid #1a1208;
+  border-bottom:2.5px solid #2d1b4e;
   top:46px;
   opacity:0.85;
   animation:mochiMouthSad .5s ease both;
 }
 @keyframes mochiMouthSad{
   from{width:8px; height:4px; border-bottom:1.5px solid #1a1208; top:44px; opacity:0.4;}
-  to{width:10px; height:5px; border-bottom:2.5px solid #1a1208; top:46px; opacity:0.85;}
+  to{width:10px; height:5px; border-bottom:2.5px solid #2d1b4e; top:46px; opacity:0.85;}
 }
 /* Katta, yoqimli, biroz tushkun ko'zlar (puppy eyes) */
 .mochi-body.sad .mochi-eye{
@@ -1069,17 +1071,96 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   width:11px;
   height:5px;
   top:40px;
-  background:rgba(194,83,74,0.35);
+  background:rgba(157,78,221,0.35);
 }
+/* ---------- MOCHI SLEEP: Flashcard'da uxlaydi ---------- */
+.mochi-body.sleep{
+  background:radial-gradient(circle at 32% 28%, #d0c0e8 0%, #b0a0d0 35%, #9080b8 70%, #706098 100%);
+  box-shadow:
+    inset -4px -4px 12px rgba(0,0,0,0.12),
+    inset 4px 4px 14px rgba(200,180,255,0.12),
+    0 6px 18px rgba(100,70,160,0.22),
+    0 2px 5px rgba(0,0,0,0.15);
+  animation:mochiSleep 0.8s ease both;
+}
+@keyframes mochiSleep{
+  0%{transform:scale(1) translateY(0);}
+  100%{transform:scale(0.98) translateY(2px);}
+}
+/* Yumiq ko'zlar — oddiy, chiroyli, xotirjam uyqu */
+.mochi-body.sleep .mochi-eye{
+  width:14px;
+  height:14px;
+  top:26px;
+  border-radius:50%;
+  background:transparent;
+  box-shadow:none;
+  overflow:visible;
+  border:none;
+}
+.mochi-body.sleep .mochi-eye.left{ left:16px; }
+.mochi-body.sleep .mochi-eye.right{ right:16px; }
+/* Yumshoq, yuqoriga egilgan qovoq chizig'i — xursandchilik bilan */
+.mochi-body.sleep .mochi-eye::before{
+  content:'';
+  position:absolute;
+  top:6px; left:0; right:0;
+  height:2px;
+  background:#2d1b4e;
+  border-radius:999px;
+  opacity:0.7;
+}
+/* Pupil yashirin */
+.mochi-body.sleep .mochi-pupil{
+  opacity:0;
+}
+.mochi-body.sleep .mochi-pupil{
+  opacity:0;
+}
+.mochi-body.sleep .mochi-mouth{
+  width:6px; height:3px;
+  border-radius:0 0 6px 6px;
+  border:1.2px solid #2d1b4e;
+  border-top:none;
+  top:46px;
+  opacity:0.7;
+}
+.mochi-body.sleep .mochi-blush{
+  opacity:0.20;
+  width:9px; height:4px;
+  top:40px;
+}
+.mochi-body.sleep .mochi-shine{
+  opacity:0.25;
+}
+
+/* Zzz animatsiyasi */
+.mochi-zzz{
+  position:absolute;
+  pointer-events:none;
+  font-family:var(--font-display);
+  font-weight:700;
+  color:#c77dff;
+  text-shadow:0 0 8px rgba(157,78,221,0.6);
+  opacity:0;
+  animation:zzzFloat 2.2s ease-out forwards;
+}
+@keyframes zzzFloat{
+  0%{opacity:0; transform:translate(0,0) scale(0.6) rotate(-5deg);}
+  15%{opacity:0.9; transform:translate(4px,-8px) scale(0.9) rotate(0deg);}
+  50%{opacity:0.7; transform:translate(-2px,-22px) scale(1.1) rotate(3deg);}
+  100%{opacity:0; transform:translate(6px,-40px) scale(1.3) rotate(-2deg);}
+}
+
 
 /* Sparkle stars around happy mochi */
 .mochi-sparkle{
   position:absolute;
   pointer-events:none;
   width:6px; height:6px;
-  background:#e8c87a;
+  background:#c77dff;
   border-radius:50%;
-  box-shadow:0 0 6px 2px rgba(232,200,122,0.6);
+  box-shadow:0 0 8px 3px rgba(199,125,255,0.7);
   opacity:0;
   animation:sparklePop .7s ease forwards;
 }
@@ -1094,7 +1175,7 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
   position:absolute;
   width:4px; height:6px;
   border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
-  background:rgba(120,170,220,0.7);
+  background:rgba(157,78,221,0.6);
   top:38px;
   opacity:0;
   animation:tearFall .9s ease forwards;
@@ -1103,9 +1184,323 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
 .mochi-tear.right{right:22px;}
 @keyframes tearFall{
   0%{opacity:0.8; transform:translateY(0) scale(1);}
-  60%{opacity:0.6; transform:translateY(14px) scale(0.8);}
+  60%{opacity:0.7; transform:translateY(14px) scale(0.8);}
   100%{opacity:0; transform:translateY(24px) scale(0.4);}
 }
+
+/* ============================================================
+   MOCHI AI — Aqlli yordamchi uslublari
+   ============================================================ */
+.mochi-bubble{
+  position:absolute;
+  bottom:86px;
+  left:50%;
+  transform:translateX(-50%) scale(0.85);
+  width:260px;
+  background:linear-gradient(145deg, rgba(20,24,30,0.98), rgba(12,14,18,0.98));
+  border:1px solid rgba(157,78,221,0.4);
+  border-radius:18px;
+  padding:14px 16px;
+  box-shadow:0 12px 40px rgba(0,0,0,0.6), 0 0 0 1px rgba(157,78,221,0.12), 0 0 30px rgba(123,44,191,0.15), inset 0 1px 0 rgba(255,255,255,0.04);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease, transform .35s cubic-bezier(.34,1.56,.64,1);
+  z-index:10000;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+.mochi-bubble.show{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateX(-50%) scale(1);
+}
+.mochi-bubble::after{
+  content:'';
+  position:absolute;
+  bottom:-7px;
+  left:50%;
+  transform:translateX(-50%);
+  width:14px;
+  height:14px;
+  background:linear-gradient(145deg, rgba(20,24,30,0.98), rgba(12,14,18,0.98));
+  border-right:1px solid rgba(205,163,85,0.25);
+  border-bottom:1px solid rgba(205,163,85,0.25);
+  transform:translateX(-50%) rotate(45deg);
+  box-shadow:2px 2px 4px rgba(0,0,0,0.2);
+}
+.mochi-bubble-header{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-bottom:10px;
+  padding-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.mochi-bubble-avatar{
+  width:28px; height:28px;
+  border-radius:50%;
+  background:linear-gradient(135deg, #7b2cbf, #9d4edd);
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px;
+  flex-shrink:0;
+}
+.mochi-bubble-name{
+  font-size:12px; font-weight:900; color:#c77dff;
+  letter-spacing:.06em;
+}
+.mochi-bubble-status{
+  font-size:10px; color:var(--green);
+  margin-left:auto;
+  display:flex; align-items:center; gap:4px;
+}
+.mochi-bubble-status::before{
+  content:'';
+  width:6px; height:6px;
+  border-radius:50%;
+  background:#9d4edd;
+  box-shadow:0 0 8px #9d4edd, 0 0 16px rgba(157,78,221,0.5);
+  animation:statusPulse 2s ease-in-out infinite;
+}
+@keyframes statusPulse{
+  0%,100%{opacity:1; transform:scale(1);}
+  50%{opacity:.5; transform:scale(.8);}
+}
+.mochi-bubble-content{
+  font-size:13px;
+  line-height:1.55;
+  color:var(--cream);
+  min-height:36px;
+  max-height:140px;
+  overflow-y:auto;
+  margin-bottom:10px;
+  padding-right:4px;
+}
+.mochi-bubble-content::-webkit-scrollbar{width:3px;}
+.mochi-bubble-content::-webkit-scrollbar-thumb{background:rgba(157,78,221,0.4); border-radius:3px;}
+.mochi-bubble-content b{color:#c77dff; font-weight:700;}
+.mochi-bubble-content em{color:var(--muted); font-style:italic;}
+
+.mochi-input-wrap{
+  display:flex;
+  gap:6px;
+  align-items:center;
+}
+.mochi-input{
+  flex:1;
+  background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:999px;
+  padding:7px 14px;
+  color:var(--cream);
+  font-family:var(--font-body);
+  font-size:12.5px;
+  outline:none;
+  transition:border-color .2s, box-shadow .2s;
+}
+.mochi-input:focus{
+  border-color:rgba(157,78,221,0.5);
+  box-shadow:0 0 0 2px rgba(157,78,221,0.15), 0 0 10px rgba(123,44,191,0.2);
+}
+.mochi-input::placeholder{color:var(--muted); font-size:11.5px;}
+.mochi-send-btn{
+  width:32px; height:32px;
+  border-radius:50%;
+  border:none;
+  background:linear-gradient(135deg, #7b2cbf, #9d4edd);
+  color:#1a1208;
+  font-size:16px;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition:transform .15s, filter .15s;
+  flex-shrink:0;
+}
+.mochi-send-btn:hover{filter:brightness(1.1);}
+.mochi-send-btn:active{transform:scale(.9);}
+
+/* Typing indicator */
+.mochi-typing{
+  display:none;
+  gap:3px;
+  padding:4px 0;
+  align-items:center;
+}
+.mochi-typing.show{display:flex;}
+.mochi-typing span{
+  width:5px; height:5px;
+  border-radius:50%;
+  background:#c77dff;
+  opacity:.4;
+  animation:typingBounce 1.2s ease-in-out infinite;
+}
+.mochi-typing span:nth-child(2){animation-delay:.15s;}
+.mochi-typing span:nth-child(3){animation-delay:.3s;}
+@keyframes typingBounce{
+  0%,60%,100%{transform:translateY(0); opacity:.4;}
+  30%{transform:translateY(-5px); opacity:1;}
+}
+
+/* Mochi speaking animation */
+.mochi-body.speaking .mochi-mouth{
+  width:10px; height:8px;
+  border-radius:50%;
+  background:#2d1b4e;
+  border:none;
+  animation:speakMouth 0.25s ease-in-out infinite alternate;
+}
+@keyframes speakMouth{
+  from{transform:translateX(-50%) scaleY(0.6);}
+  to{transform:translateX(-50%) scaleY(1.2);}
+}
+.mochi-body.speaking .mochi-eye{
+  height:16px;
+  animation:speakEye 2s ease-in-out infinite;
+}
+@keyframes speakEye{
+  0%,100%{transform:scaleY(1);}
+  50%{transform:scaleY(1.05);}
+}
+
+/* Mochi thinking */
+.mochi-body.thinking .mochi-eye{
+  background:transparent;
+  border:2px solid #2d1b4e;
+  border-radius:50%;
+  box-shadow:none;
+  height:14px;
+}
+.mochi-body.thinking .mochi-eye::before{
+  content:'';
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:8px; height:2px;
+  background:#2d1b4e;
+  border-radius:999px;
+}
+.mochi-body.thinking .mochi-pupil{opacity:0;}
+.mochi-body.thinking .mochi-mouth{
+  width:6px; height:3px;
+  border-radius:50%;
+  background:#2d1b4e;
+  border:none;
+  top:48px;
+}
+
+/* AI Badge on mochi */
+.mochi-ai-badge{
+  position:absolute;
+  top:-4px; right:-4px;
+  width:20px; height:20px;
+  border-radius:50%;
+  background:linear-gradient(135deg, #9d4edd, #c77dff);
+  color:#1a1208;
+  font-size:9px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 2px 10px rgba(157,78,221,0.6), 0 0 20px rgba(123,44,191,0.4);
+  border:2px solid #000;
+  z-index:10;
+  animation:badgePulse 2s ease-in-out infinite;
+}
+@keyframes badgePulse{
+  0%,100%{box-shadow:0 2px 10px rgba(157,78,221,0.6), 0 0 20px rgba(123,44,191,0.4);}
+  50%{box-shadow:0 2px 16px rgba(157,78,221,0.8), 0 0 30px rgba(123,44,191,0.5);}
+}
+
+/* Quick action chips in bubble */
+.mochi-chips{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+  margin-top:8px;
+}
+.mochi-chip{
+  font-size:10.5px;
+  padding:4px 10px;
+  border-radius:999px;
+  border:1px solid rgba(157,78,221,0.3);
+  background:rgba(157,78,221,0.1);
+  color:#c77dff;
+  cursor:pointer;
+  transition:all .15s;
+  font-weight:700;
+  letter-spacing:.02em;
+}
+.mochi-chip:hover{
+  background:rgba(157,78,221,0.2);
+  border-color:rgba(157,78,221,0.5);
+}
+
+/* Context-aware hint that appears near mochi */
+.mochi-hint-float{
+  position:absolute;
+  bottom:78px;
+  left:50%;
+  transform:translateX(-50%) translateY(6px);
+  background:rgba(157,78,221,0.15);
+  border:1px solid rgba(157,78,221,0.4);
+  color:#c77dff;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+  white-space:nowrap;
+  opacity:0;
+  pointer-events:none;
+  transition:all .35s cubic-bezier(.34,1.56,.64,1);
+  z-index:9998;
+}
+.mochi-hint-float.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+
+/* Speech wave animation when mochi talks */
+.mochi-speech-wave{
+  position:absolute;
+  inset:-8px;
+  border-radius:50%;
+  border:2px solid rgba(157,78,221,0.5);
+  opacity:0;
+  pointer-events:none;
+  animation:speechWave 1.2s ease-out infinite;
+}
+.mochi-body.speaking .mochi-speech-wave{opacity:1;}
+@keyframes speechWave{
+  0%{transform:scale(0.9); opacity:0.7;}
+  100%{transform:scale(1.3); opacity:0;}
+}
+
+
+/* Neon glow pulse for idle mochi */
+@keyframes neonPulse{
+  0%,100%{filter:drop-shadow(0 0 8px rgba(157,78,221,0.3)) drop-shadow(0 0 20px rgba(123,44,191,0.15));}
+  50%{filter:drop-shadow(0 0 12px rgba(157,78,221,0.5)) drop-shadow(0 0 30px rgba(123,44,191,0.25));}
+}
+.mochi-body{
+  animation:mochiBreathe 3s ease-in-out infinite, neonPulse 4s ease-in-out infinite;
+}
+/* Override for states that have their own animations */
+.mochi-body.happy{
+  animation:mochiHappy .55s cubic-bezier(.34,1.56,.64,1) both, neonPulse 2s ease-in-out infinite;
+}
+.mochi-body.sad{
+  animation:mochiSad .6s cubic-bezier(.34,1.56,.64,1) both;
+  filter:grayscale(0.3) brightness(0.85);
+}
+.mochi-body.sleep{
+  animation:mochiSleep 0.8s ease both;
+  filter:brightness(0.75) saturate(0.7);
+}
+.mochi-body.speaking{
+  filter:drop-shadow(0 0 15px rgba(157,78,221,0.6)) drop-shadow(0 0 40px rgba(123,44,191,0.3));
+}
+.mochi-body.thinking{
+  filter:drop-shadow(0 0 10px rgba(157,78,221,0.4));
+}
+
 </style>
 </head>
 <body>
@@ -1950,6 +2345,7 @@ function playWrongSound(){
 
 function startQuiz(sourceWords){
   quizStarted = true;
+  if(window.mochiUpdateState) window.mochiUpdateState();
   currentQuizWords = sourceWords;
   queue = shuffle(sourceWords);
   idx = 0; correctCount = 0; wrongCount = 0; mistakes = []; resultLog = [];
@@ -2328,7 +2724,7 @@ function showDone(){
 function spawnConfetti(anchorEl){
   if(!anchorEl) return;
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const colors = ['#cda355','#5f9b5b','#78aadc','#c2534a','#f1ead9'];
+  const colors = ['#14b8a6','#5f9b5b','#78aadc','#c2534a','#f1ead9'];
   const layer = document.createElement('div');
   layer.className = 'confetti-layer';
   anchorEl.style.position = anchorEl.style.position || 'relative';
@@ -2496,10 +2892,12 @@ function mochiSad(){
   setTimeout(()=>body.classList.remove('sad'), 3000);
 }
 
-/* ---------------- MOCHI: Erkin suzib yuruvchi + sudrab olib borish ---------------- */
+/* ---------------- MOCHI: Erkin suzib yuruvchi + sudrab olib borish + uxlash ---------------- */
 window.addEventListener('DOMContentLoaded', function(){
   const mochi = document.getElementById('mochi');
   if(!mochi) return;
+  const body = mochi.querySelector('.mochi-body');
+  if(!body) return;
 
   let x = window.innerWidth * 0.85;
   let y = window.innerHeight * 0.15;
@@ -2510,6 +2908,8 @@ window.addEventListener('DOMContentLoaded', function(){
   const speedBase = 0.35;
   const speedVar = 0.25;
   let quizModeActive = false;
+  let isSleeping = false;
+  let zzzTimer = null;
 
   /* --- Drag state --- */
   let dragging = false;
@@ -2550,8 +2950,50 @@ window.addEventListener('DOMContentLoaded', function(){
     return {x: tx, y: ty};
   }
 
+  /* --- Uxlash / Uyg'onish --- */
+  function checkSleepState(){
+    const viewFlash = document.getElementById('viewFlash');
+    const isFlashActive = viewFlash && viewFlash.classList.contains('active');
+    const shouldSleep = isFlashActive && !dragging;
+
+    if(shouldSleep && !isSleeping){
+      isSleeping = true;
+      body.classList.add('sleep');
+      startZzz();
+    } else if(!shouldSleep && isSleeping){
+      isSleeping = false;
+      body.classList.remove('sleep');
+      stopZzz();
+      // Uyg'onganda ko'zini bir marta yumib ochsin
+      doBlink();
+    }
+  }
+
+  function spawnZzz(){
+    if(!isSleeping) return;
+    const z = document.createElement('div');
+    z.className = 'mochi-zzz';
+    z.textContent = 'z';
+    const sizes = ['14px','16px','18px'];
+    z.style.fontSize = sizes[Math.floor(Math.random()*sizes.length)];
+    z.style.left = (36 + (Math.random()-0.5)*20).toFixed(0) + 'px';
+    z.style.top = '10px';
+    z.style.animationDelay = (Math.random()*0.3).toFixed(2) + 's';
+    body.appendChild(z);
+    setTimeout(()=>{ if(z.parentNode) z.remove(); }, 2400);
+  }
+  function startZzz(){
+    if(zzzTimer) clearInterval(zzzTimer);
+    spawnZzz();
+    zzzTimer = setInterval(()=>{ if(isSleeping) spawnZzz(); }, 900);
+  }
+  function stopZzz(){
+    if(zzzTimer){ clearInterval(zzzTimer); zzzTimer = null; }
+    body.querySelectorAll('.mochi-zzz').forEach(z=>z.remove());
+  }
+
   function updateMochi(){
-    if(dragging){
+    if(dragging || isSleeping){
       requestAnimationFrame(updateMochi);
       return;
     }
@@ -2586,11 +3028,12 @@ window.addEventListener('DOMContentLoaded', function(){
     requestAnimationFrame(updateMochi);
   }
 
-  setInterval(()=>{ if(!quizModeActive && !dragging && Math.random() < 0.35) pickNewDirection(); }, 2500);
+  setInterval(()=>{ if(!quizModeActive && !dragging && !isSleeping && Math.random() < 0.35) pickNewDirection(); }, 2500);
 
-  /* --- Ko'z qorachig'i sichqonchaga qarab turadi --- */
+  /* --- Ko'z qorachig'i sichqonchaga qarab turadi (uxlamaganda) --- */
   const pupils = mochi.querySelectorAll('.mochi-pupil');
   document.addEventListener('mousemove', (e)=>{
+    if(isSleeping) return;
     const rect = mochi.getBoundingClientRect();
     const cx = rect.left + rect.width/2;
     const cy = rect.top + rect.height/2;
@@ -2603,7 +3046,7 @@ window.addEventListener('DOMContentLoaded', function(){
     pupils.forEach(p=>{ p.style.transform = `translate(${offX}px, ${offY}px)`; });
   });
 
-  /* --- Ko'z yumib ochish: AFK vaqtida tez-tez --- */
+  /* --- Ko'z yumib ochish: AFK vaqtida tez-tez (uxlamaganda) --- */
   let lastActivity = Date.now();
   const AFK_MS = 8000;
   function markActive(){ lastActivity = Date.now(); }
@@ -2612,6 +3055,7 @@ window.addEventListener('DOMContentLoaded', function(){
   });
 
   function doBlink(){
+    if(isSleeping) return;
     const eyes = mochi.querySelectorAll('.mochi-eye');
     eyes.forEach(eye=>{
       eye.classList.add('blink');
@@ -2620,6 +3064,10 @@ window.addEventListener('DOMContentLoaded', function(){
   }
 
   function blinkLoop(){
+    if(isSleeping){
+      setTimeout(blinkLoop, 1000);
+      return;
+    }
     const idle = Date.now() - lastActivity;
     const isAFK = idle > AFK_MS;
     doBlink();
@@ -2628,13 +3076,38 @@ window.addEventListener('DOMContentLoaded', function(){
   }
   setTimeout(blinkLoop, 1500);
 
-  /* ========== DRAG & DROP: sichqoncha / barmoq bilan sudrab olib borish ========== */
+  
+  /* ========== MOCHI AI CLICK HANDLER ========== */
+  // Click vs drag detection: if not dragging when mouseup, treat as click
+  mochi.addEventListener('click', (e)=>{
+    if(!dragging && window.mochiAI){
+      window.mochiAI.toggle();
+    }
+  });
+  // Also support touch tap
+  mochi.addEventListener('touchend', (e)=>{
+    if(!dragging && window.mochiAI){
+      // Small delay to let drag state settle
+      setTimeout(()=>{
+        if(!dragging) window.mochiAI.toggle();
+      }, 50);
+    }
+  });
+
+  /* ========== DRAG & DROP ========== */
   function onDragStart(clientX, clientY){
     dragging = true;
     mochi.style.cursor = 'grabbing';
     mochi.style.transition = 'none';
     dragOffsetX = clientX - x;
     dragOffsetY = clientY - y;
+    // Sudraganda uyg'onadi
+    if(isSleeping){
+      isSleeping = false;
+      body.classList.remove('sleep');
+      stopZzz();
+      doBlink();
+    }
   }
   function onDragMove(clientX, clientY){
     if(!dragging) return;
@@ -2651,6 +3124,8 @@ window.addEventListener('DOMContentLoaded', function(){
     mochi.style.cursor = 'grab';
     mochi.style.transition = 'transform .08s linear';
     pickNewDirection();
+    // Qo'yilgandan keyin 1 soniyadan keyin uxlash holatini tekshirsin
+    setTimeout(checkSleepState, 1000);
   }
 
   // Mouse
@@ -2662,7 +3137,7 @@ window.addEventListener('DOMContentLoaded', function(){
   document.addEventListener('mousemove', (e)=>{ onDragMove(e.clientX, e.clientY); });
   document.addEventListener('mouseup', onDragEnd);
 
-  // Touch (telefon)
+  // Touch
   mochi.addEventListener('touchstart', (e)=>{
     if(e.touches.length !== 1) return;
     e.preventDefault();
@@ -2678,8 +3153,19 @@ window.addEventListener('DOMContentLoaded', function(){
   document.addEventListener('touchend', onDragEnd);
   document.addEventListener('touchcancel', onDragEnd);
 
+  // Tab o'zgarishida uxlash holatini tekshirish
+  [tabFlash, tabQuiz, tabKnown].forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      setTimeout(checkSleepState, 100);
+    });
+  });
+
   pickNewDirection();
   requestAnimationFrame(updateMochi);
+  checkSleepState();
+
+  /* Global access for quiz start wake-up */
+  window.mochiUpdateState = checkSleepState;
 });
 
 /* ---------------- PWA: service worker ro'yxatdan o'tkazish ---------------- */
@@ -2688,11 +3174,369 @@ if('serviceWorker' in navigator){
     navigator.serviceWorker.register('sw.js').catch(()=>{ /* sw.js topilmasa, sahifa baribir oddiy ishlayveradi */ });
   });
 }
+
+
+/* ============================================================
+   MOCHI AI — Aqlli yordamchi tizimi
+   ============================================================ */
+class MochiAI {
+  constructor(){
+    this.bubble = document.getElementById('mochiBubble');
+    this.content = document.getElementById('mochiBubbleContent');
+    this.input = document.getElementById('mochiInput');
+    this.sendBtn = document.getElementById('mochiSend');
+    this.typing = document.getElementById('mochiTyping');
+    this.chips = document.getElementById('mochiChips');
+    this.hint = document.getElementById('mochiHint');
+    this.mochiBody = document.querySelector('.mochi-body');
+    this.isOpen = false;
+    this.isSpeaking = false;
+    this.context = 'flash'; // flash | quiz | known
+    this.lastQuizResult = null; // 'correct' | 'wrong' | null
+    this.voiceEnabled = 'speechSynthesis' in window;
+    this.conversationHistory = [];
+    this.greeted = false;
+    this.init();
+  }
+
+  init(){
+    // Event listeners
+    this.sendBtn.addEventListener('click', ()=>this.handleUserInput());
+    this.input.addEventListener('keypress', (e)=>{ if(e.key==='Enter') this.handleUserInput(); });
+
+    // Chip buttons
+    this.chips.querySelectorAll('.mochi-chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>{
+        const type = chip.dataset.chip;
+        this.handleChipClick(type);
+      });
+    });
+
+    // Context tracking via tab buttons
+    [tabFlash, tabQuiz, tabKnown].forEach((btn, i)=>{
+      const contexts = ['flash', 'quiz', 'known'];
+      btn.addEventListener('click', ()=>{
+        this.context = contexts[i];
+        this.lastQuizResult = null;
+        this.updateHint();
+      });
+    });
+
+    // Quiz result tracking
+    this.hookQuizEvents();
+
+    // Show hint after delay
+    setTimeout(()=>{
+      if(!this.isOpen && this.hint) this.showHint("Menga bosing!");
+    }, 3000);
+
+    // Auto-greet when first opened
+    this.updateChipsForContext();
+  }
+
+  hookQuizEvents(){
+    // Hook into existing quiz functions by overriding them
+    const originalSubmit = window.submitAnswer;
+    if(originalSubmit){
+      window.submitAnswer = (isCorrect, selectedBtn)=>{
+        this.lastQuizResult = isCorrect ? 'correct' : 'wrong';
+        if(isCorrect){
+          this.showHint("Ajoyib! 🎉");
+          this.speak("To'g'ri javob! Yaxshi ish!");
+        } else {
+          this.showHint("Xato bo'ldi, lekin o'rganish jarayoni shu!");
+          this.speak("Xato bo'ldi. Keyingi safar albatta to'g'ri bo'ladi!");
+        }
+        originalSubmit(isCorrect, selectedBtn);
+      };
+    }
+  }
+
+  toggle(){
+    if(this.isOpen) this.close();
+    else this.open();
+  }
+
+  open(){
+    this.isOpen = true;
+    this.bubble.classList.add('show');
+    this.hideHint();
+    if(!this.greeted){
+      this.greeted = true;
+      this.typeMessage(this.getGreeting());
+    }
+    this.input.focus();
+    this.updateChipsForContext();
+  }
+
+  close(){
+    this.isOpen = false;
+    this.bubble.classList.remove('show');
+    this.stopSpeaking();
+  }
+
+  showHint(text){
+    if(!this.hint || this.isOpen) return;
+    this.hint.textContent = text;
+    this.hint.classList.add('show');
+    setTimeout(()=>this.hint.classList.remove('show'), 3500);
+  }
+
+  hideHint(){
+    if(this.hint) this.hint.classList.remove('show');
+  }
+
+  updateChipsForContext(){
+    const chipsData = {
+      flash: [
+        {k:'explain', t:"So'z tushuntirish"},
+        {k:'practice', t:"Mashq qilish"},
+        {k:'tip', t:"Yodlash usuli"}
+      ],
+      quiz: [
+        {k:'hint', t:"Yordam ber"},
+        {k:'encourage', t:"Motivatsiya"},
+        {k:'explain', t:"Xatoni tushuntir"}
+      ],
+      known: [
+        {k:'review', t:"Qayta ko'rib chiqish"},
+        {k:'challenge', t:"Qiyinroq savol"},
+        {k:'tip', t:"Yangi so'z"}
+      ]
+    };
+    const data = chipsData[this.context] || chipsData.flash;
+    this.chips.innerHTML = data.map(d=>`<button class="mochi-chip" data-chip="${d.k}">${d.t}</button>`).join('');
+    this.chips.querySelectorAll('.mochi-chip').forEach(chip=>{
+      chip.addEventListener('click', ()=>this.handleChipClick(chip.dataset.chip));
+    });
+  }
+
+  getGreeting(){
+    const greetings = {
+      flash: "Salom! Flashcard bo'limidasiz. Qaysi so'zni tushuntirishimni xohlaysiz? Kartochkani bosing va o'rnating! 📚",
+      quiz: "Viktorina vaqti! 💪 Men sizga yordam berishim yoki motivatsiya berishim mumkin. Savollarga javob bering!",
+      known: "Bilaman bo'limi! Siz allaqachon ko'p narsalarni o'rgandingiz. Qayta ko'rib chiqishni xohlaysizmi? 🌟"
+    };
+    return greetings[this.context] || greetings.flash;
+  }
+
+  handleChipClick(type){
+    const responses = {
+      help: "Men sizga quyidagilarda yordam beraman:<br>• <b>So'z tushuntirish</b> — yaponcha so'zning ma'nosini aytaman<br>• <b>Yodlash usuli</b> — qanday yodlashni maslahat beraman<br>• <b>Motivatsiya</b> — ruhlantiruvchi gaplar<br>• <b>O'qib berish</b> — yaponcha so'zlarni to'g'ri talaffuz qilib beraman<br><br>Savol yozing! ✨",
+      word: this.getRandomWordExplanation(),
+      tip: this.getStudyTip(),
+      explain: this.getRandomWordExplanation(),
+      practice: "Amaliy mashq: Bir so'zni tanlang va uning yaponcha yozilishini ayting. Men to'g'riligini tekshiraman! (Hozircha matnli kiriting)",
+      hint: this.getQuizHint(),
+      encourage: this.getEncouragement(),
+      review: "Qayta ko'rib chiqish juda muhim! Bilgan so'zlaringizdan birini tanlang va uning ma'nosini eslab ko'ring. Keyin kartochkani aylantiring!",
+      challenge: "Qiyinroq savol: 'ありがとうございます' so'zi qachon ishlatiladi? (Javob: rasmiy ravishda rahmat aytishda)",
+      encourage: this.getEncouragement()
+    };
+    const msg = responses[type] || responses.help;
+    this.typeMessage(msg);
+    this.speak(msg.replace(/<[^>]*>/g, ''));
+  }
+
+  getRandomWordExplanation(){
+    const all = ALL_WORDS.filter(w=>!w.id.startsWith('r'));
+    const w = all[Math.floor(Math.random()*all.length)];
+    return `📖 <b>${w.uz}</b><br>🇯🇵 <b>${w.kana}</b> — <em>${w.romaji}</em><br><br>${w.note ? w.note + '<br>' : ''}Guruh: <b>${w.group}</b><br><br>Bu so'zni yodlash uchun: "${w.romaji}" deb takrorlang!`;
+  }
+
+  getStudyTip(){
+    const tips = [
+      "💡 <b>Yodlash usuli:</b> Har bir so'zni ovoz chiqarib takrorlang. Eshitish + gapirish = 80% yodlash!",
+      "💡 <b>Kunlik rejim:</b> Har kuni 10 ta yangi so'z va 20 ta eski so'zni takrorlang. Spaced repetition — eng samarali usul!",
+      "💡 <b>Kontekst:</b> So'zlarni alohida emas, balki jumlalar ichida yodlang. Masalan: 'わたしはがくせいです' (Men talabaman)",
+      "💡 <b>Yozish:</b> Yaponcha so'zlarni qo'lda yozish miyani faollashtiradi. Daftaringizga har bir so'zni 3 marta yozing!",
+      "💡 <b>Guruhlash:</b> O'xshash so'zlarni birga yodlang. Masalan: かいしゃ (kompaniya), かいしゃいん (xodimi) — bir ildiz!"
+    ];
+    return tips[Math.floor(Math.random()*tips.length)];
+  }
+
+  getQuizHint(){
+    const hints = [
+      "🎯 <b>Yordam:</b> Javobni bilmasangiz, avval noto'g'ri variantlarni chiqarib tashlang. Qolganlaridan birini tanlang!",
+      "🎯 <b>Yordam:</b> So'zning guruhiga qarang. Agar 'Joylar' bo'lsa, joy nomi ekanini bilasiz.",
+      "🎯 <b>Yordam:</b> Romaji (lotincha yozilish)ni eslab qoling. U kana yozuviga yaqin!",
+      "🎯 <b>Yordam:</b> Xato qilish — o'rganishning eng yaxshi usuli. Xatolarizni keyinroq ko'rib chiqing!"
+    ];
+    return hints[Math.floor(Math.random()*hints.length)];
+  }
+
+  getEncouragement(){
+    const msgs = [
+      "🌟 Siz ajoyib ish qilyapsiz! Har bir to'g'ri javob — katta yutuq!",
+      "🔥 Davom eting! Yapon tilini o'rganish — marafon, ne sprint. Sabr-toqat!",
+      "💪 Xato qilishdan qo'rqmang! Hatto yaponlar ham o'rganishda xato qilishadi.",
+      "🎌 Ganbatte! (Гамбатте!) — Yaponlarning 'xarakat qil' degan eng kuchli so'zi!",
+      "⭐ Siz allaqachon ko'p narsalarni bilasiz! Faqat ozgina mashq qolgan..."
+    ];
+    return msgs[Math.floor(Math.random()*msgs.length)];
+  }
+
+  handleUserInput(){
+    const text = this.input.value.trim();
+    if(!text) return;
+    this.input.value = '';
+
+    // Add user message
+    this.addMessage("Siz: " + text, 'user');
+
+    // Generate response
+    const response = this.generateResponse(text);
+
+    // Type response
+    setTimeout(()=>{
+      this.typeMessage(response);
+      this.speak(response.replace(/<[^>]*>/g, ''));
+    }, 400);
+  }
+
+  addMessage(text, sender){
+    const div = document.createElement('div');
+    div.style.marginBottom = '8px';
+    div.style.fontSize = '12.5px';
+    if(sender === 'user'){
+      div.style.color = 'var(--gold)';
+      div.style.textAlign = 'right';
+      div.innerHTML = `<b>${text}</b>`;
+    }
+    this.content.appendChild(div);
+    this.content.scrollTop = this.content.scrollHeight;
+  }
+
+  generateResponse(input){
+    const lower = input.toLowerCase();
+
+    // Check for specific word queries
+    const matchedWord = ALL_WORDS.find(w=>{
+      const searchTerms = [w.uz.toLowerCase(), w.romaji.toLowerCase(), w.kana];
+      return searchTerms.some(t=>lower.includes(t.toLowerCase()));
+    });
+
+    if(matchedWord){
+      return `🎯 <b>${matchedWord.uz}</b><br>🇯🇵 ${matchedWord.kana}<br>🔤 ${matchedWord.romaji}<br>📂 ${matchedWord.group}<br>${matchedWord.note ? '📝 ' + matchedWord.note + '<br>' : ''}<br>Bu so'zni to'g'ri o'qish uchun: <b>${matchedWord.romaji}</b>`;
+    }
+
+    // Pattern matching
+    if(lower.includes('salom') || lower.includes('hello')){
+      return this.getGreeting();
+    }
+    if(lower.includes('rahmat') || lower.includes('thank')){
+      return "🙏 Arigatou! (ありがとう!) — Sizga yordam berishdan xursandman!";
+    }
+    if(lower.includes('yordam') || lower.includes('help')){
+      return this.handleChipClick('help');
+    }
+    if(lower.includes('maslahat') || lower.includes('tip') || lower.includes('usul')){
+      return this.getStudyTip();
+    }
+    if(lower.includes('motiv') || lower.includes('ruh')){
+      return this.getEncouragement();
+    }
+    if(lower.includes('xato') || lower.includes('error') || lower.includes('wrong')){
+      return "❌ Xato — o'rganishning ajralmas qismi. Muhim narsa: xatoni tushunish va uni to'g'rilash. Qayta urinib ko'ring! 💪";
+    }
+    if(lower.includes('qiyin') || lower.includes('hard')){
+      return "🧠 Boshida hamma narsa qiyin tuyuladi. Lekin har kuni 10 daqiqa — bir oyda 5 soat! Vaqt o'tishi bilan yengillashadi.";
+    }
+    if(lower.includes('raqam') || lower.includes('son') || lower.includes('number')){
+      return "🔢 Raqamlar bo'limida 0 dan 90,000 gacha raqamlar bor. Yaponlarda 10,000 (いちまん) — alohida birlik. Bu biroz odatlanish talab qiladi!";
+    }
+    if(lower.includes('kun') || lower.includes('hafta')){
+      return "📅 Hafta kunlari: げつようび (dushanba), かようび (seshanba), すいようび (chorshanba)... 'youbi' (ようび) — hafta kunlarining oxirida keladi.";
+    }
+    if(lower.includes('fe') || lower.includes('verb')){
+      return "📝 Yapon tilida 3 ta fe'l guruhi bor:<br>• <b>I guruh:</b> いきます (bormoq) — oxirgi 'u' + 'imasu'<br>• <b>II guruh:</b> おきます (turmoq) — oxirgi 'i/e' + 'masu'<br>• <b>III guruh:</b> べんきょうします (o'qimoq) — maxsus!";
+    }
+    if(lower.includes('salomlash') || lower.includes('tanish')){
+      return "🤝 Tanishuv: はじめまして (Hajimemashite) — 'Birinchi marta uchrashaylik'. Javob: どうぞよろしくおねがいします (Yaxshi tanishaylik)!";
+    }
+    if(lower.includes('qayer') || lower.includes('where')){
+      return "📍 Qayer: どこ (doko) — oddiy, どちら (dochira) — hurmatli. Javob: ~はここです (Bu yerda).";
+    }
+    if(lower.includes('pul') || lower.includes('money')){
+      return "💴 Yapon puli: えん (en/yen). 100円 = ひゃくえん. 1000円 = せんえん. 10,000円 = いちまんえん.";
+    }
+
+    // Default contextual responses
+    const defaults = [
+      "🤔 Qiziq savol! Men hali bu mavzuda to'liq o'rganishim kerak. Boshqa narsa so'rang — masalan, 'hafta kunlari', 'fe'llar' yoki 'raqamlar'.",
+      "💬 Bu haqida aniqroq ayta olmasam ham, sizga yordam berishga harakat qilaman! Qanday so'zni o'rganmoqchisiz?",
+      "🌟 Yaxshi savol! Menga aniq so'zni aytsangiz, uning ma'nosini va yozilishini tushuntirib beraman."
+    ];
+    return defaults[Math.floor(Math.random()*defaults.length)];
+  }
+
+  typeMessage(html){
+    this.typing.classList.add('show');
+    this.mochiBody.classList.add('thinking');
+    this.stopSpeaking();
+
+    const delay = 600 + Math.random()*800;
+    setTimeout(()=>{
+      this.typing.classList.remove('show');
+      this.mochiBody.classList.remove('thinking');
+      this.mochiBody.classList.add('speaking');
+
+      this.content.innerHTML = html;
+      this.content.scrollTop = 0;
+
+      // Auto remove speaking after a while
+      const speakTime = Math.max(2000, html.length * 40);
+      setTimeout(()=>{
+        this.mochiBody.classList.remove('speaking');
+      }, speakTime);
+    }, delay);
+  }
+
+  speak(text){
+    if(!this.voiceEnabled || !text) return;
+    // Cancel previous
+    window.speechSynthesis.cancel();
+
+    const utter = new SpeechSynthesisUtterance(text);
+    utter.rate = 1.1;
+    utter.pitch = 1.15;
+    utter.volume = 0.8;
+
+    // Try to find Japanese voice
+    const voices = window.speechSynthesis.getVoices();
+    const jaVoice = voices.find(v=>v.lang.includes('ja') || v.lang.includes('JP'));
+    if(jaVoice) utter.voice = jaVoice;
+
+    utter.onstart = ()=>{ this.isSpeaking = true; };
+    utter.onend = ()=>{ this.isSpeaking = false; };
+
+    window.speechSynthesis.speak(utter);
+  }
+
+  stopSpeaking(){
+    if(this.voiceEnabled) window.speechSynthesis.cancel();
+    this.isSpeaking = false;
+    this.mochiBody.classList.remove('speaking');
+  }
+}
+
+// Initialize Mochi AI when DOM is ready
+let mochiAI = null;
+window.addEventListener('DOMContentLoaded', ()=>{
+  // Small delay to ensure all elements exist
+  setTimeout(()=>{
+    mochiAI = new MochiAI();
+    window.mochiAI = mochiAI;
+  }, 100);
+});
+
 </script>
 
 <!-- MOCHI: Erkin suzib yuruvchi sferik personaj -->
 <div class="mochi-wrap" id="mochi">
   <div class="mochi-body">
+    <div class="mochi-ai-badge">AI</div>
+    <div class="mochi-speech-wave"></div>
     <div class="mochi-shine"></div>
     <div class="mochi-face">
       <div class="mochi-eye left"><div class="mochi-pupil"></div></div>
@@ -2704,5 +3548,30 @@ if('serviceWorker' in navigator){
   </div>
   <div class="mochi-shadow"></div>
 </div>
+    <!-- MOCHI AI CHAT BUBBLE -->
+    <div class="mochi-bubble" id="mochiBubble">
+      <div class="mochi-bubble-header">
+        <div class="mochi-bubble-avatar">🌟</div>
+        <div class="mochi-bubble-name">Mochi AI</div>
+        <div class="mochi-bubble-status">Onlayn</div>
+      </div>
+      <div class="mochi-bubble-content" id="mochiBubbleContent">
+        Salom! Men Mochi — yapon tilidagi yordamchingizman. Menga savol berishingiz yoki tezkor yordam olishingiz mumkin! 🎌
+      </div>
+      <div class="mochi-typing" id="mochiTyping">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="mochi-chips" id="mochiChips">
+        <button class="mochi-chip" data-chip="help">Yordam</button>
+        <button class="mochi-chip" data-chip="word">So'z tushuntirish</button>
+        <button class="mochi-chip" data-chip="tip">Maslahat</button>
+      </div>
+      <div class="mochi-input-wrap">
+        <input type="text" class="mochi-input" id="mochiInput" placeholder="Savol yozing..." autocomplete="off">
+        <button class="mochi-send-btn" id="mochiSend">➤</button>
+      </div>
+    </div>
+    <div class="mochi-hint-float" id="mochiHint">Menga bosing!</div>
+
 </body>
 </html>
