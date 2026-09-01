@@ -3579,7 +3579,36 @@ class MochiAI {
       console.error('Groq xatosi:', err);
       this.typing.classList.remove('show');
       this.mochiBody.classList.remove('thinking');
-      this.typeMessage("😔 Kechirasiz, hozir javob bera olmadim. Internet aloqasini tekshiring yoki keyinroq qayta urinib ko'ring.");
+
+      let errMsg = "";
+      let speakMsg = "";
+      if(err.message === 'CORS_BLOCKED'){
+        errMsg = "<b>⚠️ CORS xatosi</b><br>Faylni brauzerga to'g'ridan-to'g'ri ochdingiz (file://). Tashqi API chaqirish taqiqlanadi.<br><br><b>Yechim:</b> Faylni <b>Live Server</b> (VS Code) yoki <b>Python</b> orqali ishga tushiring:<br><code style='background:rgba(157,78,221,0.15);padding:2px 6px;border-radius:4px;'>python -m http.server 8000</code>";
+        speakMsg = "Faylni server orqali oching.";
+      }else if(err.message === 'NETWORK_ERROR'){
+        errMsg = "<b>📡 Tarmoq xatosi</b><br>Internet aloqasi uzilib qoldi yoki server javob bermayapti.";
+        speakMsg = "Internet aloqasini tekshiring.";
+      }else if(err.message === 'API_KEY_INVALID'){
+        errMsg = "<b>🔑 API kalit eskirgan</b><br>Groq API kaliti yaroqsiz. Yangi kalit olishingiz kerak.";
+        speakMsg = "API kalitini yangilang.";
+      }else if(err.message === 'RATE_LIMIT'){
+        errMsg = "<b>⏳ Juda ko'p so'rov</b><br>Bir oz kutib, keyinroq qayta urinib ko'ring.";
+        speakMsg = "Bir oz kuting.";
+      }else if(err.message && err.message.startsWith('API_ERROR')){
+        errMsg = "<b>🔧 Server xatosi</b><br>Groq serverida muammo: " + err.message.replace('API_ERROR:','') + ". Keyinroq qayta urinib ko'ring.";
+        speakMsg = "Serverda muammo, keyinroq urinib ko'ring.";
+      }else{
+        errMsg = "😔 Kechirasiz, hozir javob bera olmadim. Internet aloqasini tekshiring yoki keyinroq qayta urinib ko'ring.";
+        speakMsg = "Kechirasiz, hozir javob bera olmadim.";
+      }
+
+      const msgDiv = document.createElement('div');
+      msgDiv.style.marginBottom = '8px';
+      msgDiv.style.fontSize = '12.5px';
+      msgDiv.innerHTML = errMsg;
+      this.content.appendChild(msgDiv);
+      this.content.scrollTop = this.content.scrollHeight;
+      this.speak(speakMsg);
     }
   }
 
@@ -3595,23 +3624,36 @@ class MochiAI {
       ...this.conversationHistory
     ];
 
-    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: { 
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${this.GROQ_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: "llama3-8b-8192",
-        messages: messages,
-        temperature: 0.7,
-        max_tokens: 1024
-      })
-    });
+    let response;
+    try{
+      response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${this.GROQ_API_KEY}`
+        },
+        body: JSON.stringify({
+          model: "llama3-8b-8192",
+          messages: messages,
+          temperature: 0.7,
+          max_tokens: 1024
+        })
+      });
+    }catch(networkErr){
+      // CORS yoki network xatosi
+      console.error('Tarmoq xatosi:', networkErr);
+      if(networkErr.name === 'TypeError' && networkErr.message.includes('fetch')){
+        throw new Error('CORS_BLOCKED');
+      }
+      throw new Error('NETWORK_ERROR');
+    }
 
     if(!response.ok){
-      const err = await response.text();
-      throw new Error('Groq xato: ' + err);
+      let errText = '';
+      try{ errText = await response.text(); }catch(e){}
+      if(response.status === 401) throw new Error('API_KEY_INVALID');
+      if(response.status === 429) throw new Error('RATE_LIMIT');
+      throw new Error('API_ERROR:' + response.status);
     }
 
     const data = await response.json();
@@ -3688,6 +3730,9 @@ Lug'at (JSON): ${this.buildVocabContext()}`;
       msgDiv.innerHTML = html;
       this.content.appendChild(msgDiv);
       this.content.scrollTop = this.content.scrollHeight;
+      // Xabarni ovoz chiqarish
+      const plain = html.replace(/<[^>]*>/g, '').replace(/😔|🎌|💪|🌟/g, '');
+      this.speak(plain);
       const speakTime = Math.max(2000, html.length * 40);
       setTimeout(()=>{ this.mochiBody.classList.remove('speaking'); }, speakTime);
     }, 600);
@@ -3697,12 +3742,24 @@ Lug'at (JSON): ${this.buildVocabContext()}`;
     if(!this.voiceEnabled || !text) return;
     window.speechSynthesis.cancel();
     const utter = new SpeechSynthesisUtterance(text);
-    utter.rate = 1.1;
-    utter.pitch = 1.15;
-    utter.volume = 0.8;
-    const voices = window.speechSynthesis.getVoices();
-    const jaVoice = voices.find(v=>v.lang.includes('ja') || v.lang.includes('JP'));
-    if(jaVoice) utter.voice = jaVoice;
+    utter.rate = 1.05;
+    utter.pitch = 1.1;
+    utter.volume = 0.85;
+
+    // Brauzer ovozlarini yuklash — ba'zi brauzerlarda darhol bo'sh qaytadi
+    const setVoice = ()=>{
+      const voices = window.speechSynthesis.getVoices();
+      // Avval o'zbek/ingliz ovozi, keyin yapon ovozi
+      const preferred = voices.find(v=>v.lang.includes('uz')) || 
+                        voices.find(v=>v.lang.includes('en')) ||
+                        voices.find(v=>v.lang.includes('ja') || v.lang.includes('JP'));
+      if(preferred) utter.voice = preferred;
+    };
+    setVoice();
+    if(window.speechSynthesis.onvoiceschanged !== undefined){
+      window.speechSynthesis.onvoiceschanged = setVoice;
+    }
+
     utter.onstart = ()=>{ this.isSpeaking = true; };
     utter.onend = ()=>{ this.isSpeaking = false; };
     window.speechSynthesis.speak(utter);
