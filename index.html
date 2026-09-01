@@ -3382,7 +3382,7 @@ class MochiAI {
     // ============================================
     // GROQ API KALIT (FAQAT SHAXSIY FOYDALANISH UCHUN!)
     // ============================================
-    this.GROQ_API_KEY = "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";
+    this.GROQ_API_KEY = "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";
 
     this.setupSpeechRecognition();
     this.init();
@@ -3595,7 +3595,7 @@ class MochiAI {
         errMsg = "<b>⏳ Juda ko'p so'rov</b><br>Bir oz kutib, keyinroq qayta urinib ko'ring.";
         speakMsg = "Bir oz kuting.";
       }else if(err.message && err.message.startsWith('API_ERROR')){
-        errMsg = "<b>🔧 Server xatosi</b><br>Groq serverida muammo: " + err.message.replace('API_ERROR:','') + ". Keyinroq qayta urinib ko'ring.";
+        errMsg = "<b>🔧 Server xatosi</b><br>Groq serverida muammo: " + err.message.replace('API_ERROR:','') + "<br><br>Iltimos, keyinroq qayta urinib ko'ring.";
         speakMsg = "Serverda muammo, keyinroq urinib ko'ring.";
       }else{
         errMsg = "😔 Kechirasiz, hozir javob bera olmadim. Internet aloqasini tekshiring yoki keyinroq qayta urinib ko'ring.";
@@ -3633,7 +3633,7 @@ class MochiAI {
           "Authorization": `Bearer ${this.GROQ_API_KEY}`
         },
         body: JSON.stringify({
-          model: "llama3-8b-8192",
+          model: "llama-3.1-8b-instant",
           messages: messages,
           temperature: 0.7,
           max_tokens: 1024
