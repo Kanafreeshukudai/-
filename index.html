@@ -1590,6 +1590,9 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
           <button class="sub-btn" data-set="payshanba30" id="flashSubPayshanba30">6-mavzu</button>
           <button class="sub-btn active" data-set="juma31" id="flashSubJuma31">7-mavzu</button>
           <button class="sub-btn" data-set="numbers" id="flashSubNumbers">Raqamlar</button>
+          <button class="sub-btn" data-set="mavzu8" id="flashSubMavzu8">8-mavzu</button>
+          <button class="sub-btn" data-set="mavzu9" id="flashSubMavzu9">9-mavzu</button>
+          <button class="sub-btn" data-set="mavzu10" id="flashSubMavzu10">10-mavzu</button>
         </div>
       </div>
       <div style="flex:1;"></div>
@@ -1894,6 +1897,109 @@ const PAYSHANBA_WORDS = [
 ];
 
 /* "7-mavzu" bo'limi — yangi so'zlar */
+const MAVZU8_WORDS = [
+  {uz:"yemoq", note:"(食べます) II guruh fe'li", kana:"たべます", accepted:["たべます"], romaji:"tabemasu", group:"Fe'llar", kb:"hira"},
+  {uz:"ichmoq", note:"(飲みます) I guruh fe'li", kana:"のみます", accepted:["のみます"], romaji:"nomimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"chekmoq (sigaret)", note:"(吸います) I guruh fe'li", kana:"すいます", accepted:["すいます"], romaji:"suimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"ko'rish", note:"(見ます) II guruh fe'li", kana:"みます", accepted:["みます"], romaji:"mimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"eshitmoq", note:"(聞きます) I guruh fe'li", kana:"ききます", accepted:["ききます"], romaji:"kikimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"o'qimoq", note:"(読みます) I guruh fe'li", kana:"よみます", accepted:["よみます"], romaji:"yomimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"yozmoq", note:"(書きます) I guruh fe'li", kana:"かきます", accepted:["かきます"], romaji:"kakimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"sotib olish", note:"(買います) I guruh fe'li", kana:"かいます", accepted:["かいます"], romaji:"kaimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"olmoq (fotosuratga)", note:"(撮ります) I guruh fe'li", kana:"とります", accepted:["とります"], romaji:"torimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"qilmoq, bajarmoq", note:"(します) III guruh fe'li", kana:"します", accepted:["します"], romaji:"shimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"uchrashmoq (do'stini)", note:"(会います) I guruh fe'li", kana:"あいます", accepted:["あいます"], romaji:"aimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"ovqat, guruch", kana:"ごはん", accepted:["ごはん"], romaji:"gohan", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"nonushta", kana:"あさごはん", accepted:["あさごはん"], romaji:"asagohan", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"tushlik", kana:"ひるごはん", accepted:["ひるごはん"], romaji:"hirugohan", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"kechki ovqat", kana:"ばんごはん", accepted:["ばんごはん"], romaji:"bangohan", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"non", kana:"パン", accepted:["パン"], romaji:"pan", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"tuxum", kana:"たまご", accepted:["たまご"], romaji:"tamago", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"go'sht", kana:"にく", accepted:["にく"], romaji:"niku", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"baliq", kana:"さかな", accepted:["さかな"], romaji:"sakana", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"sabzavot", kana:"やさい", accepted:["やさい"], romaji:"yasai", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"meva", kana:"くだもの", accepted:["くだもの"], romaji:"kudamono", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"suv", kana:"みず", accepted:["みず"], romaji:"mizu", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"choy, yashil choy", kana:"おちゃ", accepted:["おちゃ"], romaji:"ocha", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"qora choy", kana:"こうちゃ", accepted:["こうちゃ"], romaji:"koucha", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"sut", kana:"ぎゅうにゅう", accepted:["ぎゅうにゅう"], romaji:"gyuunyuu", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"sut", kana:"ミルク", accepted:["ミルク"], romaji:"miruku", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"sharbat", kana:"ジュース", accepted:["ジュース"], romaji:"juusu", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"pivo", kana:"ビール", accepted:["ビール"], romaji:"biiru", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"sake-yapon arogi", kana:"(お)さけ", accepted:["おさけ","さけ"], romaji:"(o)sake", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"DVD", kana:"ディーブイディー", accepted:["ディーブイディー"], romaji:"diibuidii", group:"Texnika", kb:"kata"},
+  {uz:"kino", kana:"えいが", accepted:["えいが"], romaji:"eiga", group:"Boshqa", kb:"hira"},
+  {uz:"musiqa", kana:"おんがく", accepted:["おんがく"], romaji:"ongaku", group:"Boshqa", kb:"hira"},
+  {uz:"CD", kana:"シーディー", accepted:["シーディー"], romaji:"shiidii", group:"Texnika", kb:"kata"},
+  {uz:"xat", kana:"てがみ", accepted:["てがみ"], romaji:"tegami", group:"Boshqa", kb:"hira"},
+  {uz:"rasm", kana:"しゃしん", accepted:["しゃしん"], romaji:"shashin", group:"Boshqa", kb:"hira"},
+  {uz:"restoran", kana:"レストラン", accepted:["レストラン"], romaji:"resutoran", group:"Joylar", kb:"kata"},
+  {uz:"uy vazifasi", kana:"しゅくだい", accepted:["しゅくだい"], romaji:"shukudai", group:"Boshqa", kb:"hira"},
+  {uz:"tennis", kana:"テニス", accepted:["テニス"], romaji:"tenisu", group:"Boshqa", kb:"kata"},
+  {uz:"futbol", kana:"サッカー", accepted:["サッカー"], romaji:"sakkaa", group:"Boshqa", kb:"kata"},
+  {uz:"Gullagan Sakura daraxtini tomosha qilish", kana:"(お)はなみ", accepted:["おはなみ","はなみ"], romaji:"(o)hanami", group:"Boshqa", kb:"hira"},
+  {uz:"dengiz", kana:"うみ", accepted:["うみ"], romaji:"umi", group:"Joylar", kb:"hira"},
+  {uz:"Izakaya", kana:"いざかや", accepted:["いざかや"], romaji:"izakaya", group:"Joylar", kb:"hira"},
+  {uz:"xiyobon", kana:"こうえん", accepted:["こうえん"], romaji:"kouen", group:"Joylar", kb:"hira"},
+  {uz:"Akihabara", kana:"あきはばら", accepted:["あきはばら"], romaji:"akihabara", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Hech narsa yo'q", kana:"なにも～ない", accepted:["なにも～ない"], romaji:"nanimo~nai", group:"Boshqa", kb:"hira"},
+  {uz:"har safar", kana:"いつも", accepted:["いつも"], romaji:"itsumo", group:"Boshqa", kb:"hira"},
+  {uz:"ba'zan", kana:"ときどき", accepted:["ときどき"], romaji:"tokidoki", group:"Boshqa", kb:"hira"},
+  {uz:"undan keyin", kana:"それから", accepted:["それから"], romaji:"sorekara", group:"Boshqa", kb:"hira"},
+  {uz:"nimadir", kana:"なにか", accepted:["なにか"], romaji:"nanika", group:"Boshqa", kb:"hira"},
+  {uz:"nima", kana:"なに", accepted:["なに"], romaji:"nani", group:"Boshqa", kb:"hira"}
+];
+
+const MAVZU9_WORDS = [
+  {uz:"bermoq", note:"(あげます) II guruh fe'li", kana:"あげます", accepted:["あげます"], romaji:"agemasu", group:"Fe'llar", kb:"hira"},
+  {uz:"olmoq", note:"(もらいます) I guruh fe'li", kana:"もらいます", accepted:["もらいます"], romaji:"moraimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"qarzga bermoq, berib turmoq", note:"(貸します) I guruh fe'li", kana:"かします", accepted:["かします"], romaji:"kashimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"qarzga olmoq, olib turmoq", note:"(借ります) II guruh fe'li", kana:"かります", accepted:["かります"], romaji:"karimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"o'rgatmoq", note:"(教えます) II guruh fe'li", kana:"おしえます", accepted:["おしえます"], romaji:"oshiemasu", group:"Fe'llar", kb:"hira"},
+  {uz:"o'rganmoq", note:"(習います) I guruh fe'li", kana:"ならいます", accepted:["ならいます"], romaji:"naraimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"jo'natmoq", note:"(送ります) I guruh fe'li", kana:"おくります", accepted:["おくります"], romaji:"okurimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"telefon qilmoq", note:"(電話をかけます) II guruh fe'li", kana:"(でんわを)かけます", accepted:["でんわをかけます","でんわを かけます"], romaji:"(denwa wo) kakemasu", group:"Fe'llar", kb:"hira"},
+  {uz:"gul", kana:"はな", accepted:["はな"], romaji:"hana", group:"Boshqa", kb:"hira"},
+  {uz:"ko'ylak", kana:"シャツ", accepted:["シャツ"], romaji:"shatsu", group:"Kiyim-kechak", kb:"kata"},
+  {uz:"sovg'a", kana:"プレゼント", accepted:["プレゼント"], romaji:"purezento", group:"Boshqa", kb:"kata"},
+  {uz:"pul", kana:"おかね", accepted:["おかね"], romaji:"okane", group:"Boshqa", kb:"hira"},
+  {uz:"Rojdestvo", kana:"クリスマス", accepted:["クリスマス"], romaji:"kurisumasu", group:"Boshqa", kb:"kata"},
+  {uz:"(mening) otam", kana:"ちち", accepted:["ちち"], romaji:"chichi", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"(mening) onam", kana:"はは", accepted:["はは"], romaji:"haha", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"(bironning) otasi", kana:"おとうさん", accepted:["おとうさん"], romaji:"otousan", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"(bironning) onasi", kana:"おかあさん", accepted:["おかあさん"], romaji:"okaasan", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"sayohat", kana:"りょこう", accepted:["りょこう"], romaji:"ryokou", group:"Boshqa", kb:"hira"},
+  {uz:"suvenir", kana:"おみやげ", accepted:["おみやげ"], romaji:"omiyage", group:"Boshqa", kb:"hira"},
+  {uz:"elektron pochta", kana:"メール", accepted:["メール"], romaji:"meeru", group:"Texnika", kb:"kata"},
+  {uz:"tort, pirog", kana:"ケーキ", accepted:["ケーキ"], romaji:"keeki", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"ajoyib ekan", kana:"すてきですね", accepted:["すてきですね"], romaji:"suteki desu ne", group:"Iboralar", kb:"hira"}
+];
+
+const MAVZU10_WORDS = [
+  {uz:"kesmoq", note:"(切ります) I guruh fe'li", kana:"きります", accepted:["きります"], romaji:"kirimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Men tushundim", note:"(分かりました) I guruh fe'li", kana:"わかりました", accepted:["わかりました"], romaji:"wakarimashita", group:"Iboralar", kb:"hira"},
+  {uz:"qo'l", kana:"て", accepted:["て"], romaji:"te", group:"Boshqa", kb:"hira"},
+  {uz:"Ovqatlanish uchun ishlatiladigan cho'p", kana:"はし", accepted:["はし"], romaji:"hashi", group:"Boshqa", kb:"hira"},
+  {uz:"qoshiq", kana:"スプーン", accepted:["スプーン"], romaji:"supuun", group:"Boshqa", kb:"kata"},
+  {uz:"sanchqi", kana:"フォーク", accepted:["フォーク"], romaji:"fooku", group:"Boshqa", kb:"kata"},
+  {uz:"pichoq", kana:"ナイフ", accepted:["ナイフ"], romaji:"naifu", group:"Boshqa", kb:"kata"},
+  {uz:"qaychi", kana:"はさみ", accepted:["はさみ"], romaji:"hasami", group:"Boshqa", kb:"hira"},
+  {uz:"stapler", kana:"ホッチキス", accepted:["ホッチキス"], romaji:"hocchikisu", group:"Boshqa", kb:"kata"},
+  {uz:"skotch", kana:"セロテープ", accepted:["セロテープ"], romaji:"seroteepu", group:"Boshqa", kb:"kata"},
+  {uz:"o'chirgich", kana:"けしごむ", accepted:["けしごむ"], romaji:"keshigomu", group:"Boshqa", kb:"hira"},
+  {uz:"qog'oz", kana:"かみ", accepted:["かみ"], romaji:"kami", group:"Boshqa", kb:"hira"},
+  {uz:"yuk", kana:"にもつ", accepted:["にもつ"], romaji:"nimotsu", group:"Boshqa", kb:"hira"},
+  {uz:"chipta", kana:"きっぷ", accepted:["きっぷ"], romaji:"kippu", group:"Boshqa", kb:"hira"},
+  {uz:"hisobot", kana:"レポート", accepted:["レポート"], romaji:"repooto", group:"Boshqa", kb:"kata"},
+  {uz:"birga", kana:"いっしょに", accepted:["いっしょに"], romaji:"issho ni", group:"Boshqa", kb:"hira"},
+  {uz:"bir oz", kana:"ちょっと", accepted:["ちょっと"], romaji:"chotto", group:"Boshqa", kb:"hira"},
+  {uz:"yaxshiku", kana:"いいですね", accepted:["いいですね"], romaji:"ii desu ne", group:"Iboralar", kb:"hira"},
+  {uz:"allaqachon", kana:"もう", accepted:["もう"], romaji:"mou", group:"Boshqa", kb:"hira"},
+  {uz:"hali emas", kana:"まだ", accepted:["まだ"], romaji:"mada", group:"Boshqa", kb:"hira"},
+  {uz:"bundan buyon, endi", kana:"これから", accepted:["これから"], romaji:"korekara", group:"Boshqa", kb:"hira"},
+  {uz:"yaxshi; sog'lom", kana:"げんきです", accepted:["げんきです"], romaji:"genki desu", group:"Iboralar", kb:"hira"}
+];
+
 const JUMA31_WORDS = [
 
   {uz:"bormoq", note:"(行きます) I guruh fe'li", kana:"いきます", accepted:["いきます"], romaji:"ikimasu", group:"Fe'llar", kb:"hira"},
@@ -2063,8 +2169,11 @@ TODAY_WORDS.forEach((w,i)=>{ w.id = 't'+i; });
 TODAY2_WORDS.forEach((w,i)=>{ w.id = 't2_'+i; });
 CHORSHANBA_WORDS.forEach((w,i)=>{ w.id = 'c_'+i; });
 PAYSHANBA_WORDS.forEach((w,i)=>{ w.id = 'p30_'+i; });
+MAVZU8_WORDS.forEach((w,i)=>{ w.id = 'm8_'+i; });
+MAVZU9_WORDS.forEach((w,i)=>{ w.id = 'm9_'+i; });
+MAVZU10_WORDS.forEach((w,i)=>{ w.id = 'm10_'+i; });
 JUMA31_WORDS.forEach((w,i)=>{ w.id = 'j31_'+i; });
-const ALL_WORDS = DAILY_WORDS.concat(NEW_WORDS, NUMBER_WORDS, TODAY_WORDS, TODAY2_WORDS, CHORSHANBA_WORDS, PAYSHANBA_WORDS, JUMA31_WORDS);
+const ALL_WORDS = DAILY_WORDS.concat(NEW_WORDS, NUMBER_WORDS, TODAY_WORDS, TODAY2_WORDS, CHORSHANBA_WORDS, PAYSHANBA_WORDS, JUMA31_WORDS, MAVZU8_WORDS, MAVZU9_WORDS, MAVZU10_WORDS);
 
 const KNOWN_KEY = 'yaponcha_bilaman_sozlar';
 let knownIds = new Set(JSON.parse(localStorage.getItem(KNOWN_KEY) || '[]'));
@@ -2081,6 +2190,9 @@ const SETS = [
   {key:'chorshanba', label:"5-mavzu", words:CHORSHANBA_WORDS},
   {key:'payshanba30', label:"6-mavzu", words:PAYSHANBA_WORDS},
   {key:'juma31', label:"7-mavzu", words:JUMA31_WORDS},
+  {key:'mavzu8', label:"8-mavzu", words:MAVZU8_WORDS},
+  {key:'mavzu9', label:"9-mavzu", words:MAVZU9_WORDS},
+  {key:'mavzu10', label:"10-mavzu", words:MAVZU10_WORDS},
   {key:'numbers', label:"Raqamlar", words:NUMBER_WORDS}
 ];
 
@@ -2197,10 +2309,13 @@ function renderActiveSet(){
   else if(set === 'daily') renderFlashGrid(DAILY_WORDS.filter(w=>!knownIds.has(w.id)));
   else if(set === 'new') renderFlashGrid(NEW_WORDS.filter(w=>!knownIds.has(w.id)));
   else if(set === 'numbers') renderFlashGrid(NUMBER_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu8') renderFlashGrid(MAVZU8_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu9') renderFlashGrid(MAVZU9_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu10') renderFlashGrid(MAVZU10_WORDS.filter(w=>!knownIds.has(w.id)));
 }
 
 function setActiveSubBtn(activeBtn){
-  [flashSubToday, flashSubToday2, flashSubChorshanba, flashSubPayshanba30, flashSubJuma31, flashSubDaily, flashSubNew, flashSubNumbers].forEach(b=>b.classList.toggle('active', b===activeBtn));
+  [flashSubToday, flashSubToday2, flashSubChorshanba, flashSubPayshanba30, flashSubJuma31, flashSubDaily, flashSubNew, flashSubNumbers, flashSubMavzu8, flashSubMavzu9, flashSubMavzu10].forEach(b=>b.classList.toggle('active', b===activeBtn));
 }
 // Dropdown toggle
 const flashDropdown = document.getElementById('flashDropdown');
@@ -2217,7 +2332,7 @@ document.addEventListener('click', ()=>{
 
 // Sub-buttons inside dropdown
 function setActiveDropdownBtn(activeBtn){
-  [flashSubDaily, flashSubNew, flashSubToday, flashSubToday2, flashSubChorshanba, flashSubPayshanba30, flashSubJuma31, flashSubNumbers].forEach(b=>b.classList.toggle('active', b===activeBtn));
+  [flashSubDaily, flashSubNew, flashSubToday, flashSubToday2, flashSubChorshanba, flashSubPayshanba30, flashSubJuma31, flashSubNumbers, flashSubMavzu8, flashSubMavzu9, flashSubMavzu10].forEach(b=>b.classList.toggle('active', b===activeBtn));
   flashDropdown.classList.remove('open');
   flashDropdownBtn.classList.remove('active');
   // Update button text to show current topic
@@ -2232,6 +2347,9 @@ flashSubJuma31.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubJuma
 flashSubDaily.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubDaily); renderActiveSet(); });
 flashSubNew.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubNew); renderActiveSet(); });
 flashSubNumbers.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubNumbers); renderActiveSet(); });
+flashSubMavzu8.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu8); renderActiveSet(); });
+flashSubMavzu9.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu9); renderActiveSet(); });
+flashSubMavzu10.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu10); renderActiveSet(); });
 
 renderActiveSet();
 
@@ -2852,6 +2970,9 @@ function spawnConfetti(anchorEl){
   flashSubDaily.addEventListener('click', ()=>setTimeout(placeStars, 60));
   flashSubNew.addEventListener('click', ()=>setTimeout(placeStars, 60));
   flashSubNumbers.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu8.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu9.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu10.addEventListener('click', ()=>setTimeout(placeStars, 60));
 
   placeStars();
 
@@ -3250,68 +3371,50 @@ class MochiAI {
     this.mochiBody = document.querySelector('.mochi-body');
     this.isOpen = false;
     this.isSpeaking = false;
-    this.context = 'flash'; // flash | quiz | known
-    this.lastQuizResult = null; // 'correct' | 'wrong' | null
+    this.context = 'flash';
+    this.lastQuizResult = null;
     this.voiceEnabled = 'speechSynthesis' in window;
     this.isListening = false;
     this.recognition = null;
     this.conversationHistory = [];
     this.greeted = false;
+
+    // ============================================
+    // GROQ API KALIT (FAQAT SHAXSIY FOYDALANISH UCHUN!)
+    // ============================================
+    this.GROQ_API_KEY = "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";
+
     this.setupSpeechRecognition();
     this.init();
   }
 
   init(){
-    // Event listeners
     this.sendBtn.addEventListener('click', ()=>this.handleUserInput());
     this.input.addEventListener('keypress', (e)=>{ if(e.key==='Enter') this.handleUserInput(); });
-    if(this.micBtn){
-      this.micBtn.addEventListener('click', ()=>this.toggleListening());
-    }
+    if(this.micBtn) this.micBtn.addEventListener('click', ()=>this.toggleListening());
 
-    // Chip buttons
     this.chips.querySelectorAll('.mochi-chip').forEach(chip=>{
-      chip.addEventListener('click', ()=>{
-        const type = chip.dataset.chip;
-        this.handleChipClick(type);
-      });
+      chip.addEventListener('click', ()=>this.handleChipClick(chip.dataset.chip));
     });
 
-    // Context tracking via tab buttons
     [tabFlash, tabQuiz, tabKnown].forEach((btn, i)=>{
       const contexts = ['flash', 'quiz', 'known'];
       btn.addEventListener('click', ()=>{
         this.context = contexts[i];
         this.lastQuizResult = null;
-        this.updateHint();
+        this.updateChipsForContext();
       });
     });
 
-    // Quiz result tracking
     this.hookQuizEvents();
-
-    // Show hint after delay
-    setTimeout(()=>{
-      if(!this.isOpen && this.hint) this.showHint("Menga bosing!");
-    }, 3000);
-
-    // Auto-greet when first opened
     this.updateChipsForContext();
   }
 
   hookQuizEvents(){
-    // Hook into existing quiz functions by overriding them
     const originalSubmit = window.submitAnswer;
     if(originalSubmit){
       window.submitAnswer = (isCorrect, selectedBtn)=>{
         this.lastQuizResult = isCorrect ? 'correct' : 'wrong';
-        if(isCorrect){
-          this.showHint("Ajoyib! 🎉");
-          this.speak("To'g'ri javob! Yaxshi ish!");
-        } else {
-          this.showHint("Xato bo'ldi, lekin o'rganish jarayoni shu!");
-          this.speak("Xato bo'ldi. Keyingi safar albatta to'g'ri bo'ladi!");
-        }
         originalSubmit(isCorrect, selectedBtn);
       };
     }
@@ -3337,22 +3440,14 @@ class MochiAI {
       if(this.micBtn) this.micBtn.classList.add('listening');
       this.input.placeholder = "Tinglayapman...";
     };
-
     this.recognition.onresult = (event)=>{
-      const transcript = event.results[0][0].transcript;
-      this.input.value = transcript;
+      this.input.value = event.results[0][0].transcript;
       this.handleUserInput();
     };
-
     this.recognition.onerror = (event)=>{
-      console.warn('Ovozni tanish xatosi:', event.error);
-      if(event.error === 'no-speech'){
-        this.showHint("Ovoz eshitilmadi, qayta urinib ko'ring 🎤");
-      } else if(event.error === 'not-allowed' || event.error === 'service-not-allowed'){
-        this.showHint("Mikrofonga ruxsat bering 🎙️");
-      }
+      if(event.error === 'no-speech') this.showHint("Ovoz eshitilmadi 🎤");
+      else if(event.error === 'not-allowed') this.showHint("Mikrofonga ruxsat bering 🎙️");
     };
-
     this.recognition.onend = ()=>{
       this.isListening = false;
       if(this.micBtn) this.micBtn.classList.remove('listening');
@@ -3363,35 +3458,21 @@ class MochiAI {
   toggleListening(){
     if(!this.recognition) return;
     if(!this.isOpen) this.open();
-    if(this.isListening){
-      this.recognition.stop();
-      return;
-    }
-    // Don't let Mochi hear itself talking
+    if(this.isListening){ this.recognition.stop(); return; }
     this.stopSpeaking();
-    try{
-      this.recognition.start();
-    }catch(err){
-      // start() throws if called while already active; ignore
-      console.warn('Mikrofonni ishga tushirib bo\'lmadi:', err);
-    }
+    try{ this.recognition.start(); }catch(err){}
   }
 
-  toggle(){
-    if(this.isOpen) this.close();
-    else this.open();
-  }
+  toggle(){ this.isOpen ? this.close() : this.open(); }
 
   open(){
     this.isOpen = true;
     this.bubble.classList.add('show');
-    this.hideHint();
     if(!this.greeted){
       this.greeted = true;
       this.typeMessage(this.getGreeting());
     }
     this.input.focus();
-    this.updateChipsForContext();
   }
 
   close(){
@@ -3405,10 +3486,6 @@ class MochiAI {
     this.hint.textContent = text;
     this.hint.classList.add('show');
     setTimeout(()=>this.hint.classList.remove('show'), 3500);
-  }
-
-  hideHint(){
-    if(this.hint) this.hint.classList.remove('show');
   }
 
   updateChipsForContext(){
@@ -3438,67 +3515,28 @@ class MochiAI {
 
   getGreeting(){
     const greetings = {
-      flash: "Salom! Flashcard bo'limidasiz. Qaysi so'zni tushuntirishimni xohlaysiz? Kartochkani bosing va o'rnating! 📚",
-      quiz: "Viktorina vaqti! 💪 Men sizga yordam berishim yoki motivatsiya berishim mumkin. Savollarga javob bering!",
-      known: "Bilaman bo'limi! Siz allaqachon ko'p narsalarni o'rgandingiz. Qayta ko'rib chiqishni xohlaysizmi? 🌟"
+      flash: "Salom! Men Mochi — yapon tilidagi yordamchingizman. Savol berishingiz yoki so'z haqida so'rashingiz mumkin! 🎌",
+      quiz: "Viktorina vaqti! 💪 Savollarga javob bering, men yordam beraman!",
+      known: "Bilaman bo'limi! Siz allaqachon ko'p narsalarni o'rgandingiz. 🌟"
     };
     return greetings[this.context] || greetings.flash;
   }
 
   handleChipClick(type){
-    const responses = {
-      help: "Men sizga quyidagilarda yordam beraman:<br>• <b>So'z tushuntirish</b> — yaponcha so'zning ma'nosini aytaman<br>• <b>Yodlash usuli</b> — qanday yodlashni maslahat beraman<br>• <b>Motivatsiya</b> — ruhlantiruvchi gaplar<br>• <b>O'qib berish</b> — yaponcha so'zlarni to'g'ri talaffuz qilib beraman<br><br>Savol yozing! ✨",
-      word: this.getRandomWordExplanation(),
-      tip: this.getStudyTip(),
-      explain: this.getRandomWordExplanation(),
-      practice: "Amaliy mashq: Bir so'zni tanlang va uning yaponcha yozilishini ayting. Men to'g'riligini tekshiraman! (Hozircha matnli kiriting)",
-      hint: this.getQuizHint(),
-      encourage: this.getEncouragement(),
-      review: "Qayta ko'rib chiqish juda muhim! Bilgan so'zlaringizdan birini tanlang va uning ma'nosini eslab ko'ring. Keyin kartochkani aylantiring!",
-      challenge: "Qiyinroq savol: 'ありがとうございます' so'zi qachon ishlatiladi? (Javob: rasmiy ravishda rahmat aytishda)",
-      encourage: this.getEncouragement()
+    const prompts = {
+      help: "Menga yapon tilida qanday yordam bera olishingni tushuntir",
+      explain: "Menga tasodifiy yapon so'zini tushuntirib ber va uni qanday yodlashni ayt",
+      practice: "Menga yapon tilida qisqa mashq ber",
+      tip: "Yodlash bo'yicha samarali usul ayt",
+      hint: "Viktorinada yordam berish uchun maslahat ber",
+      encourage: "Meni ruhlantir",
+      review: "Qayta ko'rib chiqish uchun maslahat ber",
+      challenge: "Menga qiyinroq yapon tili savoli ber",
+      word: "Menga tasodifiy so'z tushuntirib ber"
     };
-    const msg = responses[type] || responses.help;
-    this.typeMessage(msg);
-    this.speak(msg.replace(/<[^>]*>/g, ''));
-  }
-
-  getRandomWordExplanation(){
-    const all = ALL_WORDS.filter(w=>!w.id.startsWith('r'));
-    const w = all[Math.floor(Math.random()*all.length)];
-    return `📖 <b>${w.uz}</b><br>🇯🇵 <b>${w.kana}</b> — <em>${w.romaji}</em><br><br>${w.note ? w.note + '<br>' : ''}Guruh: <b>${w.group}</b><br><br>Bu so'zni yodlash uchun: "${w.romaji}" deb takrorlang!`;
-  }
-
-  getStudyTip(){
-    const tips = [
-      "💡 <b>Yodlash usuli:</b> Har bir so'zni ovoz chiqarib takrorlang. Eshitish + gapirish = 80% yodlash!",
-      "💡 <b>Kunlik rejim:</b> Har kuni 10 ta yangi so'z va 20 ta eski so'zni takrorlang. Spaced repetition — eng samarali usul!",
-      "💡 <b>Kontekst:</b> So'zlarni alohida emas, balki jumlalar ichida yodlang. Masalan: 'わたしはがくせいです' (Men talabaman)",
-      "💡 <b>Yozish:</b> Yaponcha so'zlarni qo'lda yozish miyani faollashtiradi. Daftaringizga har bir so'zni 3 marta yozing!",
-      "💡 <b>Guruhlash:</b> O'xshash so'zlarni birga yodlang. Masalan: かいしゃ (kompaniya), かいしゃいん (xodimi) — bir ildiz!"
-    ];
-    return tips[Math.floor(Math.random()*tips.length)];
-  }
-
-  getQuizHint(){
-    const hints = [
-      "🎯 <b>Yordam:</b> Javobni bilmasangiz, avval noto'g'ri variantlarni chiqarib tashlang. Qolganlaridan birini tanlang!",
-      "🎯 <b>Yordam:</b> So'zning guruhiga qarang. Agar 'Joylar' bo'lsa, joy nomi ekanini bilasiz.",
-      "🎯 <b>Yordam:</b> Romaji (lotincha yozilish)ni eslab qoling. U kana yozuviga yaqin!",
-      "🎯 <b>Yordam:</b> Xato qilish — o'rganishning eng yaxshi usuli. Xatolarizni keyinroq ko'rib chiqing!"
-    ];
-    return hints[Math.floor(Math.random()*hints.length)];
-  }
-
-  getEncouragement(){
-    const msgs = [
-      "🌟 Siz ajoyib ish qilyapsiz! Har bir to'g'ri javob — katta yutuq!",
-      "🔥 Davom eting! Yapon tilini o'rganish — marafon, ne sprint. Sabr-toqat!",
-      "💪 Xato qilishdan qo'rqmang! Hatto yaponlar ham o'rganishda xato qilishadi.",
-      "🎌 Ganbatte! (Гамбатте!) — Yaponlarning 'xarakat qil' degan eng kuchli so'zi!",
-      "⭐ Siz allaqachon ko'p narsalarni bilasiz! Faqat ozgina mashq qolgan..."
-    ];
-    return msgs[Math.floor(Math.random()*msgs.length)];
+    const text = prompts[type] || type;
+    this.input.value = text;
+    this.handleUserInput();
   }
 
   async handleUserInput(){
@@ -3506,100 +3544,110 @@ class MochiAI {
     if(!text) return;
     this.input.value = '';
 
-    // Add user message
-    this.addMessage("Siz: " + text, 'user');
+    this.addMessage(text, 'user');
 
-    // Show thinking state immediately while we wait for the real AI
     this.typing.classList.add('show');
     this.mochiBody.classList.add('thinking');
     this.stopSpeaking();
 
     try{
-      const reply = await this.askRealAI(text);
+      const reply = await this.askGroq(text);
       this.typing.classList.remove('show');
       this.mochiBody.classList.remove('thinking');
       this.mochiBody.classList.add('speaking');
+
       this.content.innerHTML = reply;
       this.content.scrollTop = 0;
+
       const plain = reply.replace(/<[^>]*>/g, '');
       this.speak(plain);
+
       const speakTime = Math.max(2000, reply.length * 40);
       setTimeout(()=>{ this.mochiBody.classList.remove('speaking'); }, speakTime);
+
+      if(this.lastQuizResult === 'correct'){
+        mochiHappy(); this.lastQuizResult = null;
+      } else if(this.lastQuizResult === 'wrong'){
+        mochiSad(); this.lastQuizResult = null;
+      }
+
     }catch(err){
-      console.error('Mochi AI xatosi:', err);
+      console.error('Groq xatosi:', err);
       this.typing.classList.remove('show');
       this.mochiBody.classList.remove('thinking');
-      this.typeMessage("😔 Kechirasiz, hozir javob bera olmadim (aloqa xatosi). Birozdan keyin qayta urinib ko'ring, iltimos.");
+      this.typeMessage("😔 Kechirasiz, hozir javob bera olmadim. Internet aloqasini tekshiring yoki keyinroq qayta urinib ko'ring.");
     }
   }
 
-  buildVocabContext(){
-    // Compact vocab dump so the AI grounds its answers in exactly the words in this app
-    if(this._vocabContextCache) return this._vocabContextCache;
-    const compact = ALL_WORDS.map(w=>({uz:w.uz, kana:w.kana, romaji:w.romaji, group:w.group, note:w.note||undefined}));
-    this._vocabContextCache = JSON.stringify(compact);
-    return this._vocabContextCache;
+  /* ========== TO'G'RIDAN-TO'G'RI GROQ API ========== */
+  async askGroq(userText){
+    this.conversationHistory.push({role:'user', content:userText});
+    if(this.conversationHistory.length > 20){
+      this.conversationHistory = this.conversationHistory.slice(-20);
+    }
+
+    const messages = [
+      {role: 'system', content: this.buildSystemPrompt()},
+      ...this.conversationHistory
+    ];
+
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: { 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${this.GROQ_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: "llama3-8b-8192",
+        messages: messages,
+        temperature: 0.7,
+        max_tokens: 1024
+      })
+    });
+
+    if(!response.ok){
+      const err = await response.text();
+      throw new Error('Groq xato: ' + err);
+    }
+
+    const data = await response.json();
+    const rawText = data.choices?.[0]?.message?.content || "Javob yo'q";
+
+    this.conversationHistory.push({role:'assistant', content: rawText});
+    return this.formatAIText(rawText);
   }
 
   buildSystemPrompt(){
-    const contextNames = {flash:"Flashcard (so'z kartalari)", quiz:"Viktorina", known:"Bilaman (o'rganilgan so'zlar)"};
+    const contextNames = {flash:"Flashcard", quiz:"Viktorina", known:"Bilaman"};
     const currentScreen = contextNames[this.context] || contextNames.flash;
     let quizNote = '';
     if(this.context === 'quiz' && this.lastQuizResult){
       quizNote = this.lastQuizResult === 'correct'
         ? "\nFoydalanuvchi hozirgina viktorinada TO'G'RI javob berdi."
-        : "\nFoydalanuvchi hozirgina viktorinada XATO javob berdi — uni ruhlantiring va tushuntiring.";
+        : "\nFoydalanuvchi hozirgina viktorinada XATO javob berdi.";
     }
-    return `Sen "Mochi" ismli, do'stona va quvnoq AI yordamchisan. Sen o'zbek tilida so'zlashuvchi foydalanuvchiga yapon tilini o'rganishda yordam berasan. Bu ilova — "Uyga vazifa so'zlari" nomli yapon tili lug'at/flashcard/viktorina ilovasi.
+    return `Sen "Mochi" ismli, do'stona va quvnoq AI yordamchisan. O'zbek tilida so'zlashuvchi foydalanuvchiga yapon tilini o'rganishda yordam berasan.
 
 Qoidalar:
-- Har doim FAQAT o'zbek tilida javob ber (yapon so'zlari, kana va romaji bundan mustasno).
-- Javoblaring qisqa, iliq va tushunarli bo'lsin (odatda 2-5 gap), lekin savol chuqur tushuntirish talab qilsa kengroq yoz.
-- Iloji bo'lsa, javobingda tegishli emoji ishlat va HTML <b>, <br>, <em> teglaridan foydalanib formatlashing mumkin (Markdown emas, faqat shu HTML teglar).
-- Foydalanuvchi biror so'z haqida so'rasa, quyidagi lug'at ma'lumotlaridan foydalan (bu — ilovadagi aniq so'zlar ro'yxati, JSON formatida): agar so'z shu ro'yxatda bo'lsa, aniq kana/romaji/guruhini bergin; bo'lmasa, umumiy yapon tili bilimingdan foydalanib yordam ber va buni yashirma.
-- Foydalanuvchi hozir ilovaning "${currentScreen}" bo'limida turibdi.${quizNote}
-- Sen shunchaki skript emassan — foydalanuvchi bilan erkin, tabiiy suhbat qura olasan, savollariga chinakam javob ber.
+- FAQAT o'zbek tilida javob ber (yapon so'zlari, kana va romaji bundan mustasno).
+- Javoblar qisqa, iliq va tushunarli bo'lsin (2-5 gap).
+- Emoji va HTML <b>, <br>, <em> teglaridan foydalan.
+- Foydalanuvchi hozir "${currentScreen}" bo'limida.${quizNote}
+- Erkin suhbat qura olasan, savollarga chinakam javob ber.
 
 Lug'at (JSON): ${this.buildVocabContext()}`;
   }
 
-  async askRealAI(userText){
-    this.conversationHistory.push({role:'user', content:userText});
-    // Keep history bounded so requests stay small
-    if(this.conversationHistory.length > 16){
-      this.conversationHistory = this.conversationHistory.slice(-16);
-    }
-
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-6",
-        max_tokens: 1000,
-        system: this.buildSystemPrompt(),
-        messages: this.conversationHistory
-      })
-    });
-
-    if(!response.ok){
-      throw new Error('API javobi muvaffaqiyatsiz: ' + response.status);
-    }
-
-    const data = await response.json();
-    const rawText = (data.content || [])
-      .filter(block => block.type === 'text')
-      .map(block => block.text)
-      .join('\n')
-      .trim();
-
-    const finalText = rawText || "🤔 Kechirasiz, javob shakllantira olmadim. Boshqacharoq so'rab ko'ring.";
-    this.conversationHistory.push({role:'assistant', content: finalText});
-
-    return this.formatAIText(finalText);
+  buildVocabContext(){
+    if(this._vocabCache) return this._vocabCache;
+    const compact = ALL_WORDS.slice(0, 200).map(w=>({
+      uz:w.uz, kana:w.kana, romaji:w.romaji, group:w.group
+    }));
+    this._vocabCache = JSON.stringify(compact);
+    return this._vocabCache;
   }
 
   formatAIText(text){
-    // Escape any accidental HTML from the model, then convert markdown-ish bold/newlines
     const escaped = text
       .replace(/&/g,'&amp;')
       .replace(/</g,'&lt;')
@@ -3626,42 +3674,29 @@ Lug'at (JSON): ${this.buildVocabContext()}`;
     this.typing.classList.add('show');
     this.mochiBody.classList.add('thinking');
     this.stopSpeaking();
-
-    const delay = 600 + Math.random()*800;
     setTimeout(()=>{
       this.typing.classList.remove('show');
       this.mochiBody.classList.remove('thinking');
       this.mochiBody.classList.add('speaking');
-
       this.content.innerHTML = html;
       this.content.scrollTop = 0;
-
-      // Auto remove speaking after a while
       const speakTime = Math.max(2000, html.length * 40);
-      setTimeout(()=>{
-        this.mochiBody.classList.remove('speaking');
-      }, speakTime);
-    }, delay);
+      setTimeout(()=>{ this.mochiBody.classList.remove('speaking'); }, speakTime);
+    }, 600);
   }
 
   speak(text){
     if(!this.voiceEnabled || !text) return;
-    // Cancel previous
     window.speechSynthesis.cancel();
-
     const utter = new SpeechSynthesisUtterance(text);
     utter.rate = 1.1;
     utter.pitch = 1.15;
     utter.volume = 0.8;
-
-    // Try to find Japanese voice
     const voices = window.speechSynthesis.getVoices();
     const jaVoice = voices.find(v=>v.lang.includes('ja') || v.lang.includes('JP'));
     if(jaVoice) utter.voice = jaVoice;
-
     utter.onstart = ()=>{ this.isSpeaking = true; };
     utter.onend = ()=>{ this.isSpeaking = false; };
-
     window.speechSynthesis.speak(utter);
   }
 
@@ -3672,13 +3707,12 @@ Lug'at (JSON): ${this.buildVocabContext()}`;
   }
 }
 
-// Initialize Mochi AI when DOM is ready
-let mochiAI = null;
+// Initialize
 window.addEventListener('DOMContentLoaded', ()=>{
-  // Small delay to ensure all elements exist
   setTimeout(()=>{
-    mochiAI = new MochiAI();
-    window.mochiAI = mochiAI;
+    window.mochiAI = new MochiAI();
+  }, 100);
+});window.mochiAI = mochiAI;
   }, 100);
 });
 
