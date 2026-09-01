@@ -3556,8 +3556,12 @@ class MochiAI {
       this.mochiBody.classList.remove('thinking');
       this.mochiBody.classList.add('speaking');
 
-      this.content.innerHTML = reply;
-      this.content.scrollTop = 0;
+      const replyDiv = document.createElement('div');
+      replyDiv.style.marginBottom = '8px';
+      replyDiv.style.fontSize = '12.5px';
+      replyDiv.innerHTML = reply;
+      this.content.appendChild(replyDiv);
+      this.content.scrollTop = this.content.scrollHeight;
 
       const plain = reply.replace(/<[^>]*>/g, '');
       this.speak(plain);
@@ -3678,8 +3682,12 @@ Lug'at (JSON): ${this.buildVocabContext()}`;
       this.typing.classList.remove('show');
       this.mochiBody.classList.remove('thinking');
       this.mochiBody.classList.add('speaking');
-      this.content.innerHTML = html;
-      this.content.scrollTop = 0;
+      const msgDiv = document.createElement('div');
+      msgDiv.style.marginBottom = '8px';
+      msgDiv.style.fontSize = '12.5px';
+      msgDiv.innerHTML = html;
+      this.content.appendChild(msgDiv);
+      this.content.scrollTop = this.content.scrollHeight;
       const speakTime = Math.max(2000, html.length * 40);
       setTimeout(()=>{ this.mochiBody.classList.remove('speaking'); }, speakTime);
     }, 600);
@@ -3711,8 +3719,6 @@ Lug'at (JSON): ${this.buildVocabContext()}`;
 window.addEventListener('DOMContentLoaded', ()=>{
   setTimeout(()=>{
     window.mochiAI = new MochiAI();
-  }, 100);
-});window.mochiAI = mochiAI;
   }, 100);
 });
 
