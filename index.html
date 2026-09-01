@@ -3382,7 +3382,8 @@ class MochiAI {
     // ============================================
     // GROQ API KALIT (FAQAT SHAXSIY FOYDALANISH UCHUN!)
     // ============================================
-    this.GROQ_API_KEY = "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";
+    this.GROQ_API_KEY = localStorage.getItem('mochi_groq_key') || '';
+    this.askedForKey = false;
 
     this.setupSpeechRecognition();
     this.init();
@@ -3550,8 +3551,33 @@ class MochiAI {
     this.mochiBody.classList.add('thinking');
     this.stopSpeaking();
 
+    // API kalit mavjudligini tekshirish
+    const hasKey = !!(this.GROQ_API_KEY && this.GROQ_API_KEY.startsWith('gsk_'));
+
+    // Avval local javobni sinab ko'ramiz — tez va ishonchli
+    const localReply = this.getLocalReply(text);
+
     try{
-      const reply = await this.askGroq(text);
+      let reply;
+      if(hasKey){
+        reply = await this.askGroq(text);
+      } else {
+        // API kalit yo'q — local javob + kalit so'rash
+        reply = localReply || this.getDefaultLocalReply(text);
+        // Bir marta so'raymiz
+        if(!this.askedForKey){
+          this.askedForKey = true;
+          setTimeout(()=>{
+            const key = prompt("Groq API kalitini kiriting (gsk_...):\n\nKalitni https://console.groq.com saytidan olishingiz mumkin.\n\nLocal javoblar ishlashda davom etadi, lekin AI javoblari uchun kalit kerak.");
+            if(key && key.startsWith('gsk_')){
+              localStorage.setItem('mochi_groq_key', key);
+              this.GROQ_API_KEY = key;
+              this.addMessage("✅ API kalit saqlandi! Endi to'liq AI javoblarni olishingiz mumkin.", 'system');
+            }
+          }, 1200);
+        }
+      }
+
       this.typing.classList.remove('show');
       this.mochiBody.classList.remove('thinking');
       this.mochiBody.classList.add('speaking');
@@ -3580,40 +3606,80 @@ class MochiAI {
       this.typing.classList.remove('show');
       this.mochiBody.classList.remove('thinking');
 
-      let errMsg = "";
-      let speakMsg = "";
-      if(err.message === 'CORS_BLOCKED'){
-        errMsg = "<b>⚠️ CORS xatosi</b><br>Faylni brauzerga to'g'ridan-to'g'ri ochdingiz (file://). Tashqi API chaqirish taqiqlanadi.<br><br><b>Yechim:</b> Faylni <b>Live Server</b> (VS Code) yoki <b>Python</b> orqali ishga tushiring:<br><code style='background:rgba(157,78,221,0.15);padding:2px 6px;border-radius:4px;'>python -m http.server 8000</code>";
-        speakMsg = "Faylni server orqali oching.";
-      }else if(err.message === 'NETWORK_ERROR'){
-        errMsg = "<b>📡 Tarmoq xatosi</b><br>Internet aloqasi uzilib qoldi yoki server javob bermayapti.";
-        speakMsg = "Internet aloqasini tekshiring.";
-      }else if(err.message === 'API_KEY_INVALID'){
-        errMsg = "<b>🔑 API kalit eskirgan</b><br>Groq API kaliti yaroqsiz. Yangi kalit olishingiz kerak.";
-        speakMsg = "API kalitini yangilang.";
-      }else if(err.message === 'RATE_LIMIT'){
-        errMsg = "<b>⏳ Juda ko'p so'rov</b><br>Bir oz kutib, keyinroq qayta urinib ko'ring.";
-        speakMsg = "Bir oz kuting.";
-      }else if(err.message && err.message.startsWith('API_ERROR')){
-        errMsg = "<b>🔧 Server xatosi</b><br>Groq serverida muammo: " + err.message.replace('API_ERROR:','') + "<br><br>Iltimos, keyinroq qayta urinib ko'ring.";
-        speakMsg = "Serverda muammo, keyinroq urinib ko'ring.";
-      }else{
-        errMsg = "😔 Kechirasiz, hozir javob bera olmadim. Internet aloqasini tekshiring yoki keyinroq qayta urinib ko'ring.";
-        speakMsg = "Kechirasiz, hozir javob bera olmadim.";
-      }
+      // API xatoligida ham local javob ko'rsatamiz
+      const fallbackReply = localReply || this.getDefaultLocalReply(text);
 
-      const msgDiv = document.createElement('div');
-      msgDiv.style.marginBottom = '8px';
-      msgDiv.style.fontSize = '12.5px';
-      msgDiv.innerHTML = errMsg;
-      this.content.appendChild(msgDiv);
+      this.mochiBody.classList.add('speaking');
+      const replyDiv = document.createElement('div');
+      replyDiv.style.marginBottom = '8px';
+      replyDiv.style.fontSize = '12.5px';
+      replyDiv.innerHTML = fallbackReply + '<br><br><em style="color:var(--muted);font-size:11px;">⚡ Local javob (API vaqtinchalik ishlamayapti)</em>';
+      this.content.appendChild(replyDiv);
       this.content.scrollTop = this.content.scrollHeight;
-      this.speak(speakMsg);
+
+      const plain = fallbackReply.replace(/<[^>]*>/g, '');
+      this.speak(plain);
+
+      setTimeout(()=>{ this.mochiBody.classList.remove('speaking'); }, 2500);
     }
   }
 
-  /* ========== TO'G'RIDAN-TO'G'RI GROQ API ========== */
-  async askGroq(userText){
+  /* ---------- LOCAL FALLBACK REPLIES ---------- */
+  getLocalReply(text){
+    const t = text.toLowerCase();
+
+    // So'z qidirish — lug'atdan
+    const foundWord = ALL_WORDS.find(w => 
+      t.includes(w.uz.toLowerCase()) || 
+      t.includes(w.romaji.toLowerCase()) ||
+      w.accepted.some(a => t.includes(a.toLowerCase()))
+    );
+
+    if(foundWord && (t.includes('so\'z') || t.includes('tushun') || t.includes('maq') || t.includes('nim') || t.includes('word'))){
+      return `<b>${foundWord.uz}</b><br>🇯🇵 <b>${foundWord.kana}</b><br>🔊 ${foundWord.romaji}<br>📂 ${foundWord.group}<br><br>${foundWord.note ? '📝 ' + foundWord.note + '<br>' : ''}Bu so'zni yodlash uchun uni ovoz chiqarib 3 marta takrorlang va misol jumlada ishlating! ✨`;
+    }
+
+    if(t.includes('mashq') || t.includes('mashq') || t.includes('practice') || t.includes('exercise')){
+      const pool = shuffle(ALL_WORDS).slice(0,4);
+      const correct = pool[0];
+      const opts = shuffle(pool.map(w => w.kana));
+      return `<b>🎯 Mashq: To'g'ri javobni tanlang</b><br><br><b>${correct.uz}</b> — qaysi?<br><br>${opts.map((o,i) => `${i+1}) ${o}`).join('<br>')}<br><br>✅ Javob: <b>${correct.kana}</b> (${correct.romaji})`;
+    }
+
+    if(t.includes('yodlash') || t.includes('tip') || t.includes('usul') || t.includes('maslahat') || t.includes('advice')){
+      const tips = [
+        "<b>🧠 Yodlash usuli: Mnemonika</b><br>Hiragana harflarini tasavvur qiling. Masalan, 'あ' (a) ni ochildiq og'iz shakli deb eslang.<br><br>Har bir so'zni rasmla bog'lab yodlang!",
+        "<b>🔄 Takrorlash jadvali</b><br>Yangi so'zni 1 soatdan keyin, keyin 1 kundan keyin, 3 kundan keyin va 1 haftadan keyin takrorlang. Bu Spaced Repetition usuli.<br><br>Flashcard'larni har kuni 10 daqiqa ko'rib chiqing!",
+        "<b>🎧 Eshitish orqali</b><br>Har bir so'zni ovoz chiqarib o'qing. Yapon tilida intonatsiya muhim!<br><br>Romajidan foydalanib to'g'ri talaffuzni o'rganing.",
+        "<b>✍️ Yozish orqali</b><br>So'zni 5 marta yozing: avval kana, keyin romaji, keyin ma'nosi. Qo'l mushaklari xotirani mustahkamlaydi!"
+      ];
+      return tips[Math.floor(Math.random()*tips.length)];
+    }
+
+    if(t.includes('salom') || t.includes('hello') || t.includes('hi ')){
+      return `Salom! 👋 Men Mochi — yapon tilidagi yordamchingizman.<br><br>Quyidagilarni qila olaman:<br>• So'zlarni tushuntirish<br>• Mashqlar berish<br>• Yodlash usullarini ko'rsatish<br>• Viktorinada yordam berish<br><br>Savol berishingiz mumkin! 🎌`;
+    }
+
+    if(t.includes('yordam') || t.includes('help') || t.includes('qila ol')){
+      return `<b>🌟 Mochi nima qila oladi?</b><br><br>1️⃣ <b>So'z tushuntirish</b> — istalgan so'z haqida ma'lumot<br>2️⃣ <b>Mashq qilish</b> — 4 variantli testlar<br>3️⃣ <b>Yodlash usuli</b> — samarali metodlar<br>4️⃣ <b>Viktorina yordami</b> — motivatsiya va maslahat<br><br>Tezkor tugmalardan foydalaning yoki savol yozing!`;
+    }
+
+    if(foundWord){
+      return `<b>${foundWord.uz}</b> — bu so'zni bilasizmi?<br><br>🇯🇵 <b>${foundWord.kana}</b><br>🔊 ${foundWord.romaji}<br>📂 ${foundWord.group}<br><br>Flashcard bo'limida bu so'zni ko'rib chiqing! 🃏`;
+    }
+
+    return null; // Local javob topilmadi — default reply ishlatiladi
+  }
+
+  getDefaultLocalReply(text){
+    const t = text.toLowerCase();
+    if(t.includes('qanday') || t.includes('nima')){
+      return `Bu haqida to'liq ma'lumot berish uchun <b>API kalit</b> kerak.<br><br>Lekin sizga yordam bera olaman:<br>• Istagan so'zni tushuntirishim mumkin<br>• Mashq berishim mumkin<br>• Yodlash usuli ko'rsatishim mumkin<br><br>Quyidagi tugmalardan birini bosing yoki so'z nomini yozing! 🎯`;
+    }
+    return `Tushundim! 💬<br><br>Hozircha to'liq AI javob berishim uchun API kalit kerak. Lekin sizga boshqa yo'llar bilan yordam bera olaman:<br><br>• <b>So'z tushuntirish</b> — istalgan so'z haqida<br>• <b>Mashq qilish</b> — testlar<br>• <b>Yodlash usuli</b> — samarali metodlar<br><br>Quyidagi tugmalardan foydalaning! 👇`;
+  }
+
+  /* ========== TO'G'RIDAN-TO'G'RI GROQ API ========== */async askGroq(userText){
     this.conversationHistory.push({role:'user', content:userText});
     if(this.conversationHistory.length > 20){
       this.conversationHistory = this.conversationHistory.slice(-20);
@@ -3633,7 +3699,7 @@ class MochiAI {
           "Authorization": `Bearer ${this.GROQ_API_KEY}`
         },
         body: JSON.stringify({
-          model: "llama-3.1-8b-instant",
+          model: "openai/gpt-oss-20b",
           messages: messages,
           temperature: 0.7,
           max_tokens: 1024
