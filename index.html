@@ -1593,6 +1593,16 @@ footer.note{text-align:center; color:rgba(255,255,255,0.25); font-size:11.5px; m
           <button class="sub-btn" data-set="mavzu8" id="flashSubMavzu8">8-mavzu</button>
           <button class="sub-btn" data-set="mavzu9" id="flashSubMavzu9">9-mavzu</button>
           <button class="sub-btn" data-set="mavzu10" id="flashSubMavzu10">10-mavzu</button>
+          <button class="sub-btn" data-set="mavzu11" id="flashSubMavzu11">11-mavzu</button>
+          <button class="sub-btn" data-set="mavzu12" id="flashSubMavzu12">12-mavzu</button>
+          <button class="sub-btn" data-set="mavzu13" id="flashSubMavzu13">13-mavzu</button>
+          <button class="sub-btn" data-set="mavzu14" id="flashSubMavzu14">14-mavzu</button>
+          <button class="sub-btn" data-set="mavzu15" id="flashSubMavzu15">15-mavzu</button>
+          <button class="sub-btn" data-set="mavzu16" id="flashSubMavzu16">16-mavzu</button>
+          <button class="sub-btn" data-set="mavzu17" id="flashSubMavzu17">17-mavzu</button>
+          <button class="sub-btn" data-set="mavzu18" id="flashSubMavzu18">18-mavzu</button>
+          <button class="sub-btn" data-set="mavzu19" id="flashSubMavzu19">19-mavzu</button>
+          <button class="sub-btn" data-set="mavzu20" id="flashSubMavzu20">20-mavzu</button>
         </div>
       </div>
       <div style="flex:1;"></div>
@@ -2000,6 +2010,358 @@ const MAVZU10_WORDS = [
   {uz:"yaxshi; sog'lom", kana:"げんきです", accepted:["げんきです"], romaji:"genki desu", group:"Iboralar", kb:"hira"}
 ];
 
+/* "11-mavzu" bo'limi — yangi so'zlar */
+const MAVZU11_WORDS = [
+  {uz:"Kelishgan (erkaklarga nisbatan)", note:"(な)", kana:"ハンサム", accepted:["ハンサム"], romaji:"hansamu", group:"Sifatlar", kb:"kata"},
+  {uz:"chiroyli, toza", note:"(な)", kana:"きれい", accepted:["きれい"], romaji:"kirei", group:"Sifatlar", kb:"hira"},
+  {uz:"Mehribon", note:"(親切・な)", kana:"しんせつ", accepted:["しんせつ"], romaji:"shinsetsu", group:"Sifatlar", kb:"hira"},
+  {uz:"Baquvvat", note:"(元気・な)", kana:"げんき", accepted:["げんき"], romaji:"genki", group:"Sifatlar", kb:"hira"},
+  {uz:"band emas", note:"(暇・な)", kana:"ひま", accepted:["ひま"], romaji:"hima", group:"Sifatlar", kb:"hira"},
+  {uz:"ajoyib; yaxshi", note:"(な)", kana:"すてき", accepted:["すてき"], romaji:"suteki", group:"Sifatlar", kb:"hira"},
+  {uz:"Yaxshi", note:"(良い)", kana:"いい", accepted:["いい","よい"], romaji:"ii (yoi)", group:"Sifatlar", kb:"hira"},
+  {uz:"Yomon", note:"(悪い)", kana:"わるい", accepted:["わるい"], romaji:"warui", group:"Sifatlar", kb:"hira"},
+  {uz:"Issiq", note:"(暑い / 熱い)", kana:"あつい", accepted:["あつい"], romaji:"atsui", group:"Sifatlar", kb:"hira"},
+  {uz:"sovuq (ob-havo)", note:"(寒い)", kana:"さむい", accepted:["さむい"], romaji:"samui", group:"Sifatlar", kb:"hira"},
+  {uz:"sovuq (narsalar, odamlar)", note:"(冷たい)", kana:"つめたい", accepted:["つめたい"], romaji:"tsumetai", group:"Sifatlar", kb:"hira"},
+  {uz:"Qiyin", note:"(難しい)", kana:"むずかしい", accepted:["むずかしい"], romaji:"muzukashii", group:"Sifatlar", kb:"hira"},
+  {uz:"Oson", note:"(易しい)", kana:"やさしい", accepted:["やさしい"], romaji:"yasashii", group:"Sifatlar", kb:"hira"},
+  {uz:"qimmat; baland; yuqori", note:"(高い)", kana:"たかい", accepted:["たかい"], romaji:"takai", group:"Sifatlar", kb:"hira"},
+  {uz:"Arzon", note:"(安い)", kana:"やすい", accepted:["やすい"], romaji:"yasui", group:"Sifatlar", kb:"hira"},
+  {uz:"Past", note:"(低い)", kana:"ひくい", accepted:["ひくい"], romaji:"hikui", group:"Sifatlar", kb:"hira"},
+  {uz:"Qiziqarli", kana:"おもしろい", accepted:["おもしろい"], romaji:"omoshiroi", group:"Sifatlar", kb:"hira"},
+  {uz:"Mazali", kana:"おいしい", accepted:["おいしい"], romaji:"oishii", group:"Sifatlar", kb:"hira"},
+  {uz:"Band", note:"(忙しい)", kana:"いそがしい", accepted:["いそがしい"], romaji:"isogashii", group:"Sifatlar", kb:"hira"},
+  {uz:"Qiziq", note:"(楽しい)", kana:"たのしい", accepted:["たのしい"], romaji:"tanoshii", group:"Sifatlar", kb:"hira"},
+  {uz:"Yeydigan narsa", note:"(食べ物)", kana:"たべもの", accepted:["たべもの"], romaji:"tabemono", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"Dars", note:"(勉強)", kana:"べんきょう", accepted:["べんきょう"], romaji:"benkyou", group:"Darslik so'zlari", kb:"hira"},
+  {uz:"Hayot, turmush tarzi", note:"(生活)", kana:"せいかつ", accepted:["せいかつ"], romaji:"seikatsu", group:"Boshqa", kb:"hira"},
+  {uz:"ish; yumush", note:"(仕事)", kana:"(お)しごと", accepted:["おしごと","しごと"], romaji:"(o)shigoto", group:"Boshqa", kb:"hira"},
+  {uz:"Uyning ijara puli", note:"(家賃)", kana:"やちん", accepted:["やちん"], romaji:"yachin", group:"Boshqa", kb:"hira"},
+  {uz:"Fuji tog'i", note:"(富士山)", kana:"ふじさん", accepted:["ふじさん"], romaji:"fujisan", group:"Joylar", kb:"hira"},
+  {uz:"Xo'jayin", kana:"オーナー", accepted:["オーナー"], romaji:"oonaa", group:"Kasblar", kb:"kata"},
+  {uz:"Juda", kana:"とても", accepted:["とても"], romaji:"totemo", group:"Boshqa", kb:"hira"},
+  {uz:"Va, keyin", kana:"そして", accepted:["そして"], romaji:"soshite", group:"Boshqa", kb:"hira"},
+  {uz:"yaxshi; shunday", kana:"そうですね", accepted:["そうですね"], romaji:"sou desu ne", group:"Iboralar", kb:"hira"},
+  {uz:"Unchalik", kana:"あまり", accepted:["あまり"], romaji:"amari", group:"Boshqa", kb:"hira"},
+  {uz:"Yaxshi bo'libdi", note:"(良かったですね)", kana:"よかったですね", accepted:["よかったですね"], romaji:"yokatta desu ne", group:"Iboralar", kb:"hira"},
+  {uz:"bir oz", kana:"ちょっと", accepted:["ちょっと"], romaji:"chotto", group:"Boshqa", kb:"hira"},
+  {uz:"~, lekin ~", kana:"～が、～", accepted:["～が、～","が"], romaji:"~ga, ~", group:"Boshqa", kb:"hira"},
+  {uz:"Qanaqasiga, qanday", kana:"どう", accepted:["どう"], romaji:"dou", group:"Boshqa", kb:"hira"}
+];
+
+/* "12-mavzu" bo'limi — yangi so'zlar */
+const MAVZU12_WORDS = [
+  {uz:"Tinch, sokin", note:"(静か・な)", kana:"しずか", accepted:["しずか"], romaji:"shizuka", group:"Sifatlar", kb:"hira"},
+  {uz:"Shovqinli", note:"(賑やか・な)", kana:"にぎやか", accepted:["にぎやか"], romaji:"nigiyaka", group:"Sifatlar", kb:"hira"},
+  {uz:"Mashhur", note:"(有名・な)", kana:"ゆうめい", accepted:["ゆうめい"], romaji:"yuumei", group:"Sifatlar", kb:"hira"},
+  {uz:"Qulay", note:"(便利・な)", kana:"べんり", accepted:["べんり"], romaji:"benri", group:"Sifatlar", kb:"hira"},
+  {uz:"Katta", note:"(大きい)", kana:"おおきい", accepted:["おおきい"], romaji:"ookii", group:"Sifatlar", kb:"hira"},
+  {uz:"Kichik", note:"(小さい)", kana:"ちいさい", accepted:["ちいさい"], romaji:"chiisai", group:"Sifatlar", kb:"hira"},
+  {uz:"Yangi", note:"(新しい)", kana:"あたらしい", accepted:["あたらしい"], romaji:"atarashii", group:"Sifatlar", kb:"hira"},
+  {uz:"Eski", note:"(古い)", kana:"ふるい", accepted:["ふるい"], romaji:"furui", group:"Sifatlar", kb:"hira"},
+  {uz:"Oq", note:"(白い)", kana:"しろい", accepted:["しろい"], romaji:"shiroi", group:"Sifatlar", kb:"hira"},
+  {uz:"Qora", note:"(黒い)", kana:"くろい", accepted:["くろい"], romaji:"kuroi", group:"Sifatlar", kb:"hira"},
+  {uz:"Qizil", note:"(赤い)", kana:"あかい", accepted:["あかい"], romaji:"akai", group:"Sifatlar", kb:"hira"},
+  {uz:"ko'k", note:"(青い)", kana:"あおい", accepted:["あおい"], romaji:"aoi", group:"Sifatlar", kb:"hira"},
+  {uz:"ona shahri, tug'ilgan joyi", note:"(出身)", kana:"(ご)しゅっしん", accepted:["ごしゅっしん","しゅっしん"], romaji:"(go)shusshin", group:"Shaxsiy ma'lumot", kb:"hira"},
+  {uz:"Shahar", note:"(町)", kana:"まち", accepted:["まち"], romaji:"machi", group:"Joylar", kb:"hira"},
+  {uz:"Odam", note:"(人)", kana:"ひと", accepted:["ひと"], romaji:"hito", group:"Odamlar", kb:"hira"},
+  {uz:"Joy", kana:"ところ", accepted:["ところ"], romaji:"tokoro", group:"Joylar", kb:"hira"},
+  {uz:"Tog'", note:"(山)", kana:"やま", accepted:["やま"], romaji:"yama", group:"Joylar", kb:"hira"},
+  {uz:"Bino", kana:"ビル", accepted:["ビル"], romaji:"biru", group:"Joylar", kb:"kata"},
+  {uz:"Olma", kana:"りんご", accepted:["りんご"], romaji:"ringo", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"Kiyim", note:"(服)", kana:"ふく", accepted:["ふく"], romaji:"fuku", group:"Kiyim-kechak", kb:"hira"},
+  {uz:"Otera, ibodatxona", note:"(お寺)", kana:"おてら", accepted:["おてら"], romaji:"otera", group:"Joylar", kb:"hira"},
+  {uz:"Kinkakuji ibodatxonasi", note:"(金閣寺)", kana:"きんかくじ", accepted:["きんかくじ"], romaji:"kinkakuji", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Tokio stantsiyasi", note:"(東京駅)", kana:"とうきょうえき", accepted:["とうきょうえき"], romaji:"toukyou eki", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Kyushu", note:"(九州)", kana:"きゅうしゅう", accepted:["きゅうしゅう"], romaji:"kyuushuu", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Fukuoka", note:"(福岡)", kana:"ふくおか", accepted:["ふくおか"], romaji:"fukuoka", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Taiwan", note:"(台湾)", kana:"たいわん", accepted:["たいわん"], romaji:"taiwan", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Taypey", note:"(台北)", kana:"たいぺい", accepted:["たいぺい"], romaji:"taipei", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Yaqinda", note:"(最近)", kana:"さいきん", accepted:["さいきん"], romaji:"saikin", group:"Vaqt", kb:"hira"},
+  {uz:"Siz qayerdansiz?", kana:"どちらのごしゅっしんですか", accepted:["どちらのごしゅっしんですか"], romaji:"dochira no go-shusshin desu ka", group:"Tanishuv", kb:"hira"},
+  {uz:"qanday ~", kana:"どんな", accepted:["どんな"], romaji:"donna", group:"Boshqa", kb:"hira"}
+];
+
+/* "13-mavzu" bo'limi — yangi so'zlar */
+const MAVZU13_WORDS = [
+  {uz:"Tushunmoq", note:"I guruh fe'li", kana:"わかります", accepted:["わかります"], romaji:"wakarimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Bor(bo'lmoq)", note:"I guruh fe'li", kana:"あります", accepted:["あります"], romaji:"arimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Yoqimli, yaxshi ko'rgan", note:"(好き・な)", kana:"すき", accepted:["すき"], romaji:"suki", group:"Sifatlar", kb:"hira"},
+  {uz:"Yomon ko'rish, yoqtirmaslik", note:"(嫌い・な)", kana:"きらい", accepted:["きらい"], romaji:"kirai", group:"Sifatlar", kb:"hira"},
+  {uz:"Mohir, usta", note:"(上手・な)", kana:"じょうず", accepted:["じょうず"], romaji:"jouzu", group:"Sifatlar", kb:"hira"},
+  {uz:"Mahoratsiz, no'noq", note:"(下手・な)", kana:"へた", accepted:["へた"], romaji:"heta", group:"Sifatlar", kb:"hira"},
+  {uz:"Har xil", note:"(な)", kana:"いろいろ", accepted:["いろいろ"], romaji:"iroiro", group:"Sifatlar", kb:"hira"},
+  {uz:"musobaqa", note:"(試合)", kana:"しあい", accepted:["しあい"], romaji:"shiai", group:"Boshqa", kb:"hira"},
+  {uz:"Ovqat, taom", note:"(料理)", kana:"りょうり", accepted:["りょうり"], romaji:"ryouri", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"Ichimlik", note:"(飲み物)", kana:"のみもの", accepted:["のみもの"], romaji:"nomimono", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"Sport", kana:"スポーツ", accepted:["スポーツ"], romaji:"supootsu", group:"Boshqa", kb:"kata"},
+  {uz:"Fudbol", kana:"サッカー", accepted:["サッカー"], romaji:"sakkaa", group:"Boshqa", kb:"kata"},
+  {uz:"Basketbol", kana:"バスケットボール", accepted:["バスケットボール"], romaji:"basukettobooru", group:"Boshqa", kb:"kata"},
+  {uz:"Beysbol", note:"(野球)", kana:"やきゅう", accepted:["やきゅう"], romaji:"yakyuu", group:"Boshqa", kb:"hira"},
+  {uz:"raqsga tushish", kana:"ダンス", accepted:["ダンス"], romaji:"dansu", group:"Boshqa", kb:"kata"},
+  {uz:"Musiqa", note:"(音楽)", kana:"おんがく", accepted:["おんがく"], romaji:"ongaku", group:"Boshqa", kb:"hira"},
+  {uz:"qo'shiq", note:"(歌)", kana:"うた", accepted:["うた"], romaji:"uta", group:"Boshqa", kb:"hira"},
+  {uz:"Konsert", kana:"コンサート", accepted:["コンサート"], romaji:"konsaato", group:"Boshqa", kb:"kata"},
+  {uz:"Karaoke", kana:"カラオケ", accepted:["カラオケ"], romaji:"karaoke", group:"Boshqa", kb:"kata"},
+  {uz:"Rasm", note:"(絵)", kana:"え", accepted:["え"], romaji:"e", group:"Boshqa", kb:"hira"},
+  {uz:"Yozuv", note:"(字)", kana:"じ", accepted:["じ"], romaji:"ji", group:"Boshqa", kb:"hira"},
+  {uz:"Kanji", note:"(漢字)", kana:"かんじ", accepted:["かんじ"], romaji:"kanji", group:"Til", kb:"hira"},
+  {uz:"Hiragana", note:"(平仮名)", kana:"ひらがな", accepted:["ひらがな"], romaji:"hiragana", group:"Til", kb:"hira"},
+  {uz:"Katakana", kana:"カタカナ", accepted:["カタカナ"], romaji:"katakana", group:"Til", kb:"kata"},
+  {uz:"chet tili", note:"(外国語)", kana:"がいこくご", accepted:["がいこくご"], romaji:"gaikokugo", group:"Til", kb:"hira"},
+  {uz:"turmush o'rtog'ingiz (xo'jayiningiz)", kana:"ごしゅじん", accepted:["ごしゅじん"], romaji:"go-shujin", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Er, turmush o'rtoq", note:"(夫)", kana:"おっと", accepted:["おっと"], romaji:"otto", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Xotin", note:"(奥さん)", kana:"おくさん", accepted:["おくさん"], romaji:"okusan", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Xotin", note:"(妻)", kana:"つま", accepted:["つま"], romaji:"tsuma", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Bola, farzand", note:"(子ども)", kana:"こども", accepted:["こども"], romaji:"kodomo", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"farzand", note:"(お子さん)", kana:"おこさん", accepted:["おこさん"], romaji:"okosan", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Tarix", note:"(歴史)", kana:"れきし", accepted:["れきし"], romaji:"rekishi", group:"Darslik so'zlari", kb:"hira"},
+  {uz:"Mayda pul", note:"(細かいお金)", kana:"こまかいおかね", accepted:["こまかいおかね"], romaji:"komakai okane", group:"Pul va raqamlar", kb:"hira"},
+  {uz:"Chipta", kana:"チケット", accepted:["チケット"], romaji:"chiketto", group:"Boshqa", kb:"kata"},
+  {uz:"Vaqt", note:"(時間)", kana:"じかん", accepted:["じかん"], romaji:"jikan", group:"Vaqt", kb:"hira"},
+  {uz:"va'da", note:"(約束)", kana:"やくそく", accepted:["やくそく"], romaji:"yakusoku", group:"Boshqa", kb:"hira"},
+  {uz:"Ish, yumush", note:"(用事)", kana:"ようじ", accepted:["ようじ"], romaji:"youji", group:"Boshqa", kb:"hira"},
+  {uz:"xarid qilish", note:"(買い物)", kana:"かいもの", accepted:["かいもの"], romaji:"kaimono", group:"Boshqa", kb:"hira"},
+  {uz:"Rok (musiqa)", kana:"ロック", accepted:["ロック"], romaji:"rokku", group:"Boshqa", kb:"kata"},
+  {uz:"Pop (musiqa)", kana:"ポップス", accepted:["ポップス"], romaji:"poppusu", group:"Boshqa", kb:"kata"},
+  {uz:"Jazz (musiqa)", kana:"ジャズ", accepted:["ジャズ"], romaji:"jazu", group:"Boshqa", kb:"kata"},
+  {uz:"tez-tez", kana:"よく", accepted:["よく"], romaji:"yoku", group:"Boshqa", kb:"hira"},
+  {uz:"Deyarli", kana:"だいたい", accepted:["だいたい"], romaji:"daitai", group:"Boshqa", kb:"hira"},
+  {uz:"juda ko'p", kana:"たくさん", accepted:["たくさん"], romaji:"takusan", group:"Boshqa", kb:"hira"},
+  {uz:"bir oz", note:"(少し)", kana:"すこし", accepted:["すこし"], romaji:"sukoshi", group:"Boshqa", kb:"hira"},
+  {uz:"Aslo, umuman", note:"(全然)", kana:"ぜんぜん", accepted:["ぜんぜん"], romaji:"zenzen", group:"Boshqa", kb:"hira"},
+  {uz:"Tezroq", kana:"はやく", accepted:["はやく"], romaji:"hayaku", group:"Boshqa", kb:"hira"},
+  {uz:"Afsus", note:"(残念です)", kana:"ざんねんです", accepted:["ざんねんです"], romaji:"zannen desu", group:"Iboralar", kb:"hira"},
+  {uz:"~dan", kana:"から", accepted:["から"], romaji:"kara", group:"Boshqa", kb:"hira"},
+  {uz:"Nima uchun", kana:"どうして", accepted:["どうして"], romaji:"doushite", group:"Boshqa", kb:"hira"}
+];
+
+/* "14-mavzu" bo'limi — yangi so'zlar */
+const MAVZU14_WORDS = [
+  {uz:"Bor bo'lmoq (jonli narsalarga)", note:"II guruh fe'li", kana:"います", accepted:["います"], romaji:"imasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Bor bo'lmoq (jonsiz narsalarga)", note:"I guruh fe'li", kana:"あります", accepted:["あります"], romaji:"arimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"ATM (bankomat)", kana:"エーティーエム", accepted:["エーティーエム"], romaji:"eetiiemu", group:"Boshqa", kb:"kata"},
+  {uz:"O'g'il bola, erkak kishi", note:"(男の子)", kana:"おとこのこ", accepted:["おとこのこ"], romaji:"otoko no ko", group:"Odamlar", kb:"hira"},
+  {uz:"Qiz bola, ayol kishi", note:"(女の子)", kana:"おんなのこ", accepted:["おんなのこ"], romaji:"onna no ko", group:"Odamlar", kb:"hira"},
+  {uz:"It", note:"(犬)", kana:"いぬ", accepted:["いぬ"], romaji:"inu", group:"Boshqa", kb:"hira"},
+  {uz:"Mushuk", note:"(猫)", kana:"ねこ", accepted:["ねこ"], romaji:"neko", group:"Boshqa", kb:"hira"},
+  {uz:"Daraxt", note:"(木)", kana:"き", accepted:["き"], romaji:"ki", group:"Boshqa", kb:"hira"},
+  {uz:"Narsa,buyum", note:"(物)", kana:"もの", accepted:["もの"], romaji:"mono", group:"Boshqa", kb:"hira"},
+  {uz:"Batareya", note:"(電池)", kana:"でんち", accepted:["でんち"], romaji:"denchi", group:"Boshqa", kb:"hira"},
+  {uz:"Quti,yashik", note:"(箱)", kana:"はこ", accepted:["はこ"], romaji:"hako", group:"Boshqa", kb:"hira"},
+  {uz:"Eshik", kana:"ドア", accepted:["ドア"], romaji:"doa", group:"Boshqa", kb:"kata"},
+  {uz:"Deraza", note:"(窓)", kana:"まど", accepted:["まど"], romaji:"mado", group:"Boshqa", kb:"hira"},
+  {uz:"viklyuchatel (elektr tokini ulaydigan va uzadigan asbob)", kana:"スイッチ", accepted:["スイッチ"], romaji:"suicchi", group:"Boshqa", kb:"kata"},
+  {uz:"Muzlatgich", note:"(冷蔵庫)", kana:"れいぞうこ", accepted:["れいぞうこ"], romaji:"reizouko", group:"Boshqa", kb:"hira"},
+  {uz:"Stol", kana:"テーブル", accepted:["テーブル"], romaji:"teeburu", group:"Boshqa", kb:"kata"},
+  {uz:"Yotoq,krovat", kana:"ベッド", accepted:["ベッド"], romaji:"beddo", group:"Boshqa", kb:"kata"},
+  {uz:"Konditsioner", kana:"エアコン", accepted:["エアコン"], romaji:"eakon", group:"Boshqa", kb:"kata"},
+  {uz:"Tokcha", note:"(棚)", kana:"たな", accepted:["たな"], romaji:"tana", group:"Boshqa", kb:"hira"},
+  {uz:"Pochta qutisi", kana:"ポスト", accepted:["ポスト"], romaji:"posuto", group:"Boshqa", kb:"kata"},
+  {uz:"Gul do'koni", note:"(花屋)", kana:"はなや", accepted:["はなや"], romaji:"hanaya", group:"Joylar", kb:"hira"},
+  {uz:"kitob do'koni", note:"(本屋)", kana:"ほんや", accepted:["ほんや"], romaji:"hon'ya", group:"Joylar", kb:"hira"},
+  {uz:"do'kon", note:"(~屋)", kana:"~や", accepted:["~や"], romaji:"~ya", group:"Boshqa", kb:"hira"},
+  {uz:"Politsiya idorasi", note:"(交番)", kana:"こうばん", accepted:["こうばん"], romaji:"kouban", group:"Joylar", kb:"hira"},
+  {uz:"bino", kana:"ビル", accepted:["ビル"], romaji:"biru", group:"Joylar", kb:"kata"},
+  {uz:"park", note:"(公園)", kana:"こうえん", accepted:["こうえん"], romaji:"kouen", group:"Joylar", kb:"hira"},
+  {uz:"Bekat", note:"(乗り場)", kana:"のりば", accepted:["のりば"], romaji:"noriba", group:"Joylar", kb:"hira"},
+  {uz:"Tokio Disneylend", note:"(東京ディズニーランド)", kana:"とうきょうでぃずにーらんど", accepted:["とうきょうでぃずにーらんど"], romaji:"toukyou dizuniirando", group:"Joylar", kb:"hira"},
+  {uz:"Chiba prefekturasi", note:"(千葉県)", kana:"ちばけん", accepted:["ちばけん"], romaji:"chibaken", group:"Joylar", kb:"hira"},
+  {uz:"Prefektura", note:"(県)", kana:"けん", accepted:["けん"], romaji:"ken", group:"Boshqa", kb:"hira"},
+  {uz:"Ostida", note:"(下)", kana:"した", accepted:["した"], romaji:"shita", group:"Joylashuv", kb:"hira"},
+  {uz:"Yuqorida", note:"(上)", kana:"うえ", accepted:["うえ"], romaji:"ue", group:"Joylashuv", kb:"hira"},
+  {uz:"Oldida", note:"(前)", kana:"まえ", accepted:["まえ"], romaji:"mae", group:"Joylashuv", kb:"hira"},
+  {uz:"Orqasida", note:"(後ろ)", kana:"うしろ", accepted:["うしろ"], romaji:"ushiro", group:"Joylashuv", kb:"hira"},
+  {uz:"O'ng tomon", note:"(右)", kana:"みぎ", accepted:["みぎ"], romaji:"migi", group:"Joylashuv", kb:"hira"},
+  {uz:"Chap tomon", note:"(左)", kana:"ひだり", accepted:["ひだり"], romaji:"hidari", group:"Joylashuv", kb:"hira"},
+  {uz:"O'rtasida,ichkarisida", note:"(中)", kana:"なか", accepted:["なか"], romaji:"naka", group:"Joylashuv", kb:"hira"},
+  {uz:"Tashqarida", note:"(外)", kana:"そと", accepted:["そと"], romaji:"soto", group:"Joylashuv", kb:"hira"},
+  {uz:"Yonida", note:"(隣)", kana:"となり", accepted:["となり"], romaji:"tonari", group:"Joylashuv", kb:"hira"},
+  {uz:"yaqinida", note:"(近く)", kana:"ちかく", accepted:["ちかく"], romaji:"chikaku", group:"Joylashuv", kb:"hira"},
+  {uz:"Orasida", note:"(間)", kana:"あいだ", accepted:["あいだ"], romaji:"aida", group:"Joylashuv", kb:"hira"},
+  {uz:"lekin", kana:"でも", accepted:["でも"], romaji:"demo", group:"Boshqa", kb:"hira"},
+  {uz:"~ va ~ va boshqalar.", kana:"~や~", accepted:["~や~"], romaji:"~ya~", group:"Boshqa", kb:"hira"}
+];
+
+/* "15-mavzu" bo'limi — yangi so'zlar */
+const MAVZU15_WORDS = [
+  {uz:"Mening farzandlarim bor", note:"II guruh fe'li", kana:"（こどもが）います", accepted:["（こどもが）います"], romaji:"(kodomo ga) imasu", group:"Iboralar", kb:"hira"},
+  {uz:"Men Yaponiyadaman", note:"I guruh fe'li", kana:"（にほんに）います", accepted:["（にほんに）います"], romaji:"(nihon ni) imasu", group:"Iboralar", kb:"hira"},
+  {uz:"Buyurtma", note:"(ご注文)", kana:"（ご）ちゅうもん", accepted:["（ご）ちゅうもん"], romaji:"(go)chuumon", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"Olib ketish", note:"(お持ち帰り)", kana:"おもちかえり", accepted:["おもちかえり"], romaji:"omochikaeri", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"Hisob-kitob", note:"(お会計)", kana:"おかいけい", accepted:["おかいけい"], romaji:"okaikei", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"Bitta", note:"(1つ)", kana:"ひとつ", accepted:["ひとつ"], romaji:"hitotsu", group:"Sanoq", kb:"hira"},
+  {uz:"Ikkita", note:"(2つ)", kana:"ふたつ", accepted:["ふたつ"], romaji:"futatsu", group:"Sanoq", kb:"hira"},
+  {uz:"uchta", note:"(3つ)", kana:"みっつ", accepted:["みっつ"], romaji:"mittsu", group:"Sanoq", kb:"hira"},
+  {uz:"to'rtta", note:"(4つ)", kana:"よっつ", accepted:["よっつ"], romaji:"yottsu", group:"Sanoq", kb:"hira"},
+  {uz:"Beshta", note:"(5つ)", kana:"いつつ", accepted:["いつつ"], romaji:"itsutsu", group:"Sanoq", kb:"hira"},
+  {uz:"Oltita", note:"(6つ)", kana:"むっつ", accepted:["むっつ"], romaji:"muttsu", group:"Sanoq", kb:"hira"},
+  {uz:"Yettita", note:"(7つ)", kana:"ななつ", accepted:["ななつ"], romaji:"nanatsu", group:"Sanoq", kb:"hira"},
+  {uz:"Sakkizta", note:"(8つ)", kana:"やっつ", accepted:["やっつ"], romaji:"yattsu", group:"Sanoq", kb:"hira"},
+  {uz:"to'qqizta", note:"(9つ)", kana:"ここのつ", accepted:["ここのつ"], romaji:"kokonotsu", group:"Sanoq", kb:"hira"},
+  {uz:"o'nta", note:"(10)", kana:"とお", accepted:["とお"], romaji:"too", group:"Sanoq", kb:"hira"},
+  {uz:"1 kishi", note:"(1人)", kana:"ひとり", accepted:["ひとり"], romaji:"hitori", group:"Sanoq", kb:"hira"},
+  {uz:"ikki kishi", note:"(2人)", kana:"ふたり", accepted:["ふたり"], romaji:"futari", group:"Sanoq", kb:"hira"},
+  {uz:"uch kishi", note:"(3人)", kana:"さんにん", accepted:["さんにん"], romaji:"sannin", group:"Sanoq", kb:"hira"},
+  {uz:"~ kishi (sanoq suffiksi)", note:"(~人)", kana:"~にん", accepted:["~にん"], romaji:"~nin", group:"Sanoq", kb:"hira"},
+  {uz:"~ta (texnikalarga ishlatiladi)", note:"(~台)", kana:"~だい", accepted:["~だい"], romaji:"~dai", group:"Sanoq", kb:"hira"},
+  {uz:"~ta (yupqa narsalar uchun)", note:"(~枚)", kana:"~まい", accepted:["~まい"], romaji:"~mai", group:"Sanoq", kb:"hira"},
+  {uz:"Olma", kana:"りんご", accepted:["りんご"], romaji:"ringo", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"Mandarin", kana:"みかん", accepted:["みかん"], romaji:"mikan", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"Gyudon (Mol go'shtidan tayyorlangan taom)", note:"(牛丼)", kana:"ぎゅうどん", accepted:["ぎゅうどん"], romaji:"gyuudon", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"Muzqaymoq", kana:"アイスクリーム", accepted:["アイスクリーム"], romaji:"aisukuriimu", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"Sendvich", kana:"サンドイッチ", accepted:["サンドイッチ"], romaji:"sandoicchi", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"Gamburger", kana:"ハンバーガー", accepted:["ハンバーガー"], romaji:"hanbaagaa", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"Chizburger", kana:"チーズバーガー", accepted:["チーズバーガー"], romaji:"chiizubaagaa", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"Kartoshka", kana:"ポテト", accepted:["ポテト"], romaji:"poteto", group:"Ovqat-ichimlik", kb:"kata"},
+  {uz:"Pochta markasi", note:"(切手)", kana:"きって", accepted:["きって"], romaji:"kitte", group:"Boshqa", kb:"hira"},
+  {uz:"Otkritka", kana:"はがき", accepted:["はがき"], romaji:"hagaki", group:"Boshqa", kb:"hira"},
+  {uz:"Convert", note:"(封筒)", kana:"ふうとう", accepted:["ふうとう"], romaji:"fuutou", group:"Boshqa", kb:"hira"},
+  {uz:"ota-ona", note:"(両親)", kana:"りょうしん", accepted:["りょうしん"], romaji:"ryoushin", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Aka-uka", note:"(兄弟)", kana:"きょうだい", accepted:["きょうだい"], romaji:"kyoudai", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Akam", note:"(兄)", kana:"あに", accepted:["あに"], romaji:"ani", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Akangiz", note:"(お兄さん)", kana:"おにいさん", accepted:["おにいさん"], romaji:"oniisan", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Opam", note:"(姉)", kana:"あね", accepted:["あね"], romaji:"ane", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Opangiz", note:"(お姉さん)", kana:"おねえさん", accepted:["おねえさん"], romaji:"oneesan", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Ukam", note:"(弟)", kana:"おとうと", accepted:["おとうと"], romaji:"otouto", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Singlim", note:"(妹)", kana:"いもうと", accepted:["いもうと"], romaji:"imouto", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Ukangiz", note:"(弟さん)", kana:"おとうとさん", accepted:["おとうとさん"], romaji:"otoutosan", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Singlingiz", note:"(妹さん)", kana:"いもうとさん", accepted:["いもうとさん"], romaji:"imoutosan", group:"Oilaviy munosabatlar", kb:"hira"},
+  {uz:"Yapon tili maktabi", note:"(日本語学校)", kana:"にほんごがっこう", accepted:["にほんごがっこう"], romaji:"nihongo gakkou", group:"Joylar", kb:"hira"},
+  {uz:"Alohida", note:"(別々に)", kana:"べつべつに", accepted:["べつべつに"], romaji:"betsubetsu ni", group:"Boshqa", kb:"hira"},
+  {uz:"Men tushundim", kana:"かしこまりました", accepted:["かしこまりました"], romaji:"kashikomarimashita", group:"Iboralar", kb:"hira"},
+  {uz:"Qancha", kana:"いくつ", accepted:["いくつ"], romaji:"ikutsu", group:"Sanoq", kb:"hira"}
+];
+
+/* "16-mavzu" bo'limi — yangi so'zlar */
+const MAVZU16_WORDS = [
+  {uz:"(ishga bormaslik) dam olmoq", note:"（会社を）休みます・I guruh fe'li", kana:"（かいしゃを）やすみます", accepted:["（かいしゃを）やすみます"], romaji:"(kaisha wo) yasumimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"sarf bo'lmoq, ketmoq (pul yoki vaqt)", note:"I guruh fe'li", kana:"かかります", accepted:["かかります"], romaji:"kakarimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"~ soat", note:"(~時間)", kana:"~じかん", accepted:["~じかん"], romaji:"~jikan", group:"Vaqt", kb:"hira"},
+  {uz:"~ hafta", note:"(~週間)", kana:"~しゅうかん", accepted:["~しゅうかん"], romaji:"~shuukan", group:"Vaqt", kb:"hira"},
+  {uz:"~ oy", note:"(~か月)", kana:"~かげつ", accepted:["~かげつ"], romaji:"~kagetsu", group:"Vaqt", kb:"hira"},
+  {uz:"~yil", note:"(~年)", kana:"~ねん", accepted:["~ねん"], romaji:"~nen", group:"Vaqt", kb:"hira"},
+  {uz:"~ marta", note:"(~回)", kana:"~かい", accepted:["~かい"], romaji:"~kai", group:"Vaqt", kb:"hira"},
+  {uz:"Shinkansen,ekspress poyezd", note:"(新幹線)", kana:"しんかんせん", accepted:["しんかんせん"], romaji:"shinkansen", group:"Transport", kb:"hira"},
+  {uz:"Tokio", note:"(東京)", kana:"とうきょう", accepted:["とうきょう"], romaji:"toukyou", group:"Joylar", kb:"hira"},
+  {uz:"Osaka", note:"(大阪)", kana:"おおさか", accepted:["おおさか"], romaji:"oosaka", group:"Joylar", kb:"hira"},
+  {uz:"Xirosima", note:"(広島)", kana:"ひろしま", accepted:["ひろしま"], romaji:"hiroshima", group:"Joylar", kb:"hira"},
+  {uz:"Nyu-York", kana:"ニューヨーク", accepted:["ニューヨーク"], romaji:"nyuu-yooku", group:"Joylar", kb:"kata"},
+  {uz:"xorijiy davlat", note:"(外国)", kana:"がいこく", accepted:["がいこく"], romaji:"gaikoku", group:"Joylar", kb:"hira"},
+  {uz:"~lar, ~cha, taxminan~", kana:"~くらい", accepted:["~くらい"], romaji:"~kurai", group:"Boshqa", kb:"hira"},
+  {uz:"faqat", kana:"~だけ", accepted:["~だけ"], romaji:"~dake", group:"Boshqa", kb:"hira"},
+  {uz:"shamollamoq", note:"(風邪をひきます)", kana:"かぜをひきます", accepted:["かぜをひきます"], romaji:"kaze wo hikimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Qancha (vaqt)", kana:"どのくらい", accepted:["どのくらい"], romaji:"dono kurai", group:"Vaqt", kb:"hira"}
+];
+
+/* "17-mavzu" bo'limi — yangi so'zlar */
+const MAVZU17_WORDS = [
+  {uz:"oson", note:"(簡単・な)", kana:"かんたん", accepted:["かんたん"], romaji:"kantan", group:"Sifatlar", kb:"hira"},
+  {uz:"yaqin", note:"(近い)", kana:"ちかい", accepted:["ちかい"], romaji:"chikai", group:"Sifatlar", kb:"hira"},
+  {uz:"uzoq", note:"(遠い)", kana:"とおい", accepted:["とおい"], romaji:"tooi", group:"Sifatlar", kb:"hira"},
+  {uz:"Erta,tez", note:"(早い/速い)", kana:"はやい", accepted:["はやい"], romaji:"hayai", group:"Sifatlar", kb:"hira"},
+  {uz:"sekin", note:"(遅い)", kana:"おそい", accepted:["おそい"], romaji:"osoi", group:"Sifatlar", kb:"hira"},
+  {uz:"ko'p", note:"(多い)", kana:"おおい", accepted:["おおい"], romaji:"ooi", group:"Sifatlar", kb:"hira"},
+  {uz:"oz", note:"(少ない)", kana:"すくない", accepted:["すくない"], romaji:"sukunai", group:"Sifatlar", kb:"hira"},
+  {uz:"Iliq", note:"(暖かい/温かい)", kana:"あたたかい", accepted:["あたたかい"], romaji:"atatakai", group:"Sifatlar", kb:"hira"},
+  {uz:"Ajoyib", note:"(涼しい)", kana:"すずしい", accepted:["すずしい"], romaji:"suzushii", group:"Sifatlar", kb:"hira"},
+  {uz:"Shirin", note:"(甘い)", kana:"あまい", accepted:["あまい"], romaji:"amai", group:"Sifatlar", kb:"hira"},
+  {uz:"Achchiq", note:"(辛い)", kana:"からい", accepted:["からい"], romaji:"karai", group:"Sifatlar", kb:"hira"},
+  {uz:"og'ir", note:"(重い)", kana:"おもい", accepted:["おもい"], romaji:"omoi", group:"Sifatlar", kb:"hira"},
+  {uz:"yengil", note:"(軽い)", kana:"かるい", accepted:["かるい"], romaji:"karui", group:"Sifatlar", kb:"hira"},
+  {uz:"Yaxshi (yaxshi kofe)", kana:"いい", accepted:["いい"], romaji:"ii", group:"Sifatlar", kb:"hira"},
+  {uz:"Bo'yi baland", note:"(背が高い)", kana:"せがたかい", accepted:["せがたかい"], romaji:"se ga takai", group:"Sifatlar", kb:"hira"},
+  {uz:"Bo'yi past", note:"(背が低い)", kana:"せがひくい", accepted:["せがひくい"], romaji:"se ga hikui", group:"Sifatlar", kb:"hira"},
+  {uz:"Mavsum", note:"(季節)", kana:"きせつ", accepted:["きせつ"], romaji:"kisetsu", group:"Vaqt", kb:"hira"},
+  {uz:"Bahor", note:"(春)", kana:"はる", accepted:["はる"], romaji:"haru", group:"Vaqt", kb:"hira"},
+  {uz:"Yoz", note:"(夏)", kana:"なつ", accepted:["なつ"], romaji:"natsu", group:"Vaqt", kb:"hira"},
+  {uz:"Kuz", note:"(秋)", kana:"あき", accepted:["あき"], romaji:"aki", group:"Vaqt", kb:"hira"},
+  {uz:"Qish", note:"(冬)", kana:"ふゆ", accepted:["ふゆ"], romaji:"fuyu", group:"Vaqt", kb:"hira"},
+  {uz:"Mehmonxona", kana:"ホテル", accepted:["ホテル"], romaji:"hoteru", group:"Joylar", kb:"kata"},
+  {uz:"Aeroport", note:"(空港)", kana:"くうこう", accepted:["くうこう"], romaji:"kuukou", group:"Joylar", kb:"hira"},
+  {uz:"tog'", note:"(山)", kana:"やま", accepted:["やま"], romaji:"yama", group:"Boshqa", kb:"hira"},
+  {uz:"Dengiz", note:"(海)", kana:"うみ", accepted:["うみ"], romaji:"umi", group:"Boshqa", kb:"hira"},
+  {uz:"Okinava", note:"(沖縄)", kana:"おきなわ", accepted:["おきなわ"], romaji:"okinawa", group:"Joylar", kb:"hira"},
+  {uz:"Aholi", note:"(人口)", kana:"じんこう", accepted:["じんこう"], romaji:"jinkou", group:"Boshqa", kb:"hira"},
+  {uz:"Dunyo", note:"(世界)", kana:"せかい", accepted:["せかい"], romaji:"sekai", group:"Boshqa", kb:"hira"},
+  {uz:"yoshi katta,keksa", note:"(年上)", kana:"としうえ", accepted:["としうえ"], romaji:"toshiue", group:"Odamlar", kb:"hira"},
+  {uz:"Yoshi kichkina", note:"(年下)", kana:"としした", accepted:["としした"], romaji:"toshishita", group:"Odamlar", kb:"hira"},
+  {uz:"~sm", kana:"センチ", accepted:["センチ"], romaji:"senchi", group:"Boshqa", kb:"kata"},
+  {uz:"Qaysi", kana:"どちら", accepted:["どちら"], romaji:"dochira", group:"Boshqa", kb:"hira"},
+  {uz:"Ikkalasi ham", kana:"どちらも", accepted:["どちらも"], romaji:"dochiramo", group:"Boshqa", kb:"hira"},
+  {uz:"Ancha,ancha vaqt", kana:"ずっと", accepted:["ずっと"], romaji:"zutto", group:"Boshqa", kb:"hira"},
+  {uz:"birinchi raqam", note:"(一番~)", kana:"いちばん", accepted:["いちばん"], romaji:"ichiban", group:"Boshqa", kb:"hira"},
+  {uz:"~dan", kana:"より", accepted:["より"], romaji:"yori", group:"Boshqa", kb:"hira"},
+  {uz:"~qalay?", kana:"~はいかがですか", accepted:["~はいかがですか"], romaji:"~wa ikaga desu ka", group:"Iboralar", kb:"hira"},
+  {uz:"~ yaxshiroq", kana:"~のほうが", accepted:["~のほうが"], romaji:"~no hou ga", group:"Boshqa", kb:"hira"},
+  {uz:"Yapon oshxonasi", note:"(日本料理)", kana:"にほんりょうり", accepted:["にほんりょうり"], romaji:"nihon ryouri", group:"Ovqat-ichimlik", kb:"hira"},
+  {uz:"Buddistlar ibodatxonasi", note:"(仏教のお寺)", kana:"ぶっきょうのおてら", accepted:["ぶっきょうのおてら"], romaji:"bukkyou no otera", group:"Joylar", kb:"hira"},
+  {uz:"Velosiped", kana:"バイク", accepted:["バイク"], romaji:"baiku", group:"Transport", kb:"kata"},
+  {uz:"Zilzila", note:"(地震)", kana:"じしん", accepted:["じしん"], romaji:"jishin", group:"Boshqa", kb:"hira"}
+];
+
+const MAVZU18_WORDS = [
+  {uz:"Charchamoq", note:"(疲れます) II guruh fe'li", kana:"つかれます", accepted:["つかれます"], romaji:"tsukaremasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Charchadim", note:"(疲れました)", kana:"つかれました", accepted:["つかれました"], romaji:"tsukaremashita", group:"Fe'llar", kb:"hira"},
+  {uz:"Sog'inish", note:"(寂しい)", kana:"さびしい", accepted:["さびしい"], romaji:"sabishii", group:"Sifatlar", kb:"hira"},
+  {uz:"Keng", note:"(広い)", kana:"ひろい", accepted:["ひろい"], romaji:"hiroi", group:"Sifatlar", kb:"hira"},
+  {uz:"Tor", note:"(狭い)", kana:"せまい", accepted:["せまい"], romaji:"semai", group:"Sifatlar", kb:"hira"},
+  {uz:"Soatbay ish", note:"(アルバイト)", kana:"アルバイト", accepted:["アルバイト"], romaji:"arubaito", group:"Boshqa", kb:"kata"},
+  {uz:"Kabuki", note:"(歌舞伎)", kana:"かぶき", accepted:["かぶき"], romaji:"kabuki", group:"Boshqa", kb:"hira"},
+  {uz:"Ochiq-havo", note:"(晴れ)", kana:"はれ", accepted:["はれ"], romaji:"hare", group:"Ob-havo", kb:"hira"},
+  {uz:"Yomg'ir", note:"(雨)", kana:"あめ", accepted:["あめ"], romaji:"ame", group:"Ob-havo", kb:"hira"},
+  {uz:"Bulutli", note:"(曇り)", kana:"くもり", accepted:["くもり"], romaji:"kumori", group:"Ob-havo", kb:"hira"},
+  {uz:"Qor", note:"(雪)", kana:"ゆき", accepted:["ゆき"], romaji:"yuki", group:"Ob-havo", kb:"hira"},
+  {uz:"Festival,marosim", note:"(お祭り)", kana:"おまつり", accepted:["おまつり"], romaji:"omatsuri", group:"Boshqa", kb:"hira"},
+  {uz:"Ammo, lekin", kana:"でも", accepted:["でも"], romaji:"demo", group:"Boshqa", kb:"hira"},
+  {uz:"Birinchi marta", note:"(初めて)", kana:"はじめて", accepted:["はじめて"], romaji:"hajimete", group:"Boshqa", kb:"hira"},
+  {uz:"Ayniqsa", note:"(特に)", kana:"とくに", accepted:["とくに"], romaji:"tokuni", group:"Boshqa", kb:"hira"}
+];
+
+const MAVZU19_WORDS = [
+  {uz:"Uylanmoq,turmush qurmoq", note:"(結婚します) III guruh fe'li", kana:"けっこんします", accepted:["けっこんします"], romaji:"kekkon shimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Xohlamoq", note:"(欲しい)", kana:"ほしい", accepted:["ほしい"], romaji:"hoshii", group:"Sifatlar", kb:"hira"},
+  {uz:"Iqtisod", note:"(経済)", kana:"けいざい", accepted:["けいざい"], romaji:"keizai", group:"Boshqa", kb:"hira"},
+  {uz:"Mikroto'lqinli pech", note:"(電子レンジ)", kana:"でんしれんじ", accepted:["でんしれんじ"], romaji:"denshi renji", group:"Texnika", kb:"hira"},
+  {uz:"Ikebana,gul aranjirovkasi", note:"(生け花)", kana:"いけばな", accepted:["いけばな"], romaji:"ikebana", group:"Boshqa", kb:"hira"},
+  {uz:"Ob-havo", note:"(天気)", kana:"てんき", accepted:["てんき"], romaji:"tenki", group:"Ob-havo", kb:"hira"},
+  {uz:"Qornim ochdi", note:"(お腹がすきました)", kana:"おなかがすきました", accepted:["おなかがすきました"], romaji:"onaka ga sukimashita", group:"Iboralar", kb:"hira"},
+  {uz:"Qornim to'q", note:"(お腹がいっぱいです)", kana:"おなかがいっぱいです", accepted:["おなかがいっぱいです"], romaji:"onaka ga ippai desu", group:"Iboralar", kb:"hira"},
+  {uz:"Nimadir", note:"(何か)", kana:"なにか", accepted:["なにか"], romaji:"nanika", group:"Olmoshlar", kb:"hira"},
+  {uz:"Qayerdadir", kana:"どこか", accepted:["どこか"], romaji:"dokoka", group:"Olmoshlar", kb:"hira"},
+  {uz:"O'yin o'ynamoq", note:"(ゲームをします)", kana:"げーむをします", accepted:["げーむをします"], romaji:"geemu wo shimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"~ning payti", note:"(~のとき)", kana:"~のとき", accepted:["~のとき"], romaji:"~no toki", group:"Iboralar", kb:"hira"}
+];
+
+const MAVZU20_WORDS = [
+  {uz:"O'ynamoq", note:"(遊びます) I guruh fe'li", kana:"あそびます", accepted:["あそびます"], romaji:"asobimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Suzmoq", note:"(泳ぎます) I guruh fe'li", kana:"およぎます", accepted:["およぎます"], romaji:"oyogimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Xat yozmoq", note:"(手紙を出します) I guruh fe'li", kana:"てがみをだします", accepted:["てがみをだします"], romaji:"tegami wo dashimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Xarid qilmoq", note:"(買い物します) III guruh fe'li", kana:"かいものします", accepted:["かいものします"], romaji:"kaimono shimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Ovqatlanmoq", note:"(食事します) III guruh fe'li", kana:"しょくじします", accepted:["しょくじします"], romaji:"shokuji shimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Sayr qilmoq", note:"(散歩します) III guruh fe'li", kana:"さんぽします", accepted:["さんぽします"], romaji:"sanpo shimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Kutib olmoq", note:"(迎えます) II guruh fe'li", kana:"むかえます", accepted:["むかえます"], romaji:"mukaemasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Viza olmoq", note:"(ビザを取ります) I guruh fe'li", kana:"びざをとります", accepted:["びざをとります"], romaji:"biza wo torimasu", group:"Fe'llar", kb:"hira"},
+  {uz:"Hokimiyat", note:"(市役所)", kana:"しやくしょ", accepted:["しやくしょ"], romaji:"shiyakusho", group:"Joylar", kb:"hira"},
+  {uz:"Bekat", note:"(駅)", kana:"えき", accepted:["えき"], romaji:"eki", group:"Joylar", kb:"hira"},
+  {uz:"Shinjuku", note:"(新宿)", kana:"しんじゅく", accepted:["しんじゅく"], romaji:"shinjuku", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Ikebukuro", note:"(池袋)", kana:"いけぶくろ", accepted:["いけぶくろ"], romaji:"ikebukuro", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Kioto", note:"(京都)", kana:"きょうと", accepted:["きょうと"], romaji:"kyouto", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Xokkaydo", note:"(北海道)", kana:"ほっかいどう", accepted:["ほっかいどう"], romaji:"hokkaidou", group:"Davlatlar/Shaharlar", kb:"hira"},
+  {uz:"Elchixona", note:"(大使館)", kana:"たいしかん", accepted:["たいしかん"], romaji:"taishikan", group:"Joylar", kb:"hira"},
+  {uz:"Chang'i", note:"(スキー)", kana:"スキー", accepted:["スキー"], romaji:"sukii", group:"Boshqa", kb:"kata"},
+  {uz:"Baseyn", note:"(プール)", kana:"プール", accepted:["プール"], romaji:"puuru", group:"Joylar", kb:"kata"},
+  {uz:"Majlis", note:"(会議)", kana:"かいぎ", accepted:["かいぎ"], romaji:"kaigi", group:"Boshqa", kb:"hira"},
+  {uz:"Hafta oxiri", note:"(週末)", kana:"しゅうまつ", accepted:["しゅうまつ"], romaji:"shuumatsu", group:"Vaqt", kb:"hira"},
+  {uz:"Rasmiy ro'yxatga olinganlik xujjati", note:"(住民票)", kana:"じゅうみんひょう", accepted:["じゅうみんひょう"], romaji:"juuminhyou", group:"Boshqa", kb:"hira"},
+  {uz:"Fransiya", note:"(フランス)", kana:"フランス", accepted:["フランス"], romaji:"furansu", group:"Davlatlar/Shaharlar", kb:"kata"},
+  {uz:"Klassik", note:"(クラシック)", kana:"クラシック", accepted:["クラシック"], romaji:"kurashikku", group:"Boshqa", kb:"kata"},
+  {uz:"Keyingi safar", note:"(今度)", kana:"こんど", accepted:["こんど"], romaji:"kondo", group:"Vaqt", kb:"hira"},
+  {uz:"Chamasi,taxminan", note:"(~ごろ)", kana:"~ごろ", accepted:["~ごろ"], romaji:"~goro", group:"Vaqt", kb:"hira"},
+  {uz:"Hammasi joyida", note:"(大丈夫)", kana:"だいじょうぶ", accepted:["だいじょうぶ"], romaji:"daijoubu", group:"Iboralar", kb:"hira"}
+];
+
 const JUMA31_WORDS = [
 
   {uz:"bormoq", note:"(行きます) I guruh fe'li", kana:"いきます", accepted:["いきます"], romaji:"ikimasu", group:"Fe'llar", kb:"hira"},
@@ -2172,8 +2534,18 @@ PAYSHANBA_WORDS.forEach((w,i)=>{ w.id = 'p30_'+i; });
 MAVZU8_WORDS.forEach((w,i)=>{ w.id = 'm8_'+i; });
 MAVZU9_WORDS.forEach((w,i)=>{ w.id = 'm9_'+i; });
 MAVZU10_WORDS.forEach((w,i)=>{ w.id = 'm10_'+i; });
+MAVZU11_WORDS.forEach((w,i)=>{ w.id = 'm11_'+i; });
+MAVZU12_WORDS.forEach((w,i)=>{ w.id = 'm12_'+i; });
+MAVZU13_WORDS.forEach((w,i)=>{ w.id = 'm13_'+i; });
+MAVZU14_WORDS.forEach((w,i)=>{ w.id = 'm14_'+i; });
+MAVZU15_WORDS.forEach((w,i)=>{ w.id = 'm15_'+i; });
+MAVZU16_WORDS.forEach((w,i)=>{ w.id = 'm16_'+i; });
+MAVZU17_WORDS.forEach((w,i)=>{ w.id = 'm17_'+i; });
+MAVZU18_WORDS.forEach((w,i)=>{ w.id = 'm18_'+i; });
+MAVZU19_WORDS.forEach((w,i)=>{ w.id = 'm19_'+i; });
+MAVZU20_WORDS.forEach((w,i)=>{ w.id = 'm20_'+i; });
 JUMA31_WORDS.forEach((w,i)=>{ w.id = 'j31_'+i; });
-const ALL_WORDS = DAILY_WORDS.concat(NEW_WORDS, NUMBER_WORDS, TODAY_WORDS, TODAY2_WORDS, CHORSHANBA_WORDS, PAYSHANBA_WORDS, JUMA31_WORDS, MAVZU8_WORDS, MAVZU9_WORDS, MAVZU10_WORDS);
+const ALL_WORDS = DAILY_WORDS.concat(NEW_WORDS, NUMBER_WORDS, TODAY_WORDS, TODAY2_WORDS, CHORSHANBA_WORDS, PAYSHANBA_WORDS, JUMA31_WORDS, MAVZU8_WORDS, MAVZU9_WORDS, MAVZU10_WORDS, MAVZU11_WORDS, MAVZU12_WORDS, MAVZU13_WORDS, MAVZU14_WORDS, MAVZU15_WORDS, MAVZU16_WORDS, MAVZU17_WORDS, MAVZU18_WORDS, MAVZU19_WORDS, MAVZU20_WORDS);
 
 const KNOWN_KEY = 'yaponcha_bilaman_sozlar';
 let knownIds = new Set(JSON.parse(localStorage.getItem(KNOWN_KEY) || '[]'));
@@ -2193,6 +2565,16 @@ const SETS = [
   {key:'mavzu8', label:"8-mavzu", words:MAVZU8_WORDS},
   {key:'mavzu9', label:"9-mavzu", words:MAVZU9_WORDS},
   {key:'mavzu10', label:"10-mavzu", words:MAVZU10_WORDS},
+  {key:'mavzu11', label:"11-mavzu", words:MAVZU11_WORDS},
+  {key:'mavzu12', label:"12-mavzu", words:MAVZU12_WORDS},
+  {key:'mavzu13', label:"13-mavzu", words:MAVZU13_WORDS},
+  {key:'mavzu14', label:"14-mavzu", words:MAVZU14_WORDS},
+  {key:'mavzu15', label:"15-mavzu", words:MAVZU15_WORDS},
+  {key:'mavzu16', label:"16-mavzu", words:MAVZU16_WORDS},
+  {key:'mavzu17', label:"17-mavzu", words:MAVZU17_WORDS},
+  {key:'mavzu18', label:"18-mavzu", words:MAVZU18_WORDS},
+  {key:'mavzu19', label:"19-mavzu", words:MAVZU19_WORDS},
+  {key:'mavzu20', label:"20-mavzu", words:MAVZU20_WORDS},
   {key:'numbers', label:"Raqamlar", words:NUMBER_WORDS}
 ];
 
@@ -2312,10 +2694,20 @@ function renderActiveSet(){
   else if(set === 'mavzu8') renderFlashGrid(MAVZU8_WORDS.filter(w=>!knownIds.has(w.id)));
   else if(set === 'mavzu9') renderFlashGrid(MAVZU9_WORDS.filter(w=>!knownIds.has(w.id)));
   else if(set === 'mavzu10') renderFlashGrid(MAVZU10_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu11') renderFlashGrid(MAVZU11_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu12') renderFlashGrid(MAVZU12_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu13') renderFlashGrid(MAVZU13_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu14') renderFlashGrid(MAVZU14_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu15') renderFlashGrid(MAVZU15_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu16') renderFlashGrid(MAVZU16_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu17') renderFlashGrid(MAVZU17_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu18') renderFlashGrid(MAVZU18_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu19') renderFlashGrid(MAVZU19_WORDS.filter(w=>!knownIds.has(w.id)));
+  else if(set === 'mavzu20') renderFlashGrid(MAVZU20_WORDS.filter(w=>!knownIds.has(w.id)));
 }
 
 function setActiveSubBtn(activeBtn){
-  [flashSubToday, flashSubToday2, flashSubChorshanba, flashSubPayshanba30, flashSubJuma31, flashSubDaily, flashSubNew, flashSubNumbers, flashSubMavzu8, flashSubMavzu9, flashSubMavzu10].forEach(b=>b.classList.toggle('active', b===activeBtn));
+  [flashSubToday, flashSubToday2, flashSubChorshanba, flashSubPayshanba30, flashSubJuma31, flashSubDaily, flashSubNew, flashSubNumbers, flashSubMavzu8, flashSubMavzu9, flashSubMavzu10, flashSubMavzu11, flashSubMavzu12, flashSubMavzu13, flashSubMavzu14, flashSubMavzu15, flashSubMavzu16, flashSubMavzu17, flashSubMavzu18, flashSubMavzu19, flashSubMavzu20].forEach(b=>b.classList.toggle('active', b===activeBtn));
 }
 // Dropdown toggle
 const flashDropdown = document.getElementById('flashDropdown');
@@ -2332,7 +2724,7 @@ document.addEventListener('click', ()=>{
 
 // Sub-buttons inside dropdown
 function setActiveDropdownBtn(activeBtn){
-  [flashSubDaily, flashSubNew, flashSubToday, flashSubToday2, flashSubChorshanba, flashSubPayshanba30, flashSubJuma31, flashSubNumbers, flashSubMavzu8, flashSubMavzu9, flashSubMavzu10].forEach(b=>b.classList.toggle('active', b===activeBtn));
+  [flashSubDaily, flashSubNew, flashSubToday, flashSubToday2, flashSubChorshanba, flashSubPayshanba30, flashSubJuma31, flashSubNumbers, flashSubMavzu8, flashSubMavzu9, flashSubMavzu10, flashSubMavzu11, flashSubMavzu12, flashSubMavzu13, flashSubMavzu14, flashSubMavzu15, flashSubMavzu16, flashSubMavzu17, flashSubMavzu18, flashSubMavzu19, flashSubMavzu20].forEach(b=>b.classList.toggle('active', b===activeBtn));
   flashDropdown.classList.remove('open');
   flashDropdownBtn.classList.remove('active');
   // Update button text to show current topic
@@ -2350,6 +2742,16 @@ flashSubNumbers.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubNum
 flashSubMavzu8.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu8); renderActiveSet(); });
 flashSubMavzu9.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu9); renderActiveSet(); });
 flashSubMavzu10.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu10); renderActiveSet(); });
+flashSubMavzu11.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu11); renderActiveSet(); });
+flashSubMavzu12.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu12); renderActiveSet(); });
+flashSubMavzu13.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu13); renderActiveSet(); });
+flashSubMavzu14.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu14); renderActiveSet(); });
+flashSubMavzu15.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu15); renderActiveSet(); });
+flashSubMavzu16.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu16); renderActiveSet(); });
+flashSubMavzu17.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu17); renderActiveSet(); });
+flashSubMavzu18.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu18); renderActiveSet(); });
+flashSubMavzu19.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu19); renderActiveSet(); });
+flashSubMavzu20.addEventListener('click', ()=>{ setActiveDropdownBtn(flashSubMavzu20); renderActiveSet(); });
 
 renderActiveSet();
 
@@ -2973,6 +3375,16 @@ function spawnConfetti(anchorEl){
   flashSubMavzu8.addEventListener('click', ()=>setTimeout(placeStars, 60));
   flashSubMavzu9.addEventListener('click', ()=>setTimeout(placeStars, 60));
   flashSubMavzu10.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu11.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu12.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu13.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu14.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu15.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu16.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu17.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu18.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu19.addEventListener('click', ()=>setTimeout(placeStars, 60));
+  flashSubMavzu20.addEventListener('click', ()=>setTimeout(placeStars, 60));
 
   placeStars();
 
